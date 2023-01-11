@@ -102,7 +102,8 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider2D enemyGameobject in enemy)
         {
             Debug.Log("Hit enemy");
-            enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
+            // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
         }
     }
 
