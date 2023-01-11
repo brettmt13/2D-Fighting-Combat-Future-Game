@@ -16,12 +16,23 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
-    [SerializeField] private TrailRenderer tr;
+    public Rigidbody2D rb;
+    public Transform groundCheck;
+    public Transform wallCheck;
+    public LayerMask groundLayer;
+    public LayerMask wallLayer;
+    public TrailRenderer tr;
+
+// Anim for animating and others for attacks
+    private Animator anim;
+    public GameObject attackPoint;
+    public float radius;
+    public LayerMask enemyLayer;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
 
     // Update is called once per frame
@@ -44,7 +55,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            anim.SetBool("isAttacking", true);
+        }
         Flip();
+        areYouWalkingTho();
+        
     }
 
     private void FixedUpdate()
@@ -76,6 +93,40 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+
+    public void basicAttack()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
+        }
+    }
+
+
+    public void endAttack()
+    {
+        anim.SetBool("isAttacking", false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    }
+
+    private void areYouWalkingTho()
+    {
+        if (horizontal != 0f)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else
+        {
+            anim.SetBool("isRunning", false);
         }
     }
 
