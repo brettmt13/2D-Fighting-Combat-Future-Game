@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
-            Debug.Log("Hit enemy");
+            Debug.Log("Hit Player 2");
             // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
             enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
         }

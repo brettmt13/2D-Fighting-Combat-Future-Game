@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerTwoHP : MonoBehaviour
 {
@@ -9,10 +10,14 @@ public class PlayerTwoHP : MonoBehaviour
     public Image healthBar;
     public float healthAmount = 100f;
 
+    public Image gameOver;
+    public TMP_Text text;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameOver.enabled = false;
+        text.enabled = false;
     }
 
     // Update is called once per frame
@@ -20,7 +25,9 @@ public class PlayerTwoHP : MonoBehaviour
     {
         if (healthAmount <= 0)
         {
-            Debug.Log("Left guy dies PLAYERTWO DIED");
+            Debug.Log("Right guy dies PLAYER TWO DIED");
+            gameOver.enabled = true;
+            text.enabled = true;
         }
     }
 
