@@ -16,6 +16,17 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+    private bool isWallJumping;
+    private bool isWallSliding;
+    private float wallSlidingSpeed = 2f;
+
+    private float wallJumpingDirection;
+    private float wallJumpingTime = 0.2f;
+    private float wallJumpingCounter;
+    private float wallJumpingDuration = 0.4f;
+    private Vector2 wallJumpingPower = new Vector2(8f, 16f);
+
+
     public Rigidbody2D rb;
     public Transform groundCheck;
     public Transform wallCheck;
@@ -40,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && (IsGrounded() || IsWalled()))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -48,7 +59,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
+
         }
+
+        WallSlide();
+        WallJump();
+        areYouWalkingTho();
 
         if (Input.GetButtonDown("Fire2") && canDash)
         {
@@ -59,8 +75,12 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isAttacking", true);
         }
-        Flip();
-        areYouWalkingTho();
+
+        if(!isWallJumping)
+        {
+            Flip();
+        }
+        
         
     }
 
@@ -71,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        
     }
 
     private bool IsGrounded()
@@ -85,16 +106,7 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(wallCheck.position, 0.7f, wallLayer);
     }
 
-    private void Flip()
-    {
-        if (facingRight && horizontal < 0f || !facingRight && horizontal > 0f)
-        {
-            facingRight = !facingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
+    
 
     public void basicAttack()
     {
@@ -145,5 +157,69 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
 
+    }
+
+    private void WallSlide()
+    {
+        if (IsWalled() && !IsGrounded() && horizontal != 0f)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
+
+    private void WallJump()
+    {
+        if (isWallSliding)
+        {
+            isWallJumping = false;
+            wallJumpingDirection = -transform.localScale.x;
+            wallJumpingCounter = wallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping));
+        }
+        else
+        {
+            wallJumpingCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
+        {
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            wallJumpingCounter = 0f;
+
+            if (transform.localScale.x != wallJumpingDirection)
+            {
+                facingRight = !facingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+        }
+    }
+
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
+    }
+
+
+
+private void Flip()
+    {
+        if (facingRight && horizontal < 0f || !facingRight && horizontal > 0f)
+        {
+            facingRight = !facingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
     }
 }
