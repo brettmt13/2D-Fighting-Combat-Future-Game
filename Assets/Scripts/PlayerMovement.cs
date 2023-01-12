@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashingPower = 12f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
+
     private bool isWallJumping;
     private bool isWallSliding;
     private float wallSlidingSpeed = 2f;
@@ -65,10 +66,6 @@ public class PlayerMovement : MonoBehaviour
         WallJump();
         areYouWalkingTho();
 
-        // if (!isWallJumping){
-        //     Flip();
-        // }
-
         if (Input.GetButtonDown("Fire2") && canDash)
         {
             StartCoroutine(Dash());
@@ -78,13 +75,21 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isAttacking", true);
         }
-        Flip();
+
+        if(!isWallJumping)
+        {
+            Flip();
+        }
         
         
     }
 
     private void FixedUpdate()
     {
+        if (isDashing)
+        {
+            return;
+        }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         
     }
