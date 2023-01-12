@@ -24,14 +24,14 @@ public class PlayerTwoMovement : MonoBehaviour
     public TrailRenderer tr;
 
 // Anim for animating and others for attacks
-    // private Animator anim;
-    // public GameObject attackPoint;
-    // public float radius;
-    // public LayerMask enemyLayer;
+    private Animator anim;
+    public GameObject attackPoint;
+    public float radius;
+    public LayerMask enemyLayer;
 
     void Start()
     {
-        // anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -55,10 +55,10 @@ public class PlayerTwoMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        // if (Input.GetButtonDown("Fire1"))
-        // {
-        //     anim.SetBool("isAttacking", true);
-        // }
+        if (Input.GetButtonDown("Fire11"))
+        {
+            anim.SetBool("isAttacking", true);
+        }
         Flip();
         // areYouWalkingTho();
         
@@ -96,27 +96,27 @@ public class PlayerTwoMovement : MonoBehaviour
         }
     }
 
-    // public void basicAttack()
-    // {
-    //     Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-    //     foreach (Collider2D enemyGameobject in enemy)
-    //     {
-    //         Debug.Log("Hit Player 1");
-    //         // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
-    //         enemyGameobject.GetComponent<PlayerOneHP>().TakeDamage(10);
-    //     }
-    // }
+    public void basicAttack()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 1");
+            // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
+            enemyGameobject.GetComponent<PlayerOneHP>().TakeDamage(10);
+        }
+    }
 
 
-    // public void endAttack()
-    // {
-    //     anim.SetBool("isAttacking", false);
-    // }
+    public void endAttack()
+    {
+        anim.SetBool("isAttacking", false);
+    }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    // }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    }
 
     // private void areYouWalkingTho()
     // {

@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerOneHP : MonoBehaviour
 {
 
     public Image healthBar;
     public float healthAmount = 100f;
+
+    public Image gameOver;
+    public TMP_Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,9 @@ public class PlayerOneHP : MonoBehaviour
         if (healthAmount <= 0)
         {
             Debug.Log("Left guy dies PLAYER ONE DIED");
+            gameOver.enabled = true;
+            text.enabled = true;
+            // text.text = "P2 Wins!";
         }
     }
 
