@@ -40,7 +40,7 @@ public class PlayerTwoMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal2");
 
-        if (Input.GetButtonDown("Jump2") && (IsGrounded() || IsWalled()))
+        if (Input.GetButtonDown("Jump2") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }

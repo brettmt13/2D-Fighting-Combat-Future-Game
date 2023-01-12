@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && (IsGrounded() || IsWalled()))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -65,9 +65,9 @@ public class PlayerMovement : MonoBehaviour
         WallJump();
         areYouWalkingTho();
 
-        if (!isWallJumping){
-            Flip();
-        }
+        // if (!isWallJumping){
+        //     Flip();
+        // }
 
         if (Input.GetButtonDown("Fire2") && canDash)
         {
@@ -78,17 +78,15 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isAttacking", true);
         }
-        //Flip();
+        Flip();
         
         
     }
 
     private void FixedUpdate()
     {
-        if (!isWallJumping)
-        {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        
     }
 
     private bool IsGrounded()
