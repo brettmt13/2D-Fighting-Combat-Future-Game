@@ -161,10 +161,10 @@ public class PlayerTwoMovement : MonoBehaviour
         anim.SetBool("isAttacking", false);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    // }
 
     // private void areYouWalkingTho()
     // {

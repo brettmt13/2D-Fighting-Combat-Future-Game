@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         if (KBCounter <= 0)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
+            anim.SetBool("isKnocked", false);
 
             if (Input.GetButtonDown("Jump") && IsGrounded())
             {
@@ -82,7 +83,10 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("isAttacking", true);
             }
         }
-
+        else
+        {
+            anim.SetBool("isKnocked", true);
+        }
         areYouWalkingTho();
         if(!isWallJumping)
         {
@@ -151,10 +155,10 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("isAttacking", false);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    // }
 
     private void areYouWalkingTho()
     {
@@ -246,6 +250,16 @@ private void Flip()
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+        if (KBCounter > 0 )
+        {
+            if (facingRight && !KnockFromRight || !facingRight && KnockFromRight)
+            {
+            facingRight = !facingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale; 
+            }
         }
     }
 }
