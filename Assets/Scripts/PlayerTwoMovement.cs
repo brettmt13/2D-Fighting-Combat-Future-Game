@@ -40,6 +40,12 @@ public class PlayerTwoMovement : MonoBehaviour
     public float radius;
     public LayerMask enemyLayer;
 
+    // knockback stuff
+    public float KBForce;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -49,30 +55,34 @@ public class PlayerTwoMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal2");
-
-        if (Input.GetButtonDown("Jump2") && IsGrounded())
+        if (KBCounter <= 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            horizontal = Input.GetAxisRaw("Horizontal2");
+
+            if (Input.GetButtonDown("Jump2") && IsGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
+
+            if (Input.GetButtonUp("Jump2") && rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
+            }
+
+            if (Input.GetButtonDown("Fire22") && canDash)
+            {
+                StartCoroutine(Dash());
+            }
+
+            WallSlide();
+            WallJump();
+
+            if (Input.GetButtonDown("Fire11"))
+            {
+                anim.SetBool("isAttacking", true);
+            }
         }
 
-        if (Input.GetButtonUp("Jump2") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
-        }
-
-        if (Input.GetButtonDown("Fire22") && canDash)
-        {
-            StartCoroutine(Dash());
-        }
-
-        WallSlide();
-        WallJump();
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            anim.SetBool("isAttacking", true);
-        }
         if(!isWallJumping)
         {
             Flip();
@@ -83,11 +93,30 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (KBCounter <= 0)
         {
-            return;
+            if (isDashing)
+                {
+                    return;
+                }
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        else
+        {
+            // KB*Time means it starts out high and decays quickly to 0, not linear
+            if (KnockFromRight == true)
+            {
+                rb.velocity = new Vector2(-KBForce*KBCounter, KBForce*KBCounter);
+            }
+            else
+            {
+                rb.velocity = new Vector2(KBForce*KBCounter, KBForce*KBCounter);
+            }
+            KBCounter -= Time.deltaTime;
+        }
+
+
+        
     }
 
     private bool IsGrounded()
@@ -119,7 +148,9 @@ public class PlayerTwoMovement : MonoBehaviour
         foreach (Collider2D enemyGameobject in enemy)
         {
             Debug.Log("Hit Player 1");
-            // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
+
+            enemyGameobject.GetComponent<PlayerOneHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+
             enemyGameobject.GetComponent<PlayerOneHP>().TakeDamage(10);
         }
     }

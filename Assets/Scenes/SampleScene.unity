@@ -389,6 +389,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  KBForce: 30
+  KBCounter: 0
+  KBTotalTime: 0.3
+  KnockFromRight: 0
 --- !u!96 &407774114
 TrailRenderer:
   serializedVersion: 2
@@ -531,6 +535,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1215646416}
   healthAmount: 100
+  playerMovement: {fileID: 407774113}
+  fromRight: 0
+  gameOver: {fileID: 665521334}
+  text: {fileID: 552106224}
 --- !u!1 &477127373
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477127373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37, y: 0.129, z: 0}
+  m_LocalPosition: {x: 0.25, y: 0.129, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1150,6 +1158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 871424665}
   healthAmount: 100
+  playerTwoMovement: {fileID: 1122246618}
+  fromRight: 0
   gameOver: {fileID: 665521334}
   text: {fileID: 552106224}
 --- !u!114 &1122246618
@@ -1179,6 +1189,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  KBForce: 30
+  KBCounter: 0
+  KBTotalTime: 0.3
+  KnockFromRight: 0
 --- !u!96 &1122246619
 TrailRenderer:
   serializedVersion: 2
@@ -2221,7 +2235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693800149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37, y: 0.129, z: 0}
+  m_LocalPosition: {x: 0.25, y: 0.129, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

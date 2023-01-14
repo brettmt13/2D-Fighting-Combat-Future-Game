@@ -10,6 +10,9 @@ public class PlayerTwoHP : MonoBehaviour
     public Image healthBar;
     public float healthAmount = 100f;
 
+    public PlayerTwoMovement playerTwoMovement;
+    public bool fromRight;
+
     public Image gameOver;
     public TMP_Text text;
 
@@ -33,6 +36,9 @@ public class PlayerTwoHP : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        playerTwoMovement.KnockFromRight = fromRight;
+        playerTwoMovement.KBCounter = playerTwoMovement.KBTotalTime;
+
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
     }
