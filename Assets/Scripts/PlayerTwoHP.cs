@@ -33,11 +33,14 @@ public class PlayerTwoHP : MonoBehaviour
             text.enabled = true;
         }
     }
+    // basic ftilt has kbforce 30, kbtt 0.3
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float kbForcex, float kbForcey, float kbTT)
     {
         playerTwoMovement.KnockFromRight = fromRight;
-        playerTwoMovement.KBCounter = playerTwoMovement.KBTotalTime;
+        playerTwoMovement.KBForceX = kbForcex;
+        playerTwoMovement.KBForceY = kbForcey;
+        playerTwoMovement.KBCounter = kbTT;
 
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;

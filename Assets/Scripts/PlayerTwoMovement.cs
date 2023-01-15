@@ -41,7 +41,8 @@ public class PlayerTwoMovement : MonoBehaviour
     public LayerMask enemyLayer;
 
     // knockback stuff
-    public float KBForce;
+    public float KBForceX;
+    public float KBForceY;
     public float KBCounter;
     public float KBTotalTime;
     public bool KnockFromRight;
@@ -106,11 +107,11 @@ public class PlayerTwoMovement : MonoBehaviour
             // KB*Time means it starts out high and decays quickly to 0, not linear
             if (KnockFromRight == true)
             {
-                rb.velocity = new Vector2(-KBForce*KBCounter, KBForce*KBCounter);
+                rb.velocity = new Vector2(-KBForceX*KBCounter, KBForceY*KBCounter);
             }
             else
             {
-                rb.velocity = new Vector2(KBForce*KBCounter, KBForce*KBCounter);
+                rb.velocity = new Vector2(KBForceX*KBCounter, KBForceY*KBCounter);
             }
             KBCounter -= Time.deltaTime;
         }
@@ -151,7 +152,7 @@ public class PlayerTwoMovement : MonoBehaviour
 
             enemyGameobject.GetComponent<PlayerOneHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
 
-            enemyGameobject.GetComponent<PlayerOneHP>().TakeDamage(10);
+            enemyGameobject.GetComponent<PlayerOneHP>().TakeDamage(10, 30, 30 ,(float)0.3);
         }
     }
 

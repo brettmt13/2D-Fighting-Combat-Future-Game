@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 407774110}
   - component: {fileID: 407774109}
   - component: {fileID: 407774113}
+  - component: {fileID: 407774117}
   - component: {fileID: 407774116}
   - component: {fileID: 407774114}
   - component: {fileID: 407774115}
@@ -384,11 +385,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   tr: {fileID: 407774114}
-  attackPoint: {fileID: 1693800149}
-  radius: 0.4
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 512
   KBForce: 30
   KBCounter: 0
   KBTotalTime: 0.3
@@ -539,6 +535,24 @@ MonoBehaviour:
   fromRight: 0
   gameOver: {fileID: 665521334}
   text: {fileID: 552106224}
+--- !u!114 &407774117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407774108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabb605d8b79a2d40aaa709177ed1c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 1693800149}
+  radius: 0.4
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  playerMovement: {fileID: 407774113}
 --- !u!1 &477127373
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,12 +36,13 @@ public class PlayerMovement : MonoBehaviour
 
 // Anim for animating and others for attacks
     private Animator anim;
-    public GameObject attackPoint;
-    public float radius;
-    public LayerMask enemyLayer;
+    // public GameObject attackPoint;
+    // public float radius;
+    // public LayerMask enemyLayer;
 
 // knockback stuff
-    public float KBForce;
+    public float KBForceX;
+    public float KBForceY;
     public float KBCounter;
     public float KBTotalTime;
     public bool KnockFromRight;
@@ -78,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(Dash());
             }
 
-            if (Input.GetButtonDown("Fire1"))
-            {
-                anim.SetBool("isAttacking", true);
-            }
+            // if (Input.GetButtonDown("Fire1"))
+            // {
+            //     anim.SetBool("isAttacking", true);
+            // }
         }
         else
         {
@@ -111,11 +112,11 @@ public class PlayerMovement : MonoBehaviour
             // KB*Time means it starts out high and decays quickly to 0, not linear
             if (KnockFromRight == true)
             {
-                rb.velocity = new Vector2(-KBForce*KBCounter, KBForce*KBCounter);
+                rb.velocity = new Vector2(-KBForceX*KBCounter, KBForceY*KBCounter);
             }
             else
             {
-                rb.velocity = new Vector2(KBForce*KBCounter, KBForce*KBCounter);
+                rb.velocity = new Vector2(KBForceX*KBCounter, KBForceY*KBCounter);
             }
             KBCounter -= Time.deltaTime;
         }
@@ -138,22 +139,22 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    public void basicAttack()
-    {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-        foreach (Collider2D enemyGameobject in enemy)
-        {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
-        }
-    }
+    // public void basicAttack()
+    // {
+    //     Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+    //     foreach (Collider2D enemyGameobject in enemy)
+    //     {
+    //         Debug.Log("Hit Player 2");
+    //         enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+    //         enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
+    //     }
+    // }
 
 
-    public void endAttack()
-    {
-        anim.SetBool("isAttacking", false);
-    }
+    // public void endAttack()
+    // {
+    //     anim.SetBool("isAttacking", false);
+    // }
 
     // private void OnDrawGizmos()
     // {

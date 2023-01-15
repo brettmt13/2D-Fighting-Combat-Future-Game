@@ -34,10 +34,12 @@ public class PlayerOneHP : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float kbForcex, float kbForcey, float kbTT)
     {
         playerMovement.KnockFromRight = fromRight;
-        playerMovement.KBCounter = playerMovement.KBTotalTime;
+        playerMovement.KBForceX = kbForcex;
+        playerMovement.KBForceY = kbForcey;
+        playerMovement.KBCounter = kbTT;
 
 
         healthAmount -= damage;
