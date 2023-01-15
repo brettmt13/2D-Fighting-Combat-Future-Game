@@ -36,9 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
 // Anim for animating and others for attacks
     private Animator anim;
-    public GameObject attackPoint;
-    public float radius;
-    public LayerMask enemyLayer;
+    // public GameObject attackPoint;
+    // public float radius;
+    // public LayerMask enemyLayer;
+
+// knockback stuff
+    public float KBForceX;
+    public float KBForceY;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
 
     void Start()
     {
@@ -49,33 +56,39 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (KBCounter <= 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
+            horizontal = Input.GetAxisRaw("Horizontal");
+            anim.SetBool("isKnocked", false);
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+            if (Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
+
+            if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
+            }
+
+            WallSlide();
+            WallJump();
+
+            if (Input.GetButtonDown("Fire2") && canDash)
+            {
+                StartCoroutine(Dash());
+            }
+
+            // if (Input.GetButtonDown("Fire1"))
+            // {
+            //     anim.SetBool("isAttacking", true);
+            // }
+        }
+        else
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
-
+            anim.SetBool("isKnocked", true);
         }
-
-        WallSlide();
-        WallJump();
         areYouWalkingTho();
-
-        if (Input.GetButtonDown("Fire2") && canDash)
-        {
-            StartCoroutine(Dash());
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            anim.SetBool("isAttacking", true);
-        }
-
         if(!isWallJumping)
         {
             Flip();
@@ -86,11 +99,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (KBCounter <= 0)
         {
-            return;
+            if (isDashing)
+                {
+                    return;
+                }
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        else
+        {
+            // KB*Time means it starts out high and decays quickly to 0, not linear
+            if (KnockFromRight == true)
+            {
+                rb.velocity = new Vector2(-KBForceX*KBCounter, KBForceY*KBCounter);
+            }
+            else
+            {
+                rb.velocity = new Vector2(KBForceX*KBCounter, KBForceY*KBCounter);
+            }
+            KBCounter -= Time.deltaTime;
+        }
+
+
         
     }
 
@@ -108,27 +139,27 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    public void basicAttack()
-    {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-        foreach (Collider2D enemyGameobject in enemy)
-        {
-            Debug.Log("Hit Player 2");
-            // enemyGameobject.GetComponent<EnemyHealth>().health -= 10;
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
-        }
-    }
+    // public void basicAttack()
+    // {
+    //     Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+    //     foreach (Collider2D enemyGameobject in enemy)
+    //     {
+    //         Debug.Log("Hit Player 2");
+    //         enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+    //         enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
+    //     }
+    // }
 
 
-    public void endAttack()
-    {
-        anim.SetBool("isAttacking", false);
-    }
+    // public void endAttack()
+    // {
+    //     anim.SetBool("isAttacking", false);
+    // }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    // }
 
     private void areYouWalkingTho()
     {
@@ -220,6 +251,16 @@ private void Flip()
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+        if (KBCounter > 0 )
+        {
+            if (facingRight && !KnockFromRight || !facingRight && KnockFromRight)
+            {
+            facingRight = !facingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale; 
+            }
         }
     }
 }
