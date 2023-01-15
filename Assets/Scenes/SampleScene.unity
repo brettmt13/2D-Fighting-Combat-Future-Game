@@ -234,13 +234,18 @@ GameObject:
   - component: {fileID: 407774111}
   - component: {fileID: 407774110}
   - component: {fileID: 407774109}
+<<<<<<< HEAD
   - component: {fileID: 407774113}
   - component: {fileID: 407774117}
+=======
+>>>>>>> origin/controller2
   - component: {fileID: 407774116}
   - component: {fileID: 407774114}
   - component: {fileID: 407774115}
+  - component: {fileID: 407774117}
+  - component: {fileID: 407774118}
   m_Layer: 8
-  m_Name: Player Triangle
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,7 +341,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e894b5a3f8b16da4c848550c1b5741e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.98039216}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -363,6 +368,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &407774113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +395,8 @@ MonoBehaviour:
   KBCounter: 0
   KBTotalTime: 0.3
   KnockFromRight: 0
+=======
+>>>>>>> origin/controller2
 --- !u!96 &407774114
 TrailRenderer:
   serializedVersion: 2
@@ -531,10 +539,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1215646416}
   healthAmount: 100
+<<<<<<< HEAD
   playerMovement: {fileID: 407774113}
   fromRight: 0
   gameOver: {fileID: 665521334}
   text: {fileID: 552106224}
+=======
+>>>>>>> origin/controller2
 --- !u!114 &407774117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +555,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 407774108}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: eabb605d8b79a2d40aaa709177ed1c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -584,6 +596,63 @@ Transform:
   m_Father: {fileID: 1122246614}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1cead6c34b69507478495c687b7a3e82, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &407774118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407774108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da06323f3c169394989768a2aac68ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 407774110}
+  groundCheck: {fileID: 950535300}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  tr: {fileID: 407774114}
+  wallCheck: {fileID: 2102021251}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  moveDir: {x: 0, y: 0}
+  wallDir: {x: 0, y: 0}
+  groundSpeed: 8
+  airSpeed: 3
+  jumpStat: 16
+  fallSpeed: -14
+  jumps: 2
+  notMoving: 0
+  facingRight: 0
+  isWallJumping: 0
+  isWallSliding: 0
+  wallJumpingDirection: 0
+>>>>>>> origin/controller2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

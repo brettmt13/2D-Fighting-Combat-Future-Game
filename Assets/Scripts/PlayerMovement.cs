@@ -1,128 +1,157 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    Controls playerInput;
+    public Rigidbody2D rb;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public TrailRenderer tr;
 
-    private float horizontal;
-    private float speed = 8f;
-    private float jumpingPower = 16f;
-    private bool facingRight = true;
+    public Transform wallCheck;
+    public LayerMask wallLayer;
+    public Vector2 moveDir;
+    public Vector2 wallDir;
+    public float groundSpeed = 8f;
+    public float airSpeed = 6f;
+    public float jumpStat = 16f;
+    public float fallSpeed = -14f;
+    public int jumps = 2;
+    public bool notMoving;
 
+    // adding
+    public bool facingRight = false;
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 12f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
-
-    private bool isWallJumping;
-    private bool isWallSliding;
+    public bool isWallJumping;
+    public bool isWallSliding;
     private float wallSlidingSpeed = 2f;
-
-    private float wallJumpingDirection;
+    public float wallJumpingDirection;
     private float wallJumpingTime = 0.2f;
     private float wallJumpingCounter;
-    private float wallJumpingDuration = 0.4f;
-    private Vector2 wallJumpingPower = new Vector2(8f, 16f);
+    private float wallJumpingDuration = 0.15f;
+    private Vector2 wallJumpingPower;
 
-
-    public Rigidbody2D rb;
-    public Transform groundCheck;
-    public Transform wallCheck;
-    public LayerMask groundLayer;
-    public LayerMask wallLayer;
-    public TrailRenderer tr;
-
-// Anim for animating and others for attacks
-    private Animator anim;
-    // public GameObject attackPoint;
-    // public float radius;
-    // public LayerMask enemyLayer;
-
-// knockback stuff
-    public float KBForceX;
-    public float KBForceY;
-    public float KBCounter;
-    public float KBTotalTime;
-    public bool KnockFromRight;
-
-    void Start()
-    {
-        anim = GetComponent<Animator>();
+    private void Awake(){
+        playerInput = new Controls();
+        playerInput.Enable();
+        playerInput.Player.Enable();
     }
 
+    private void Start(){
+        wallJumpingPower = new Vector2(groundSpeed, jumpStat);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (KBCounter <= 0)
-        {
-            horizontal = Input.GetAxisRaw("Horizontal");
-            anim.SetBool("isKnocked", false);
+        playerInput.Player.Move.canceled += ctx => { 
+            notMoving = true;
+            wallDir[0] = 0f;
+        };
 
-            if (Input.GetButtonDown("Jump") && IsGrounded())
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+        playerInput.Player.Move.performed += ctx => {
+            moveDir = ctx.ReadValue<Vector2>();
+            wallDir = ctx.ReadValue<Vector2>();
+
+            if(IsGrounded()){
+                notMoving = false;
+                groundSpeed = 8f;
+                airSpeed = 8f;
             }
-
-            if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y*0.5f);
+            else if(!IsGrounded()){
+                if(!isWallJumping){
+                    notMoving = false;
+                    airSpeed = 8f;
+                    groundSpeed = 0f;
+                }
             }
+        };
 
-            WallSlide();
-            WallJump();
+        playerInput.Player.Jump.performed += ctx => {
 
-            if (Input.GetButtonDown("Fire2") && canDash)
-            {
+            if(IsGrounded()){
+                rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
+                jumps = 1;
+            }
+            else if(!IsGrounded() && !IsWalled()){
+                if(jumps > 0){
+                    jumps = 0;
+                    // change jump trajectory based off of air speed and joystick
+                    if(notMoving){
+                        airSpeed = 0f;
+                        rb.velocity = new Vector2(airSpeed, jumpStat);
+                    }
+
+                    if(!notMoving){
+                        if(!isWallJumping){
+                            airSpeed = 8f;
+                        }
+                        rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat);
+                    }                   
+                }
+            } 
+        };
+
+        playerInput.Player.Fall.performed += ctx => {
+            if(!IsGrounded()){
+                rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
+            }
+        };
+
+        playerInput.Player.Dash.performed += ctx => {
+            if(canDash){
                 StartCoroutine(Dash());
             }
+        };
 
-            // if (Input.GetButtonDown("Fire1"))
-            // {
-            //     anim.SetBool("isAttacking", true);
-            // }
+        if(IsGrounded()){
+            jumps = 2;
+
+            // skid property
+            if((notMoving) && (groundSpeed > 0)){
+                groundSpeed -= .1f;
+            }
+            // make sure speed is correct
+            if((!notMoving)){
+                groundSpeed = 8f;
+            }
+            // if at a full stop
+            if(groundSpeed <= 0f){
+                moveDir[0] = 0f;
+            }      
+
+            rb.velocity = new Vector2(moveDir[0] * groundSpeed, rb.velocity.y);
         }
-        else
-        {
-            anim.SetBool("isKnocked", true);
+        else if(!IsGrounded()){
+            // if released joystick, land with no momentum
+            if(notMoving){
+                if(airSpeed > 0){
+                    groundSpeed = 0f;
+                }   
+            }
+
+            rb.velocity = new Vector2(moveDir[0] * airSpeed, rb.velocity.y);
         }
-        areYouWalkingTho();
-        if(!isWallJumping)
-        {
+
+        WallSlide();
+        WallJump();
+
+        if(!isWallJumping){
             Flip();
         }
-        
-        
     }
 
-    private void FixedUpdate()
-    {
-        if (KBCounter <= 0)
-        {
-            if (isDashing)
-                {
-                    return;
-                }
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    void FixedUpdate(){
+        if (isDashing){
+            return;
         }
-        else
-        {
-            // KB*Time means it starts out high and decays quickly to 0, not linear
-            if (KnockFromRight == true)
-            {
-                rb.velocity = new Vector2(-KBForceX*KBCounter, KBForceY*KBCounter);
-            }
-            else
-            {
-                rb.velocity = new Vector2(KBForceX*KBCounter, KBForceY*KBCounter);
-            }
-            KBCounter -= Time.deltaTime;
-        }
-
-
-        
     }
 
     private bool IsGrounded()
@@ -130,72 +159,20 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    
-
     private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.7f, wallLayer);
     }
 
-    
-
-    // public void basicAttack()
-    // {
-    //     Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-    //     foreach (Collider2D enemyGameobject in enemy)
-    //     {
-    //         Debug.Log("Hit Player 2");
-    //         enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-    //         enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10);
-    //     }
-    // }
-
-
-    // public void endAttack()
-    // {
-    //     anim.SetBool("isAttacking", false);
-    // }
-
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    // }
-
-    private void areYouWalkingTho()
-    {
-        if (horizontal != 0f)
-        {
-            anim.SetBool("isRunning", true);
-        }
-        else
-        {
-            anim.SetBool("isRunning", false);
-        }
-    }
-
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        float orignalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x*dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = orignalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-
-    }
-
     private void WallSlide()
     {
-        if (IsWalled() && !IsGrounded() && horizontal != 0f)
-        {
+        if (IsWalled() && !IsGrounded())
+        {   
+            if(jumps < 2){
+                jumps = 1;
+            }
             isWallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            rb.velocity = new Vector2(wallDir[0] * airSpeed * 5, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
@@ -218,22 +195,27 @@ public class PlayerMovement : MonoBehaviour
             wallJumpingCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
-        {
-            isWallJumping = true;
-            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
-            wallJumpingCounter = 0f;
-
-            if (transform.localScale.x != wallJumpingDirection)
+        playerInput.Player.WJump.performed += ctx =>{
+            if (wallJumpingCounter > 0f)
             {
-                facingRight = !facingRight;
-                Vector3 localScale = transform.localScale;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
-            }
+                isWallJumping = true;
+                airSpeed = airSpeed * 2;
+                rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat * 1.13f);
+                wallJumpingCounter = 0f;
 
-            Invoke(nameof(StopWallJumping), wallJumpingDuration);
-        }
+                if (transform.localScale.x != wallJumpingDirection)
+                {
+                    facingRight = !facingRight;
+                    Vector2 localScale = transform.localScale;
+                    localScale.x *= -1f;
+                    transform.localScale = localScale;
+                }
+
+                Invoke(nameof(StopWallJumping), wallJumpingDuration);
+            }     
+        };
+
+
     }
 
     private void StopWallJumping()
@@ -241,26 +223,30 @@ public class PlayerMovement : MonoBehaviour
         isWallJumping = false;
     }
 
-
-
-private void Flip()
+    private IEnumerator Dash()
     {
-        if (facingRight && horizontal < 0f || !facingRight && horizontal > 0f)
+        canDash = false;
+        isDashing = true;
+        float orignalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(moveDir[0]*dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        rb.gravityScale = orignalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    private void Flip()
+    {
+        if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
         {
             facingRight = !facingRight;
-            Vector3 localScale = transform.localScale;
+            Vector2 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-        }
-        if (KBCounter > 0 )
-        {
-            if (facingRight && !KnockFromRight || !facingRight && KnockFromRight)
-            {
-            facingRight = !facingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale; 
-            }
         }
     }
 }
