@@ -201,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
             if(jumps < 2){
                 jumps = 1;
             }
+            airSpeed = 9f; // reset speed when hitting wall so there isn't an infinte multiplier
             isWallSliding = true;
             rb.velocity = new Vector2(wallDir[0] * airSpeed * 5, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
@@ -257,7 +258,9 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float orignalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(moveDir[0]*dashingPower, 0f);
+        airSpeed = 9f;
+        airSpeed = airSpeed*1.6f;
+        rb.velocity = new Vector2(moveDir[0]*airSpeed, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
