@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Controls playerInput;
+    public Controls playerInput;
     public Rigidbody2D rb;
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -15,9 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask wallLayer;
     public Vector2 moveDir;
     public Vector2 wallDir;
-    public float groundSpeed = 8f;
-    public float airSpeed = 6f;
-    public float jumpStat = 16f;
+    public float groundSpeed = 11f;
+    public float airSpeed = 9f;
+    public float jumpStat = 20f;
     public float fallSpeed = -14f;
     public int jumps = 2;
     public bool notMoving;
@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     public float KBCounter;
     public float KBTotalTime;
     public bool KnockFromRight;
+    public bool inAttackState;
 
     private Animator anim;
 
@@ -56,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start(){
         wallJumpingPower = new Vector2(groundSpeed, jumpStat);
-
     }
 
     // Update is called once per frame
@@ -73,13 +73,13 @@ public class PlayerMovement : MonoBehaviour
 
             if(IsGrounded()){
                 notMoving = false;
-                groundSpeed = 8f;
-                airSpeed = 8f;
+                groundSpeed = 11f;
+                airSpeed = 9f;
             }
             else if(!IsGrounded()){
                 if(!isWallJumping){
                     notMoving = false;
-                    airSpeed = 8f;
+                    airSpeed = 9f;
                     groundSpeed = 0f;
                 }
             }
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
                     if(!notMoving){
                         if(!isWallJumping){
-                            airSpeed = 8f;
+                            airSpeed = 9f;
                         }
                         rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat);
                     }                   
@@ -127,11 +127,11 @@ public class PlayerMovement : MonoBehaviour
 
             // skid property
             if((notMoving) && (groundSpeed > 0)){
-                groundSpeed -= .1f;
+                groundSpeed -= .2f;
             }
             // make sure speed is correct
             if((!notMoving)){
-                groundSpeed = 8f;
+                groundSpeed = 11f;
             }
             // if at a full stop
             if(groundSpeed <= 0f){
@@ -177,14 +177,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (!playerInput.Player.enabled)
+            if (!playerInput.Player.enabled && !inAttackState)
             {
                 playerInput.Player.Enable();
             }
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
@@ -244,8 +244,6 @@ public class PlayerMovement : MonoBehaviour
                 Invoke(nameof(StopWallJumping), wallJumpingDuration);
             }     
         };
-
-
     }
 
     private void StopWallJumping()
@@ -269,9 +267,15 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    private void Flip()
+    public void Flip(bool attacking = false)
     {
-        if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
+        if(attacking){
+            facingRight = !facingRight;
+            Vector2 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;           
+        }
+        else if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
         {
             facingRight = !facingRight;
             Vector2 localScale = transform.localScale;

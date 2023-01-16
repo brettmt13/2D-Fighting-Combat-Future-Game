@@ -44,14 +44,41 @@ public class PlayerOneAttacks : MonoBehaviour
 
             playerInput.Player.Attack.performed += ctx => 
             {
-                attackDirection = ctx.ReadValue<Vector2>();
-                if (attackDirection[0] == 1)
-                {
-                    anim.SetBool("isFtilt", true);
+                if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
+                    playerMovement.inAttackState = true;
+                    attackDirection = ctx.ReadValue<Vector2>();
+                    Debug.Log(attackDirection);
+                    playerMovement.moveDir[0] = 0f;
+                    if (attackDirection[0] > 0f && playerMovement.facingRight)
+                    {
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);
+                    }
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){
+                        playerMovement.Flip(true);
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);
+                    }
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);                    
+                    }
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){
+                        playerMovement.Flip(true);
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);                   
+                    }
+                    else if(attackDirection[1] > 0f){
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isUptilt", true); 
+                    }
+                    else{
+                        // put down tilt here! for now it just makes sure they aren't attacking
+                        playerMovement.inAttackState = false;
+                    }
                 }
             };
         }
-
     }
 
     public void startFTilt()
@@ -66,13 +93,15 @@ public class PlayerOneAttacks : MonoBehaviour
     }
 
 
-    public void endFTilt()
+    public IEnumerator endFTilt()
     {
         anim.SetBool("isFtilt", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
     }
 
 
-        public void startUpTilt()
+    public void startUpTilt()
     {
         // attackPoint.transform.position.y += 0.2f;
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
@@ -85,9 +114,11 @@ public class PlayerOneAttacks : MonoBehaviour
     }
 
 
-    public void endUpTilt()
+    public IEnumerator endUpTilt()
     {
         anim.SetBool("isUptilt", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
         // attackPoint.transform.position.y -= 0.2f;
     }
 
