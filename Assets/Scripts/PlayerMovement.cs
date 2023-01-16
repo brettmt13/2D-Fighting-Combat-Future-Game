@@ -38,7 +38,17 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpingDuration = 0.15f;
     private Vector2 wallJumpingPower;
 
+    // knockback forces
+    public float KBForceX;
+    public float KBForceY;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
+
+    private Animator anim;
+
     private void Awake(){
+        anim = GetComponent<Animator>();
         playerInput = new Controls();
         playerInput.Enable();
         playerInput.Player.Enable();
@@ -46,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start(){
         wallJumpingPower = new Vector2(groundSpeed, jumpStat);
+
     }
 
     // Update is called once per frame
@@ -148,9 +159,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate(){
-        if (isDashing){
-            return;
+    void FixedUpdate()
+    {
+        if (KBCounter > 0)
+        {
+            playerInput.Player.Disable();
+            // KB*Time means it starts out high and decays quickly to 0, not linear
+            if (KnockFromRight == true)
+            {
+                rb.velocity = new Vector2(-KBForceX*KBCounter, KBForceY*KBCounter);
+            }
+            else
+            {
+                rb.velocity = new Vector2(KBForceX*KBCounter, KBForceY*KBCounter);
+            }
+            KBCounter -= Time.deltaTime;
+        }
+        else
+        {
+            if (!playerInput.Player.enabled)
+            {
+                playerInput.Player.Enable();
+            }
         }
     }
 

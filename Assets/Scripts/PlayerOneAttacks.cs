@@ -11,7 +11,16 @@ public class PlayerOneAttacks : MonoBehaviour
     public float radius;
     public LayerMask enemyLayer;
     public PlayerMovement playerMovement;
+    Controls playerInput;
+    private Vector2 attackDirection;
 
+
+    private void Awake()
+    {
+        playerInput = new Controls();
+        playerInput.Enable();
+        playerInput.Player.Enable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +33,23 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         if (playerMovement.KBCounter <= 0)
         {
-            if (Input.GetButtonDown("Fire1"))
+            // if (Input.GetButtonDown("Fire1"))
+            // {
+            //     anim.SetBool("isFtilt", true);
+            // }
+            // if (Input.GetButtonDown("Fire3"))
+            // {
+            //     anim.SetBool("isUptilt", true);
+            // }
+
+            playerInput.Player.Attack.performed += ctx => 
             {
-                anim.SetBool("isFtilt", true);
-            }
-            if (Input.GetButtonDown("Fire3"))
-            {
-                anim.SetBool("isUptilt", true);
-            }
+                attackDirection = ctx.ReadValue<Vector2>();
+                if (attackDirection[0] == 1)
+                {
+                    anim.SetBool("isFtilt", true);
+                }
+            };
         }
 
     }

@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Value"",
+                    ""id"": ""cdccb527-2024-46ed-84a7-ff07c66bad4e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,61 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""WJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""ae320edf-346c-4ba5-8cfd-f316ede9a6a3"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""21f8e616-fee4-4b57-9cd8-c01f0dfd0fdf"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""db22b1fe-3a1a-4d6d-a949-6a5234f7fc41"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e5d6b0c5-5961-4442-85e2-a9d12c9dbedd"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9d4c5f16-8a0f-479e-848a-833492015934"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -185,6 +249,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Fall = m_Player.FindAction("Fall", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_WJump = m_Player.FindAction("WJump", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +314,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fall;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_WJump;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -258,6 +324,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Fall => m_Wrapper.m_Player_Fall;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @WJump => m_Wrapper.m_Player_WJump;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +349,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @WJump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWJump;
                 @WJump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWJump;
                 @WJump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWJump;
+                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -301,6 +371,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @WJump.started += instance.OnWJump;
                 @WJump.performed += instance.OnWJump;
                 @WJump.canceled += instance.OnWJump;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -312,5 +385,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnFall(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnWJump(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
