@@ -10,6 +10,9 @@ public class PlayerTwoHP : MonoBehaviour
     public Image healthBar;
     public float healthAmount = 100f;
 
+    public PlayerTwoMovement playerTwoMovement;
+    public bool fromRight;
+
     public Image gameOver;
     public TMP_Text text;
 
@@ -30,9 +33,15 @@ public class PlayerTwoHP : MonoBehaviour
             text.enabled = true;
         }
     }
+    // basic ftilt has kbforce 30, kbtt 0.3
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float kbForcex, float kbForcey, float kbTT)
     {
+        playerTwoMovement.KnockFromRight = fromRight;
+        playerTwoMovement.KBForceX = kbForcex;
+        playerTwoMovement.KBForceY = kbForcey;
+        playerTwoMovement.KBCounter = kbTT;
+
         healthAmount -= damage;
         healthBar.fillAmount = healthAmount / 100f;
     }
