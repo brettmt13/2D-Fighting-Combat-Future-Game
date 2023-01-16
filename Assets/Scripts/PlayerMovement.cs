@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetBool("isRunning", !notMoving);
         playerInput.Player.Move.canceled += ctx => { 
             notMoving = true;
             wallDir[0] = 0f;
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
                 notMoving = false;
                 groundSpeed = 11f;
                 airSpeed = 9f;
+                Debug.Log("moving");
             }
             else if(!IsGrounded()){
                 if(!isWallJumping){
@@ -163,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (KBCounter > 0)
         {
+            anim.SetBool("isKnocked", true);
             playerInput.Player.Disable();
             // KB*Time means it starts out high and decays quickly to 0, not linear
             if (KnockFromRight == true)
@@ -174,9 +177,17 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(KBForceX*KBCounter, KBForceY*KBCounter);
             }
             KBCounter -= Time.deltaTime;
+            if (KnockFromRight && !facingRight || !KnockFromRight && facingRight)
+            {
+                facingRight = !facingRight;
+                Vector2 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
         }
         else
         {
+            anim.SetBool("isKnocked", false);
             if (!playerInput.Player.enabled && !inAttackState)
             {
                 playerInput.Player.Enable();
@@ -201,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
             if(jumps < 2){
                 jumps = 1;
             }
+            airSpeed = 9f; // reset speed when hitting wall so there isn't an infinte multiplier
             isWallSliding = true;
             rb.velocity = new Vector2(wallDir[0] * airSpeed * 5, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
@@ -257,7 +269,9 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float orignalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(moveDir[0]*dashingPower, 0f);
+        airSpeed = 9f;
+        airSpeed = airSpeed*1.6f;
+        rb.velocity = new Vector2(moveDir[0]*airSpeed, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
