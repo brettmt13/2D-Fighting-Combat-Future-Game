@@ -33,15 +33,6 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         if (playerMovement.KBCounter <= 0)
         {
-            // if (Input.GetButtonDown("Fire1"))
-            // {
-            //     anim.SetBool("isFtilt", true);
-            // }
-            // if (Input.GetButtonDown("Fire3"))
-            // {
-            //     anim.SetBool("isUptilt", true);
-            // }
-
             playerInput.Player.Attack.performed += ctx => 
             {
                 if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
