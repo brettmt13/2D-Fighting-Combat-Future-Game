@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerOneAttacks : MonoBehaviour
 {
 
-
     private Animator anim;
     public GameObject attackPoint;
     public float radius;
@@ -40,26 +39,26 @@ public class PlayerOneAttacks : MonoBehaviour
                     attackDirection = ctx.ReadValue<Vector2>();
                     Debug.Log(attackDirection);
                     playerMovement.moveDir[0] = 0f;
-                    if (attackDirection[0] > 0f && playerMovement.facingRight)
+                    if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
                     {
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFtilt", true);
                     }
-                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFtilt", true);
                     }
-                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFtilt", true);                    
                     }
-                    else if(attackDirection[0] < 0f && playerMovement.facingRight){
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFtilt", true);                   
                     }
-                    else if(attackDirection[1] > 0f){
+                    else if(attackDirection[1] > 0f){ // up tilt
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isUptilt", true); 
                     }
@@ -68,8 +67,49 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.inAttackState = false;
                     }
                 }
+                else if(!playerMovement.inAttackState && !playerMovement.IsGrounded())
+                {
+                    playerMovement.inAttackState = true;
+                    attackDirection = ctx.ReadValue<Vector2>();
+                    Debug.Log(attackDirection);
+                    playerMovement.moveDir[0] = 0f;
+                    if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
+                    {
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFair", true);
+                    }
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
+                        playerMovement.Flip(true);
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFair", true);
+                    }
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFair", true);                    
+                    }
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
+                        playerMovement.Flip(true);
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFair", true);                   
+                    }
+                    else if(attackDirection[1] > 0f){ // up tilt
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isUpair", true); 
+                    }
+                    else{
+                        // put down air here! for now it just makes sure they aren't attacking
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isDair", true); 
+                    }
+                }
             };
-        }
+
+            // playerInput.Player.Jump.performed += ctx => {
+            //     if(playerMovement.jumps > 0 && !playerMovement.inAttackState && playerMovement.jumps > -1){
+            //         anim.SetBool("isJumping", true);
+            //     }
+            // };
+        };
     }
 
 // GROUNDED ATTACKS
@@ -116,7 +156,7 @@ public class PlayerOneAttacks : MonoBehaviour
     }
 
 
-// ARIAL ATTACKS
+// AERIAL ATTACKS
 
     public void startFAir()
     {
@@ -138,7 +178,7 @@ public class PlayerOneAttacks : MonoBehaviour
     }
 
 
-        public void startUpAir()
+    public void startUpAir()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
@@ -158,7 +198,7 @@ public class PlayerOneAttacks : MonoBehaviour
     }
 
 
-        public void startDAir()
+    public void startDAir()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
@@ -177,9 +217,9 @@ public class PlayerOneAttacks : MonoBehaviour
         playerMovement.inAttackState = false;
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    // }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    }
 
 }

@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpStat = 20f;
     public float fallSpeed = -14f;
     public int jumps = 2;
-    public bool notMoving;
+    public bool notMoving = true;
 
     // adding
     public bool facingRight = false;
@@ -63,10 +63,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // This line below sucks. It lets P1 have run animations but it is a bad way to do so, and won't work with jump animations
-        anim.SetBool("isRunning", !notMoving);
+
         playerInput.Player.Move.canceled += ctx => { 
             notMoving = true;
             wallDir[0] = 0f;
+            anim.SetBool("isRunning", false);
         };
 
         playerInput.Player.Move.performed += ctx => {
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 notMoving = false;
                 groundSpeed = 11f;
                 airSpeed = 9f;
-                Debug.Log("moving");
+                anim.SetBool("isRunning", true);
             }
             else if(!IsGrounded()){
                 if(!isWallJumping){
@@ -89,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
         };
 
         playerInput.Player.Jump.performed += ctx => {
+            if(jumps > 0){
+                anim.SetBool("isJumping", true);
+            }
 
             if(IsGrounded()){
                 rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
@@ -128,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
         if(IsGrounded()){
             jumps = 2;
 
+            anim.SetBool("onGround", true);
+
             // skid property
             if((notMoving) && (groundSpeed > 0)){
                 groundSpeed -= .2f;
@@ -144,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(moveDir[0] * groundSpeed, rb.velocity.y);
         }
         else if(!IsGrounded()){
+            anim.SetBool("onGround", false);
             // if released joystick, land with no momentum
             if(notMoving){
                 if(airSpeed > 0){
@@ -297,5 +304,10 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    public void endJump()
+    {
+        anim.SetBool("isJumping", false);
     }
 }
