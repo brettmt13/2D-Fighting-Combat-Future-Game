@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a1dc709305b9d46429cb5b00eea7896b
+guid: e7b31b8f546135144a5ef3686cc5ae91
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,85 +117,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: green_run_0
+      name: green_air_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 155
-        width: 59
-        height: 74
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e9fdceb20e67b8c46a37458a4b717a8b
-      internalID: 382445276
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: green_run_1
-      rect:
-        serializedVersion: 2
-        x: 159
-        y: 153
-        width: 67
-        height: 79
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: acab6d82b19cde940843a0b92f323a15
-      internalID: 1482333619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: green_run_2
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 26
-        width: 59
-        height: 77
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eeca9c4e14680f34e91330d3059801d2
-      internalID: -56696799
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: green_run_3
-      rect:
-        serializedVersion: 2
-        x: 159
-        y: 25
+        x: 10
+        y: 504
         width: 68
-        height: 79
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: faa552a60a1c3d547affe822efa81538
-      internalID: -2142147522
+      spriteID: 8202f6c408806b04b8668a5fcc2ca5a9
+      internalID: -273107637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_air_1
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 405
+        width: 63
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1671a35ade5d16c4484509556840cdec
+      internalID: 1959233714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_air_2
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 306
+        width: 63
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399ec23a8fb89dd42a48577b0293d1f4
+      internalID: -653899827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_air_3
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 207
+        width: 64
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bdada90ea6fd4742be9f44a60b3448c
+      internalID: 230736040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_air_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 108
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95295896a3c83284494066e46c33ccd6
+      internalID: 841098941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: green_air_5
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 9
+        width: 66
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 658c4cfcc8560bd4a98a0544862b3a15
+      internalID: -107644648
       vertices: []
       indices: 
       edges: []
@@ -211,10 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      green_run_3: -2142147522
-      green_run_1: 1482333619
-      green_run_0: 382445276
-      green_run_2: -56696799
+      green_air_5: -107644648
+      green_air_0: -273107637
+      green_air_2: -653899827
+      green_air_3: 230736040
+      green_air_1: 1959233714
+      green_air_4: 841098941
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

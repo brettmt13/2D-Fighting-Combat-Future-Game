@@ -72,6 +72,8 @@ public class PlayerOneAttacks : MonoBehaviour
         }
     }
 
+// GROUNDED ATTACKS
+
     public void startFTilt()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
@@ -79,7 +81,7 @@ public class PlayerOneAttacks : MonoBehaviour
         {
             Debug.Log("Hit Player 2");
             enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 30, 30, (float)0.3);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
         }
     }
 
@@ -113,6 +115,67 @@ public class PlayerOneAttacks : MonoBehaviour
         // attackPoint.transform.position.y -= 0.2f;
     }
 
+
+// ARIAL ATTACKS
+
+    public void startFAir()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endFAir()
+    {
+        anim.SetBool("isFair", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
+    }
+
+
+        public void startUpAir()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endUpAir()
+    {
+        anim.SetBool("isUpair", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
+    }
+
+
+        public void startDAir()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endDAir()
+    {
+        anim.SetBool("isDair", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
+    }
 
     // private void OnDrawGizmos()
     // {
