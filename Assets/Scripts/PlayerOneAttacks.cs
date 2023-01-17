@@ -77,20 +77,24 @@ public class PlayerOneAttacks : MonoBehaviour
                     {
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFair", true);
+                        anim.SetBool("isJumping", false);
                     }
                     else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFair", true);
+                        anim.SetBool("isJumping", false);
                     }
                     else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFair", true);                    
+                        anim.SetBool("isFair", true);
+                        anim.SetBool("isJumping", false);
                     }
                     else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFair", true);                   
+                        anim.SetBool("isFair", true);
+                        anim.SetBool("isJumping", false);
                     }
                     else if(attackDirection[1] > 0f){ // up tilt
                         playerMovement.playerInput.Player.Disable();
@@ -121,7 +125,7 @@ public class PlayerOneAttacks : MonoBehaviour
         {
             Debug.Log("Hit Player 2");
             enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
         }
     }
 
@@ -165,7 +169,7 @@ public class PlayerOneAttacks : MonoBehaviour
         {
             Debug.Log("Hit Player 2");
             enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 40, 40, (float)0.3);
         }
     }
 
@@ -185,7 +189,7 @@ public class PlayerOneAttacks : MonoBehaviour
         {
             Debug.Log("Hit Player 2");
             enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 10, 35, (float)0.3);
         }
     }
 
@@ -205,7 +209,7 @@ public class PlayerOneAttacks : MonoBehaviour
         {
             Debug.Log("Hit Player 2");
             enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 20, 35, (float)0.3);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 5, -35, (float)0.3);
         }
     }
 
