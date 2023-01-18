@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
     public bool KnockFromRight;
     public bool inAttackState;
 
+    public bool inAerialState;
+
     private Animator anim;
 
     private void Awake(){
@@ -73,12 +75,11 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Player.Move.performed += ctx => {
             moveDir = ctx.ReadValue<Vector2>();
             wallDir = ctx.ReadValue<Vector2>();
-
+            anim.SetBool("isRunning", true); // if in the air, not actually running, but this allows for landing straight into a run from the airborn state
             if(IsGrounded()){
                 notMoving = false;
                 groundSpeed = 11f;
-                airSpeed = 9f;
-                anim.SetBool("isRunning", true);
+                airSpeed = 9f;  
             }
             else if(!IsGrounded()){
                 if(!isWallJumping){
@@ -90,10 +91,7 @@ public class PlayerMovement : MonoBehaviour
         };
 
         playerInput.Player.Jump.performed += ctx => {
-            if(jumps > 0){
-                anim.SetBool("isJumping", true);
-            }
-
+            anim.SetBool("isJumping", true);
             if(IsGrounded()){
                 rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
                 jumps = 1;
