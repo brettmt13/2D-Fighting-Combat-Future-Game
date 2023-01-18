@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     public float KBTotalTime;
     public bool KnockFromRight;
     public bool inAttackState;
-
     public bool inAerialState;
 
     private Animator anim;
@@ -290,21 +289,30 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    public void Flip(bool attacking = false)
+    public void Flip(bool attacking = false, bool aerialAttack = false)
     {
-        if(attacking){
+        if(!inAerialState){ // don't flip when doing an aerial
+            if(attacking){
+                facingRight = !facingRight;
+                Vector2 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;           
+            }
+            else if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
+            {
+                facingRight = !facingRight;
+                Vector2 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+        }
+        else if(aerialAttack){ // flip if reverse aerial attacking
             facingRight = !facingRight;
             Vector2 localScale = transform.localScale;
             localScale.x *= -1f;
-            transform.localScale = localScale;           
+            transform.localScale = localScale;            
         }
-        else if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
-        {
-            facingRight = !facingRight;
-            Vector2 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
+
     }
 
     public void endJump()
