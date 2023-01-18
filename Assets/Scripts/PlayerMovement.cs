@@ -91,7 +91,10 @@ public class PlayerMovement : MonoBehaviour
         };
 
         playerInput.Player.Jump.performed += ctx => {
-            anim.SetBool("isJumping", true);
+            if(jumps > 0){
+                anim.SetBool("isJumping", true);
+            }
+ 
             if(IsGrounded()){
                 rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
                 jumps = 1;
