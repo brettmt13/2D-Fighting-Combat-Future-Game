@@ -378,6 +378,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: isFair
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isJumping
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8444144012966357387}
   m_Solo: 0
@@ -734,7 +737,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -8444144012966357387}
-    m_Position: {x: -270, y: 50, z: 0}
+    m_Position: {x: -310, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7938616992878003076}
     m_Position: {x: -140, y: 370, z: 0}
@@ -761,7 +764,7 @@ AnimatorStateMachine:
     m_Position: {x: 890, y: 490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4565484063907450182}
-    m_Position: {x: 1140, y: 360, z: 0}
+    m_Position: {x: 1080, y: 380, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

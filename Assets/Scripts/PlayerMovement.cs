@@ -46,7 +46,9 @@ public class PlayerMovement : MonoBehaviour
     public bool KnockFromRight;
     public bool inAttackState;
     public bool inAerialState;
-
+    public AudioClip stepLeft;
+    public AudioSource source;
+    public AudioClip stepRight;
     private Animator anim;
 
     private void Awake(){
@@ -78,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
             if(IsGrounded()){
                 notMoving = false;
                 groundSpeed = 11f;
-                airSpeed = 9f;  
+                airSpeed = 9f;
             }
             else if(!IsGrounded()){
                 if(!isWallJumping){
@@ -97,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
             if(IsGrounded()){
                 rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
                 jumps = 1;
+                // anim.SetBool("isJumping", false);
             }
             else if(!IsGrounded() && !IsWalled()){
                 if(jumps > 0){
@@ -133,7 +136,6 @@ public class PlayerMovement : MonoBehaviour
             jumps = 2;
 
             anim.SetBool("onGround", true);
-
             // skid property
             if((notMoving) && (groundSpeed > 0)){
                 groundSpeed -= .2f;
@@ -146,6 +148,9 @@ public class PlayerMovement : MonoBehaviour
             if(groundSpeed <= 0f){
                 moveDir[0] = 0f;
             }      
+            if(inAerialState){
+                inAerialState = false;
+            }
 
             rb.velocity = new Vector2(moveDir[0] * groundSpeed, rb.velocity.y);
         }
@@ -312,7 +317,6 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;            
         }
-
     }
 
     public void endJump()
