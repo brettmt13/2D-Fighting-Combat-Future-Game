@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public float KBTotalTime;
     public bool KnockFromRight;
     public bool inAttackState;
+    public bool inAerialState;
 
     private Animator anim;
 
@@ -73,12 +74,11 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Player.Move.performed += ctx => {
             moveDir = ctx.ReadValue<Vector2>();
             wallDir = ctx.ReadValue<Vector2>();
-
+            anim.SetBool("isRunning", true); // if in the air, not actually running, but this allows for landing straight into a run from the airborn state
             if(IsGrounded()){
                 notMoving = false;
                 groundSpeed = 11f;
-                airSpeed = 9f;
-                anim.SetBool("isRunning", true);
+                airSpeed = 9f;  
             }
             else if(!IsGrounded()){
                 if(!isWallJumping){
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             if(jumps > 0){
                 anim.SetBool("isJumping", true);
             }
-
+ 
             if(IsGrounded()){
                 rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
                 jumps = 1;
@@ -289,21 +289,30 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
-    public void Flip(bool attacking = false)
+    public void Flip(bool attacking = false, bool aerialAttack = false)
     {
-        if(attacking){
+        if(!inAerialState){ // don't flip when doing an aerial
+            if(attacking){
+                facingRight = !facingRight;
+                Vector2 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;           
+            }
+            else if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
+            {
+                facingRight = !facingRight;
+                Vector2 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+        }
+        else if(aerialAttack){ // flip if reverse aerial attacking
             facingRight = !facingRight;
             Vector2 localScale = transform.localScale;
             localScale.x *= -1f;
-            transform.localScale = localScale;           
+            transform.localScale = localScale;            
         }
-        else if (facingRight && moveDir[0] < 0f || !facingRight && moveDir[0] > 0f)
-        {
-            facingRight = !facingRight;
-            Vector2 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
+
     }
 
     public void endJump()

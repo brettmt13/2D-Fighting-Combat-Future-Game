@@ -67,44 +67,52 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.inAttackState = false;
                     }
                 }
-                else if(!playerMovement.inAttackState && !playerMovement.IsGrounded())
-                {
-                    playerMovement.inAttackState = true;
+                else if(!playerMovement.inAerialState && !playerMovement.IsGrounded()){
+                    playerMovement.inAerialState = true;
                     attackDirection = ctx.ReadValue<Vector2>();
-                    Debug.Log(attackDirection);
-                    playerMovement.moveDir[0] = 0f;
-                    if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
+                    Debug.Log(attackDirection[0]);
+                    // do aerials, disable necessary inputs while aerialing, and make it so you don't change directions when aerialing
+                     if (attackDirection[0] > 0f && playerMovement.facingRight) // fair to right
                     {
-                        playerMovement.playerInput.Player.Disable();
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
                         anim.SetBool("isFair", true);
                         anim.SetBool("isJumping", false);
                     }
-                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
-                        playerMovement.Flip(true);
-                        playerMovement.playerInput.Player.Disable();
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, fair to right
+                        playerMovement.Flip(false, true);
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
                         anim.SetBool("isFair", true);
                         anim.SetBool("isJumping", false);
                     }
-                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFair", true);
-                        anim.SetBool("isJumping", false);
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        anim.SetBool("isFair", true);                    
                     }
-                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
-                        playerMovement.Flip(true);
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFair", true);
-                        anim.SetBool("isJumping", false);
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
+                        playerMovement.Flip(false, true);
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        anim.SetBool("isFair", true);                  
                     }
-                    else if(attackDirection[1] > 0f){ // up tilt
-                        playerMovement.playerInput.Player.Disable();
+                    else if(attackDirection[1] > 0f){ // up air
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
                         anim.SetBool("isUpair", true); 
                     }
-                    else{
-                        // put down air here! for now it just makes sure they aren't attacking
-                        playerMovement.playerInput.Player.Disable();
+                    else{ // dair
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
                         anim.SetBool("isDair", true); 
-                    }
+                    }                   
                 }
             };
 
@@ -112,7 +120,7 @@ public class PlayerOneAttacks : MonoBehaviour
             //     if(playerMovement.jumps > 0 && !playerMovement.inAttackState && playerMovement.jumps > -1){
             //         anim.SetBool("isJumping", true);
             //     }
-            // };
+            // };x
         };
     }
 
@@ -197,7 +205,10 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         anim.SetBool("isFair", false);
         yield return new WaitForSeconds(0.3f);
-        playerMovement.inAttackState = false;
+        playerMovement.inAerialState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
     }
 
 
@@ -217,7 +228,10 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         anim.SetBool("isUpair", false);
         yield return new WaitForSeconds(0.3f);
-        playerMovement.inAttackState = false;
+        playerMovement.inAerialState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
     }
 
 
@@ -237,12 +251,14 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         anim.SetBool("isDair", false);
         yield return new WaitForSeconds(0.3f);
-        playerMovement.inAttackState = false;
+        playerMovement.inAerialState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
     }
-
 }
