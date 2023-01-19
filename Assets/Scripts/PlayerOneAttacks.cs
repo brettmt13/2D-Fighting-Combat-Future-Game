@@ -12,6 +12,10 @@ public class PlayerOneAttacks : MonoBehaviour
     public PlayerMovement playerMovement;
     Controls playerInput;
     private Vector2 attackDirection;
+    
+    public AudioSource source;
+    public AudioClip ftiltAudio;
+    public AudioClip uptiltAudio;
 
 
     private void Awake()
@@ -41,26 +45,32 @@ public class PlayerOneAttacks : MonoBehaviour
                     playerMovement.moveDir[0] = 0f;
                     if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
                     {
-                        playerMovement.playerInput.Player.Disable();
+                        playerMovement.playerInput.Player.Disable(); 
                         anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
                     }
                     else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
                     }
                     else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);                    
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);                    
                     }
                     else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);                   
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);                   
                     }
                     else if(attackDirection[1] > 0f){ // up tilt
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isUptilt", true); 
+                        anim.SetBool("isUptilt", true);
+                        source.PlayOneShot(uptiltAudio);
+
                     }
                     else{
                         // put down tilt here! for now it just makes sure they aren't attacking
@@ -77,6 +87,7 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
                         anim.SetBool("isFair", true);
                         anim.SetBool("isJumping", false);
                     }
@@ -85,6 +96,7 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
                         anim.SetBool("isFair", true);
                         anim.SetBool("isJumping", false);
                     }
@@ -92,6 +104,7 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
                         anim.SetBool("isFair", true);                    
                     }
                     else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
@@ -99,18 +112,21 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
                         anim.SetBool("isFair", true);                  
                     }
                     else if(attackDirection[1] > 0f){ // up air
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
                         anim.SetBool("isUpair", true); 
                     }
                     else{ // dair
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
                         anim.SetBool("isDair", true); 
                     }                   
                 }
@@ -143,6 +159,7 @@ public class PlayerOneAttacks : MonoBehaviour
         anim.SetBool("isFtilt", false);
         yield return new WaitForSeconds(0.3f);
         playerMovement.inAttackState = false;
+        Debug.Log(playerInput.Player.Move.enabled);
     }
 
 
@@ -209,6 +226,8 @@ public class PlayerOneAttacks : MonoBehaviour
         playerMovement.playerInput.Player.Jump.Enable();
         playerMovement.playerInput.Player.Dash.Enable();
         playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+
     }
 
 
@@ -232,7 +251,8 @@ public class PlayerOneAttacks : MonoBehaviour
         playerMovement.playerInput.Player.Jump.Enable();
         playerMovement.playerInput.Player.Dash.Enable();
         playerMovement.playerInput.Player.WJump.Enable();
-    }
+        playerMovement.playerInput.Player.Attack.Enable();
+        }
 
 
     public void startDAir()
@@ -255,6 +275,8 @@ public class PlayerOneAttacks : MonoBehaviour
         playerMovement.playerInput.Player.Jump.Enable();
         playerMovement.playerInput.Player.Dash.Enable();
         playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+
     }
 
     private void OnDrawGizmos()
