@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerOneAttacks : MonoBehaviour
 {
 
-
     private Animator anim;
     public GameObject attackPoint;
     public float radius;
@@ -13,6 +12,10 @@ public class PlayerOneAttacks : MonoBehaviour
     public PlayerMovement playerMovement;
     Controls playerInput;
     private Vector2 attackDirection;
+    
+    public AudioSource source;
+    public AudioClip ftiltAudio;
+    public AudioClip uptiltAudio;
 
 
     private void Awake()
@@ -33,15 +36,6 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         if (playerMovement.KBCounter <= 0)
         {
-            // if (Input.GetButtonDown("Fire1"))
-            // {
-            //     anim.SetBool("isFtilt", true);
-            // }
-            // if (Input.GetButtonDown("Fire3"))
-            // {
-            //     anim.SetBool("isUptilt", true);
-            // }
-
             playerInput.Player.Attack.performed += ctx => 
             {
                 if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
@@ -49,37 +43,104 @@ public class PlayerOneAttacks : MonoBehaviour
                     attackDirection = ctx.ReadValue<Vector2>();
                     Debug.Log(attackDirection);
                     playerMovement.moveDir[0] = 0f;
-                    if (attackDirection[0] > 0f && playerMovement.facingRight)
+                    if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
                     {
-                        playerMovement.playerInput.Player.Disable();
+                        playerMovement.playerInput.Player.Disable(); 
                         anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
                     }
-                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
                         anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
                     }
-                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);                    
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);                    
                     }
-                    else if(attackDirection[0] < 0f && playerMovement.facingRight){
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
                         playerMovement.Flip(true);
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);                   
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);                   
                     }
-                    else if(attackDirection[1] > 0f){
+                    else if(attackDirection[1] > 0f){ // up tilt
                         playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isUptilt", true); 
+                        anim.SetBool("isUptilt", true);
+                        source.PlayOneShot(uptiltAudio);
+
                     }
                     else{
                         // put down tilt here! for now it just makes sure they aren't attacking
                         playerMovement.inAttackState = false;
                     }
                 }
+                else if(!playerMovement.inAerialState && !playerMovement.IsGrounded()){
+                    playerMovement.inAerialState = true;
+                    attackDirection = ctx.ReadValue<Vector2>();
+                    Debug.Log(attackDirection[0]);
+                    // do aerials, disable necessary inputs while aerialing, and make it so you don't change directions when aerialing
+                     if (attackDirection[0] > 0f && playerMovement.facingRight) // fair to right
+                    {
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        anim.SetBool("isFair", true);
+                        anim.SetBool("isJumping", false);
+                    }
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, fair to right
+                        playerMovement.Flip(false, true);
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        anim.SetBool("isFair", true);
+                        anim.SetBool("isJumping", false);
+                    }
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        anim.SetBool("isFair", true);                    
+                    }
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
+                        playerMovement.Flip(false, true);
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        anim.SetBool("isFair", true);                  
+                    }
+                    else if(attackDirection[1] > 0f){ // up air
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        anim.SetBool("isUpair", true); 
+                    }
+                    else{ // dair
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        anim.SetBool("isDair", true); 
+                    }                   
+                }
             };
-        }
+
+            // playerInput.Player.Jump.performed += ctx => {
+            //     if(playerMovement.jumps > 0 && !playerMovement.inAttackState && playerMovement.jumps > -1){
+            //         anim.SetBool("isJumping", true);
+            //     }
+            // };x
+        };
     }
+
+// GROUNDED ATTACKS
 
     public void startFTilt()
     {
@@ -88,7 +149,7 @@ public class PlayerOneAttacks : MonoBehaviour
         {
             Debug.Log("Hit Player 2");
             enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 30, 30, (float)0.3);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
         }
     }
 
@@ -98,6 +159,7 @@ public class PlayerOneAttacks : MonoBehaviour
         anim.SetBool("isFtilt", false);
         yield return new WaitForSeconds(0.3f);
         playerMovement.inAttackState = false;
+        Debug.Log(playerInput.Player.Move.enabled);
     }
 
 
@@ -122,10 +184,103 @@ public class PlayerOneAttacks : MonoBehaviour
         // attackPoint.transform.position.y -= 0.2f;
     }
 
+    public void startDTilt()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+        }
+    }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
-    // }
 
+    public IEnumerator endDTilt()
+    {
+        anim.SetBool("isDtilt", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
+    }
+
+
+// AERIAL ATTACKS
+
+    public void startFAir()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 40, 40, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endFAir()
+    {
+        anim.SetBool("isFair", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAerialState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+
+    }
+
+
+    public void startUpAir()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 10, 35, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endUpAir()
+    {
+        anim.SetBool("isUpair", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAerialState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+        }
+
+
+    public void startDAir()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 5, -35, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endDAir()
+    {
+        anim.SetBool("isDair", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAerialState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+    }
 }
