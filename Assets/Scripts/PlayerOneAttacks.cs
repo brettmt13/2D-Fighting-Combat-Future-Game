@@ -159,6 +159,25 @@ public class PlayerOneAttacks : MonoBehaviour
         // attackPoint.transform.position.y -= 0.2f;
     }
 
+    public void startDTilt()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            Debug.Log("Hit Player 2");
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endDTilt()
+    {
+        anim.SetBool("isDtilt", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
+    }
+
 
 // AERIAL ATTACKS
 
