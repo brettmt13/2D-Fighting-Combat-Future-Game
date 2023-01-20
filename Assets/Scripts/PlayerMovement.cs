@@ -65,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // This line below sucks. It lets P1 have run animations but it is a bad way to do so, and won't work with jump animations
 
         playerInput.Player.Move.canceled += ctx => { 
             notMoving = true;
