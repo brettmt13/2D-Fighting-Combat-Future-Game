@@ -74,7 +74,8 @@ public class PlayerOneAttacks : MonoBehaviour
                     }
                     else{
                         // put down tilt here! for now it just makes sure they aren't attacking
-                        playerMovement.inAttackState = false;
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isDtilt", true);
                     }
                 }
                 else if(!playerMovement.inAerialState && !playerMovement.IsGrounded()){
@@ -88,8 +89,13 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
                         anim.SetBool("isFair", true);
-                        anim.SetBool("isJumping", false);
+                        anim.enabled = true;
+                        // anim.SetBool("isJumping", false);
                     }
                     else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, fair to right
                         playerMovement.Flip(false, true);
@@ -97,15 +103,24 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
                         anim.SetBool("isFair", true);
-                        anim.SetBool("isJumping", false);
+                        anim.enabled = true;
                     }
                     else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isFair", true);                    
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;                  
                     }
                     else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
                         playerMovement.Flip(false, true);
@@ -113,21 +128,36 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isFair", true);                  
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;                  
                     }
                     else if(attackDirection[1] > 0f){ // up air
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isUpair", true); 
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isUpair", true);
+                        anim.enabled = true;
                     }
                     else{ // dair
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isDair", true); 
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isDair", true);
+                        anim.enabled = true; 
                     }                   
                 }
             };
