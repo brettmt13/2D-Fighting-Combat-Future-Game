@@ -1,13 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerOneAttacks : MonoBehaviour
 {
 
     private Animator anim;
-    public GameObject attackPoint;
-    public float radius;
+    public GameObject ftiltHitbox1;
+    public GameObject ftiltHitbox2;
+    public GameObject uptiltHitbox;
+    public GameObject fairHitbox;
+    public GameObject dairHitbox;
+    public GameObject upairHitbox1;
+    public GameObject upairHitbox2;
+    public GameObject upairHitbox3;
+    public float fairHitboxRadius;
+    public float ftiltHitboxRadius;
+    public float uptiltHitboxRadius;
+    public float dairHitboxRadius;
+    public float upairHitboxRadius;
     public LayerMask enemyLayer;
     public PlayerMovement playerMovement;
     Controls playerInput;
@@ -16,6 +28,11 @@ public class PlayerOneAttacks : MonoBehaviour
     public AudioSource source;
     public AudioClip ftiltAudio;
     public AudioClip uptiltAudio;
+    public bool showFtiltHitboxes;
+    public bool showUptiltHitboxes;
+    public bool showFairHitboxes;
+    public bool showDairHitboxes;
+    public bool showUpairHitboxes;
 
 
     private void Awake()
@@ -41,7 +58,7 @@ public class PlayerOneAttacks : MonoBehaviour
                 if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
                     playerMovement.inAttackState = true;
                     attackDirection = ctx.ReadValue<Vector2>();
-                    Debug.Log(attackDirection);
+                    // Debug.Log(attackDirection);
                     playerMovement.moveDir[0] = 0f;
                     if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
                     {
@@ -74,13 +91,14 @@ public class PlayerOneAttacks : MonoBehaviour
                     }
                     else{
                         // put down tilt here! for now it just makes sure they aren't attacking
-                        playerMovement.inAttackState = false;
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isDtilt", true);
                     }
                 }
                 else if(!playerMovement.inAerialState && !playerMovement.IsGrounded()){
                     playerMovement.inAerialState = true;
                     attackDirection = ctx.ReadValue<Vector2>();
-                    Debug.Log(attackDirection[0]);
+                    // Debug.Log(attackDirection[0]);
                     // do aerials, disable necessary inputs while aerialing, and make it so you don't change directions when aerialing
                      if (attackDirection[0] > 0f && playerMovement.facingRight) // fair to right
                     {
@@ -88,8 +106,13 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
                         anim.SetBool("isFair", true);
-                        anim.SetBool("isJumping", false);
+                        anim.enabled = true;
+                        // anim.SetBool("isJumping", false);
                     }
                     else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, fair to right
                         playerMovement.Flip(false, true);
@@ -97,15 +120,24 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
                         anim.SetBool("isFair", true);
-                        anim.SetBool("isJumping", false);
+                        anim.enabled = true;
                     }
                     else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isFair", true);                    
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;                  
                     }
                     else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
                         playerMovement.Flip(false, true);
@@ -113,21 +145,36 @@ public class PlayerOneAttacks : MonoBehaviour
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isFair", true);                  
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;                  
                     }
                     else if(attackDirection[1] > 0f){ // up air
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isUpair", true); 
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isUpair", true);
+                        anim.enabled = true;
                     }
                     else{ // dair
                         playerMovement.playerInput.Player.Jump.Disable();
                         playerMovement.playerInput.Player.Dash.Disable();
                         playerMovement.playerInput.Player.WJump.Disable();
                         playerMovement.playerInput.Player.Attack.Disable();
-                        anim.SetBool("isDair", true); 
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isDair", true);
+                        anim.enabled = true; 
                     }                   
                 }
             };
@@ -144,13 +191,25 @@ public class PlayerOneAttacks : MonoBehaviour
 
     public void startFTilt()
     {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-        foreach (Collider2D enemyGameobject in enemy)
-        {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+        Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(ftiltHitbox1.transform.position, ftiltHitboxRadius, enemyLayer);
+        Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(ftiltHitbox2.transform.position, ftiltHitboxRadius, enemyLayer);
+
+        if(hitbox1.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox1)
+            {
+                enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+            }
         }
+        else if(hitbox2.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox2)
+            {
+                enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+            }           
+        }
+
+
     }
 
 
@@ -159,18 +218,17 @@ public class PlayerOneAttacks : MonoBehaviour
         anim.SetBool("isFtilt", false);
         yield return new WaitForSeconds(0.3f);
         playerMovement.inAttackState = false;
-        Debug.Log(playerInput.Player.Move.enabled);
+        // Debug.Log(playerInput.Player.Move.enabled);
     }
 
 
     public void startUpTilt()
     {
-        // attackPoint.transform.position.y += 0.2f;
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        // ftiltHitbox1.transform.position.y += 0.2f;
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(uptiltHitbox.transform.position, uptiltHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (uptiltHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(30, 10, 40, (float)0.3);
         }
     }
@@ -181,16 +239,15 @@ public class PlayerOneAttacks : MonoBehaviour
         anim.SetBool("isUptilt", false);
         yield return new WaitForSeconds(0.3f);
         playerMovement.inAttackState = false;
-        // attackPoint.transform.position.y -= 0.2f;
+        // ftiltHitbox1.transform.position.y -= 0.2f;
     }
 
     public void startDTilt()
     {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(ftiltHitbox1.transform.position, ftiltHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
             enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
         }
     }
@@ -208,11 +265,10 @@ public class PlayerOneAttacks : MonoBehaviour
 
     public void startFAir()
     {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(fairHitbox.transform.position, fairHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 40, 40, (float)0.3);
         }
     }
@@ -233,12 +289,30 @@ public class PlayerOneAttacks : MonoBehaviour
 
     public void startUpAir()
     {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-        foreach (Collider2D enemyGameobject in enemy)
-        {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 10, 35, (float)0.3);
+        Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(upairHitbox1.transform.position, upairHitboxRadius, enemyLayer);
+        Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(upairHitbox2.transform.position, upairHitboxRadius, enemyLayer);
+        Collider2D[] hitbox3 = Physics2D.OverlapCircleAll(upairHitbox3.transform.position, upairHitboxRadius, enemyLayer);
+
+        if(hitbox1.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox1)
+            {
+                enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (upairHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+            }
+        }
+        else if(hitbox2.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox2)
+            {
+                enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (upairHitbox2.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+            }           
+        }
+        else if(hitbox3.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox3)
+            {
+                enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (upairHitbox3.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
+            }                
         }
     }
 
@@ -257,11 +331,10 @@ public class PlayerOneAttacks : MonoBehaviour
 
     public void startDAir()
     {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(dairHitbox.transform.position, dairHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
-            Debug.Log("Hit Player 2");
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (attackPoint.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (dairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 5, -35, (float)0.3);
         }
     }
@@ -281,6 +354,24 @@ public class PlayerOneAttacks : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, radius);
+        if(showFtiltHitboxes){
+            Gizmos.DrawWireSphere(ftiltHitbox1.transform.position, ftiltHitboxRadius);
+            Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
+            //something
+        }
+        if(showUptiltHitboxes){
+            Gizmos.DrawWireSphere(uptiltHitbox.transform.position, uptiltHitboxRadius);
+        }
+        if(showFairHitboxes){
+            Gizmos.DrawWireSphere(fairHitbox.transform.position, fairHitboxRadius);
+        }
+        if(showDairHitboxes){
+            Gizmos.DrawWireSphere(dairHitbox.transform.position, dairHitboxRadius);
+        }
+        if(showUpairHitboxes){
+            Gizmos.DrawWireSphere(upairHitbox1.transform.position, upairHitboxRadius);
+            Gizmos.DrawWireSphere(upairHitbox2.transform.position, upairHitboxRadius);            
+            Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
+        }
     }
-}
+    }
