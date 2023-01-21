@@ -90,9 +90,9 @@ public class PlayerOneAttacks : MonoBehaviour
 
                     }
                     else{
-                        // put down tilt here! for now it just makes sure they aren't attacking
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isDtilt", true);
+                        playerMovement.playerInput.Player.Disable(); 
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
                     }
                 }
                 else if(!playerMovement.inAerialState && !playerMovement.IsGrounded()){
@@ -240,24 +240,6 @@ public class PlayerOneAttacks : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         playerMovement.inAttackState = false;
         // ftiltHitbox1.transform.position.y -= 0.2f;
-    }
-
-    public void startDTilt()
-    {
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(ftiltHitbox1.transform.position, ftiltHitboxRadius, enemyLayer);
-        foreach (Collider2D enemyGameobject in enemy)
-        {
-            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(10, 35, 20, (float)0.3);
-        }
-    }
-
-
-    public IEnumerator endDTilt()
-    {
-        anim.SetBool("isDtilt", false);
-        yield return new WaitForSeconds(0.3f);
-        playerMovement.inAttackState = false;
     }
 
 
