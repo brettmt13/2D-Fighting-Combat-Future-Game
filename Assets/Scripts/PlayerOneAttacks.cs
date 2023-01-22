@@ -177,6 +177,17 @@ public class PlayerOneAttacks : MonoBehaviour
                         anim.enabled = true; 
                     }                   
                 }
+                else if(playerMovement.isWallSliding){
+                    playerMovement.inAttackState = true;
+                    attackDirection = ctx.ReadValue<Vector2>();
+                    playerMovement.moveDir[0] = 0f;
+                    playerMovement.moveDir[1] = 0f; //new
+                    if (attackDirection[0] != 0f || attackDirection[1] != 0f) // any right stick input = wall attack
+                    {
+                        playerMovement.playerInput.Player.Disable(); 
+                        anim.SetBool("isWallAttack", true);
+                    }
+                }
             };
 
             // playerInput.Player.Jump.performed += ctx => {
@@ -333,6 +344,29 @@ public class PlayerOneAttacks : MonoBehaviour
         playerMovement.playerInput.Player.Attack.Enable();
 
     }
+
+
+// wall attack hitbox needs to be negative in x direction, because player techincally facing left when sprite looks right!!
+    public void startWallAttack()
+    {
+        // ftiltHitbox1.transform.position.y += 0.2f;
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(uptiltHitbox.transform.position, uptiltHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (uptiltHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            enemyGameobject.GetComponent<PlayerTwoHP>().TakeDamage(30, 10, 40, (float)0.3);
+        }
+    }
+
+
+    public IEnumerator endWallAttack()
+    {
+        anim.SetBool("isWallAttack", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAttackState = false;
+        // ftiltHitbox1.transform.position.y -= 0.2f;
+    }
+
 
     private void OnDrawGizmos()
     {
