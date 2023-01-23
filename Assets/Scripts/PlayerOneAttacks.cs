@@ -368,26 +368,26 @@ public class PlayerOneAttacks : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
-    {
-        if(showFtiltHitboxes){
-            Gizmos.DrawWireSphere(ftiltHitbox1.transform.position, ftiltHitboxRadius);
-            Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
-            //something
-        }
-        if(showUptiltHitboxes){
-            Gizmos.DrawWireSphere(uptiltHitbox.transform.position, uptiltHitboxRadius);
-        }
-        if(showFairHitboxes){
-            Gizmos.DrawWireSphere(fairHitbox.transform.position, fairHitboxRadius);
-        }
-        if(showDairHitboxes){
-            Gizmos.DrawWireSphere(dairHitbox.transform.position, dairHitboxRadius);
-        }
-        if(showUpairHitboxes){
-            Gizmos.DrawWireSphere(upairHitbox1.transform.position, upairHitboxRadius);
-            Gizmos.DrawWireSphere(upairHitbox2.transform.position, upairHitboxRadius);            
-            Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
-        }
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     if(showFtiltHitboxes){
+    //         Gizmos.DrawWireSphere(ftiltHitbox1.transform.position, ftiltHitboxRadius);
+    //         Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
+    //         //something
+    //     }
+    //     if(showUptiltHitboxes){
+    //         Gizmos.DrawWireSphere(uptiltHitbox.transform.position, uptiltHitboxRadius);
+    //     }
+    //     if(showFairHitboxes){
+    //         Gizmos.DrawWireSphere(fairHitbox.transform.position, fairHitboxRadius);
+    //     }
+    //     if(showDairHitboxes){
+    //         Gizmos.DrawWireSphere(dairHitbox.transform.position, dairHitboxRadius);
+    //     }
+    //     if(showUpairHitboxes){
+    //         Gizmos.DrawWireSphere(upairHitbox1.transform.position, upairHitboxRadius);
+    //         Gizmos.DrawWireSphere(upairHitbox2.transform.position, upairHitboxRadius);            
+    //         Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
+    //     }
+    // }
     }
