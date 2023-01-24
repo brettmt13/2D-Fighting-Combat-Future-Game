@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public Transform roofCheck;
+    public LayerMask roofLayer;
+    private bool isCling = true;
     public TrailRenderer tr;
 
     public Transform wallCheck;
@@ -85,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
                 airSpeed = 9f;
             }
             else if(!IsGrounded()){
-                if(!isWallJumping){
+                if(!isWallJumping && !IsRoofed()){
                     notMoving = false;
                     airSpeed = 9f;
                     groundSpeed = 0f;
@@ -103,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
                 jumps = 1;
                 // anim.SetBool("isJumping", false);
             }
-            else if(!IsGrounded() && !IsWalled()){
+            else if(!IsGrounded() && !IsWalled() && !IsRoofed()){
                 if(jumps > 0){
                     jumps = 0;
                     // change jump trajectory based off of air speed and joystick
@@ -123,19 +126,30 @@ public class PlayerMovement : MonoBehaviour
         };
 
         playerInput.Player.Fall.performed += ctx => {
-            if(!IsGrounded()){
+            if(!IsGrounded() && !IsRoofed()){
                 rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
+            }
+            else if(!IsWalled() && IsRoofed()){
+                Debug.Log("Grav change");
+                rb.gravityScale = 3f;
+                airSpeed = 9f;
+                rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
+                jumps = 1;
+                // isCling = false;
+                Debug.Log(rb.gravityScale);
+                Debug.Log(airSpeed);
             }
         };
 
         playerInput.Player.Dash.performed += ctx => {
-            if(canDash){
+            if(canDash && !IsRoofed()){
                 StartCoroutine(Dash());
             }
         };
 
         if(IsGrounded()){
             jumps = 2;
+            isCling = true;
 
             anim.SetBool("onGround", true);
             if(anim.GetBool("isFair")){
@@ -186,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
 
             rb.velocity = new Vector2(moveDir[0] * groundSpeed, rb.velocity.y);
         }
-        else if(!IsGrounded()){
+        else if(!IsGrounded() && !IsRoofed()){
             anim.SetBool("onGround", false);
             // if released joystick, land with no momentum
             if(notMoving){
@@ -200,6 +214,7 @@ public class PlayerMovement : MonoBehaviour
 
         WallSlide();
         WallJump();
+        RoofCling();
 
         if(!isWallJumping){
             Flip();
@@ -245,9 +260,26 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+    private bool IsRoofed()
+    {
+        return Physics2D.OverlapCircle(roofCheck.position, 0.5f, roofLayer);
+    }
+
     private bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.7f, wallLayer);
+    }
+
+    private void RoofCling()
+    {
+        if(IsRoofed() && !IsWalled() && isCling)
+        {
+            Debug.Log("Roof Cling");
+            airSpeed = 0f;
+            rb.gravityScale = 0f;
+            isCling = false;
+            rb.velocity = new Vector2(0,0);
+        }
     }
 
     private void WallSlide()
@@ -257,13 +289,16 @@ public class PlayerMovement : MonoBehaviour
             if(jumps < 2){
                 jumps = 1;
             }
+            isCling = true;
             airSpeed = 9f; // reset speed when hitting wall so there isn't an infinte multiplier
             isWallSliding = true;
+            anim.SetBool("isSliding", true);
             rb.velocity = new Vector2(wallDir[0] * airSpeed * 5, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
             isWallSliding = false;
+            anim.SetBool("isSliding", false);
         }
     }
 
@@ -286,6 +321,7 @@ public class PlayerMovement : MonoBehaviour
             if (wallJumpingCounter > 0f)
             {
                 isWallJumping = true;
+                isCling = true;
                 airSpeed = airSpeed * 2;
                 rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat * 1.13f);
                 wallJumpingCounter = 0f;
@@ -354,5 +390,11 @@ public class PlayerMovement : MonoBehaviour
     public void endJump()
     {
         anim.SetBool("isJumping", false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(roofCheck.transform.position, 0.5f);
+        // Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
     }
 }
