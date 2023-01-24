@@ -292,13 +292,13 @@ public class PlayerMovement : MonoBehaviour
             isCling = true;
             airSpeed = 9f; // reset speed when hitting wall so there isn't an infinte multiplier
             isWallSliding = true;
-            anim.SetBool("isSliding", true);
+            // anim.SetBool("isSliding", true);
             rb.velocity = new Vector2(wallDir[0] * airSpeed * 5, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
         else
         {
             isWallSliding = false;
-            anim.SetBool("isSliding", false);
+            // anim.SetBool("isSliding", false);
         }
     }
 
