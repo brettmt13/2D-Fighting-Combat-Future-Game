@@ -260,6 +260,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d4e6aa1-8c12-4768-844c-1bfcdc1788d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -284,6 +293,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Player2Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""767fa536-2c14-44a5-8c6d-21e21fa611e0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -302,6 +322,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_SelectScreen = asset.FindActionMap("SelectScreen", throwIfNotFound: true);
         m_SelectScreen_Player1Switch = m_SelectScreen.FindAction("Player1Switch", throwIfNotFound: true);
         m_SelectScreen_Player2Switch = m_SelectScreen.FindAction("Player2Switch", throwIfNotFound: true);
+        m_SelectScreen_StartGame = m_SelectScreen.FindAction("StartGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -436,12 +457,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private ISelectScreenActions m_SelectScreenActionsCallbackInterface;
     private readonly InputAction m_SelectScreen_Player1Switch;
     private readonly InputAction m_SelectScreen_Player2Switch;
+    private readonly InputAction m_SelectScreen_StartGame;
     public struct SelectScreenActions
     {
         private @Controls m_Wrapper;
         public SelectScreenActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Player1Switch => m_Wrapper.m_SelectScreen_Player1Switch;
         public InputAction @Player2Switch => m_Wrapper.m_SelectScreen_Player2Switch;
+        public InputAction @StartGame => m_Wrapper.m_SelectScreen_StartGame;
         public InputActionMap Get() { return m_Wrapper.m_SelectScreen; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -457,6 +480,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Player2Switch.started -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer2Switch;
                 @Player2Switch.performed -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer2Switch;
                 @Player2Switch.canceled -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer2Switch;
+                @StartGame.started -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnStartGame;
+                @StartGame.performed -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnStartGame;
+                @StartGame.canceled -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnStartGame;
             }
             m_Wrapper.m_SelectScreenActionsCallbackInterface = instance;
             if (instance != null)
@@ -467,6 +493,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Player2Switch.started += instance.OnPlayer2Switch;
                 @Player2Switch.performed += instance.OnPlayer2Switch;
                 @Player2Switch.canceled += instance.OnPlayer2Switch;
+                @StartGame.started += instance.OnStartGame;
+                @StartGame.performed += instance.OnStartGame;
+                @StartGame.canceled += instance.OnStartGame;
             }
         }
     }
@@ -484,5 +513,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnPlayer1Switch(InputAction.CallbackContext context);
         void OnPlayer2Switch(InputAction.CallbackContext context);
+        void OnStartGame(InputAction.CallbackContext context);
     }
 }
