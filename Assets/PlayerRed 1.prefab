@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563849297328334993}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.841, y: 0.369, z: 0}
+  m_LocalPosition: {x: -0.702, y: 0.364, z: 0}
   m_LocalScale: {x: -1, y: 1.0875008, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3119519196092981229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.91, y: 0.096, z: 0}
+  m_LocalPosition: {x: -0.86, y: 0.05, z: 0}
   m_LocalScale: {x: -1, y: 1.0875008, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3628722802324311443}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.82200015, y: -0.167, z: 0}
+  m_LocalPosition: {x: -0.6830001, y: -0.17199998, z: 0}
   m_LocalScale: {x: -1, y: 1.0875008, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +274,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 3be71e1c21a5545fda18de66883b9dcd, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -293,7 +293,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: 0.06}
+  m_Offset: {x: 0.04116942, y: 0.07733661}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -304,7 +304,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.7}
+  m_Size: {x: 0.7129922, y: 0.65542006}
   m_EdgeRadius: 0
 --- !u!96 &6418851269795029196
 TrailRenderer:
@@ -602,7 +602,7 @@ MonoBehaviour:
   wallDir: {x: 0, y: 0}
   groundSpeed: 11
   airSpeed: 9
-  jumpStat: 12
+  jumpStat: 20
   fallSpeed: -14
   jumps: 2
   notMoving: 1
@@ -637,8 +637,8 @@ MonoBehaviour:
   upairHitbox1: {fileID: 4889252119222811198}
   upairHitbox2: {fileID: 3768117775829782426}
   upairHitbox3: {fileID: 24280239429884592}
-  fairHitboxRadius: 1.5
-  ftiltHitboxRadius: 1.15
+  fairHitboxRadius: 1.2
+  ftiltHitboxRadius: 0.9
   uptiltHitboxRadius: 1.15
   dairHitboxRadius: 1.5
   upairHitboxRadius: 1.15
@@ -653,7 +653,7 @@ MonoBehaviour:
   showUptiltHitboxes: 0
   showFairHitboxes: 0
   showDairHitboxes: 0
-  showUpairHitboxes: 0
+  showUpairHitboxes: 1
 --- !u!114 &4686105481063378586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,7 +786,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8175622789898642484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.774, y: 0.684, z: 0}
+  m_LocalPosition: {x: -0.84, y: 0.66, z: 0}
   m_LocalScale: {x: -1, y: 1.0875008, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

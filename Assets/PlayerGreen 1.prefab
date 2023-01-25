@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074442645723874738}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.022, y: 0.802, z: 0}
+  m_LocalPosition: {x: -0.013, y: 0.877, z: 0}
   m_LocalScale: {x: 1, y: 1.087501, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,7 +201,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: 0.06}
+  m_Offset: {x: -0.079790965, y: 0.060000002}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -212,7 +212,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.7}
+  m_Size: {x: 0.69400644, y: 0.7}
   m_EdgeRadius: 0
 --- !u!96 &2810058065612397079
 TrailRenderer:
@@ -504,7 +504,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 119
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.024766
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -600,8 +600,8 @@ MonoBehaviour:
   upairHitbox1: {fileID: 2347251740215527013}
   upairHitbox2: {fileID: 1074442645723874738}
   upairHitbox3: {fileID: 5140844937522226422}
-  fairHitboxRadius: 1.3
-  ftiltHitboxRadius: 1
+  fairHitboxRadius: 1
+  ftiltHitboxRadius: 0.7
   uptiltHitboxRadius: 1
   dairHitboxRadius: 1.3
   upairHitboxRadius: 1
@@ -614,7 +614,7 @@ MonoBehaviour:
   uptiltAudio: {fileID: 8300000, guid: b10a2cd083e54674586884f3a334cfc0, type: 3}
   showFtiltHitboxes: 0
   showUptiltHitboxes: 0
-  showFairHitboxes: 0
+  showFairHitboxes: 1
   showDairHitboxes: 0
   showUpairHitboxes: 0
 --- !u!114 &4444598130636708959
@@ -703,7 +703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798582113508628507}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.691, y: 0.149, z: 0}
+  m_LocalPosition: {x: 0.719, y: 0.14, z: 0}
   m_LocalScale: {x: 1, y: 1.087501, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -734,7 +734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2347251740215527013}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3830001, y: 0.80200005, z: 0}
+  m_LocalPosition: {x: 0.39200023, y: 0.877, z: 0}
   m_LocalScale: {x: 1, y: 1.087501, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -765,7 +765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3044178428359106309}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: -0.67, z: 0}
+  m_LocalPosition: {x: 0.4, y: -0.703, z: 0}
   m_LocalScale: {x: 1, y: 1.087501, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -889,7 +889,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5140844937522226422}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4899999, y: 0.80200005, z: 0}
+  m_LocalPosition: {x: -0.48099977, y: 0.877, z: 0}
   m_LocalScale: {x: 1, y: 1.087501, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -951,7 +951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5935750567326103612}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.558, y: 0.532, z: 0}
+  m_LocalPosition: {x: 0.586, y: 0.537, z: 0}
   m_LocalScale: {x: 1, y: 1.087501, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

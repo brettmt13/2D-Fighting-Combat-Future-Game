@@ -22,13 +22,13 @@ public class PlayerMovementRed : MonoBehaviour
     // character stats for resetting
     public const float ORIGINALGROUNDSPEED = 11f;
     public const float ORIGINALAIRSPEED = 9f;
-    public const float ORIGINALJUMPSTAT = 12f;
+    public const float ORIGINALJUMPSTAT = 20f;
     public const float ORIGINALFALLSPEED = -14f;
 
     // changeable stats
     public float groundSpeed = 11f;
     public float airSpeed = 9f;
-    public float jumpStat = 12f;
+    public float jumpStat = 20f;
     public float fallSpeed = -14f;
     public int jumps = 2;
     public bool notMoving = true;
@@ -374,7 +374,7 @@ public class PlayerMovementRed : MonoBehaviour
             }
             else if(!IsWalled() && IsRoofed()){
                 Debug.Log("Grav change");
-                rb.gravityScale = 3f;
+                rb.gravityScale = 2f;
                 airSpeed = ORIGINALAIRSPEED;
                 rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
                 jumps = 1;
