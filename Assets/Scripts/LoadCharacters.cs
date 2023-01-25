@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LoadCharacters : MonoBehaviour
 {
@@ -10,19 +11,24 @@ public class LoadCharacters : MonoBehaviour
 
     public GameObject player2spawnPoint;
     public GameObject player1spawnPoint;
+    public PlayerInputManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        manager = GetComponent<PlayerInputManager>(); 
         int selectedCharacter1 = PlayerPrefs.GetInt("selectedCharacter1");
         int selectedCharacter2 = PlayerPrefs.GetInt("selectedCharacter2");
         GameObject player1 = characterPrefabs1[selectedCharacter1];
         GameObject player2 = characterPrefabs2[selectedCharacter2];
-        player1.SetActive(true);
-        player2.SetActive(true);
-        Instantiate(player1, player1spawnPoint.transform.position, Quaternion.identity);
-        Instantiate(player2, player2spawnPoint.transform.position, Quaternion.identity);
-
+        manager.playerPrefab = player1;
+        manager.JoinPlayer(PlayerPrefs.GetInt("selectedCharacter1"), -1, null, Gamepad.all[0]);
+        manager.playerPrefab = player2;
+        manager.JoinPlayer(PlayerPrefs.GetInt("selectedCharacter2"), -1, null, Gamepad.all[1]);
+        // player1.SetActive(true);
+        // player2.SetActive(true);
+        // Instantiate(player1, player1spawnPoint.transform.position, Quaternion.identity);
+        // Instantiate(player2, player2spawnPoint.transform.position, Quaternion.identity);
     }
-
 }

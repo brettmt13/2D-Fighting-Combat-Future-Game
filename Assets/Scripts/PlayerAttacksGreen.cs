@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
-public class PlayerOneAttacks : MonoBehaviour
+using UnityEngine.InputSystem;
+public class PlayerAttacksGreen : MonoBehaviour
 {
 
     private Animator anim;
@@ -21,7 +21,7 @@ public class PlayerOneAttacks : MonoBehaviour
     public float dairHitboxRadius;
     public float upairHitboxRadius;
     public LayerMask enemyLayer;
-    public PlayerMovement playerMovement;
+    public PlayerMovementGreen playerMovement;
     Controls playerInput;
     private Vector2 attackDirection;
     
@@ -51,151 +51,7 @@ public class PlayerOneAttacks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement.KBCounter <= 0)
-        {
-            playerInput.Player.Attack.performed += ctx => 
-            {
-                if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
-                    playerMovement.inAttackState = true;
-                    attackDirection = ctx.ReadValue<Vector2>();
-                    // Debug.Log(attackDirection);
-                    playerMovement.moveDir[0] = 0f;
-                    if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
-                    {
-                        playerMovement.playerInput.Player.Disable(); 
-                        anim.SetBool("isFtilt", true);
-                        source.PlayOneShot(ftiltAudio);
-                    }
-                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
-                        playerMovement.Flip(true);
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);
-                        source.PlayOneShot(ftiltAudio);
-                    }
-                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);
-                        source.PlayOneShot(ftiltAudio);                    
-                    }
-                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
-                        playerMovement.Flip(true);
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isFtilt", true);
-                        source.PlayOneShot(ftiltAudio);                   
-                    }
-                    else if(attackDirection[1] > 0f){ // up tilt
-                        playerMovement.playerInput.Player.Disable();
-                        anim.SetBool("isUptilt", true);
-                        source.PlayOneShot(uptiltAudio);
 
-                    }
-                    else{
-                        playerMovement.playerInput.Player.Disable(); 
-                        anim.SetBool("isFtilt", true);
-                        source.PlayOneShot(ftiltAudio);
-                    }
-                }
-                else if(!playerMovement.inAerialState && !playerMovement.IsGrounded()){
-                    playerMovement.inAerialState = true;
-                    attackDirection = ctx.ReadValue<Vector2>();
-                    // Debug.Log(attackDirection[0]);
-                    // do aerials, disable necessary inputs while aerialing, and make it so you don't change directions when aerialing
-                     if (attackDirection[0] > 0f && playerMovement.facingRight) // fair to right
-                    {
-                        playerMovement.playerInput.Player.Jump.Disable();
-                        playerMovement.playerInput.Player.Dash.Disable();
-                        playerMovement.playerInput.Player.WJump.Disable();
-                        playerMovement.playerInput.Player.Attack.Disable();
-                        if(anim.GetBool("isJumping")){
-                            anim.enabled = false;
-                        }
-                        
-                        anim.SetBool("isFair", true);
-                        anim.enabled = true;
-                        // anim.SetBool("isJumping", false);
-                    }
-                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, fair to right
-                        playerMovement.Flip(false, true);
-                        playerMovement.playerInput.Player.Jump.Disable();
-                        playerMovement.playerInput.Player.Dash.Disable();
-                        playerMovement.playerInput.Player.WJump.Disable();
-                        playerMovement.playerInput.Player.Attack.Disable();
-                        if(anim.GetBool("isJumping")){
-                            anim.enabled = false;
-                        }
-                        
-                        anim.SetBool("isFair", true);
-                        anim.enabled = true;
-                    }
-                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
-                        playerMovement.playerInput.Player.Jump.Disable();
-                        playerMovement.playerInput.Player.Dash.Disable();
-                        playerMovement.playerInput.Player.WJump.Disable();
-                        playerMovement.playerInput.Player.Attack.Disable();
-                        if(anim.GetBool("isJumping")){
-                            anim.enabled = false;
-                        }
-                        
-                        anim.SetBool("isFair", true);
-                        anim.enabled = true;                  
-                    }
-                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
-                        playerMovement.Flip(false, true);
-                        playerMovement.playerInput.Player.Jump.Disable();
-                        playerMovement.playerInput.Player.Dash.Disable();
-                        playerMovement.playerInput.Player.WJump.Disable();
-                        playerMovement.playerInput.Player.Attack.Disable();
-                        if(anim.GetBool("isJumping")){
-                            anim.enabled = false;
-                        }
-                        
-                        anim.SetBool("isFair", true);
-                        anim.enabled = true;                  
-                    }
-                    else if(attackDirection[1] > 0f){ // up air
-                        playerMovement.playerInput.Player.Jump.Disable();
-                        playerMovement.playerInput.Player.Dash.Disable();
-                        playerMovement.playerInput.Player.WJump.Disable();
-                        playerMovement.playerInput.Player.Attack.Disable();
-                        if(anim.GetBool("isJumping")){
-                            anim.enabled = false;
-                        }
-                        
-                        anim.SetBool("isUpair", true);
-                        anim.enabled = true;
-                    }
-                    else{ // dair
-                        playerMovement.playerInput.Player.Jump.Disable();
-                        playerMovement.playerInput.Player.Dash.Disable();
-                        playerMovement.playerInput.Player.WJump.Disable();
-                        playerMovement.playerInput.Player.Attack.Disable();
-                        if(anim.GetBool("isJumping")){
-                            anim.enabled = false;
-                        }
-                        
-                        anim.SetBool("isDair", true);
-                        anim.enabled = true; 
-                    }                   
-                }
-                else if(playerMovement.isWallSliding){
-                    playerMovement.inAttackState = true;
-                    attackDirection = ctx.ReadValue<Vector2>();
-                    playerMovement.moveDir[0] = 0f;
-                    playerMovement.moveDir[1] = 0f; //new
-                    if (attackDirection[0] != 0f || attackDirection[1] != 0f) // any right stick input = wall attack
-                    {
-                        playerMovement.playerInput.Player.Disable(); 
-                        anim.SetBool("isWallAttack", true);
-                    }
-                }
-            };
-
-            // playerInput.Player.Jump.performed += ctx => {
-            //     if(playerMovement.jumps > 0 && !playerMovement.inAttackState && playerMovement.jumps > -1){
-            //         anim.SetBool("isJumping", true);
-            //     }
-            // };x
-        };
     }
 
 // GROUNDED ATTACKS
@@ -229,7 +85,7 @@ public class PlayerOneAttacks : MonoBehaviour
     public IEnumerator endFTilt()
     {
         anim.SetBool("isFtilt", false);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         playerMovement.inAttackState = false;
         // Debug.Log(playerInput.Player.Move.enabled);
     }
@@ -365,7 +221,7 @@ public class PlayerOneAttacks : MonoBehaviour
     {
         anim.SetBool("isWallAttack", false);
         yield return new WaitForSeconds(0.3f);
-        playerMovement.inAttackState = false;
+        playerMovement.inAerialState = false;
         // ftiltHitbox1.transform.position.y -= 0.2f;
     }
 
@@ -392,4 +248,146 @@ public class PlayerOneAttacks : MonoBehaviour
             Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
         }
     }
+
+    public void OnAttack(InputAction.CallbackContext context){
+        if(context.performed){
+            Debug.Log("attack");
+            if(playerMovement.KBCounter <= 0){
+                if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
+                    playerMovement.inAttackState = true;
+                    attackDirection = context.ReadValue<Vector2>();
+                    playerMovement.moveDir[0] = 0f;
+                    // Debug.Log(attackDirection);
+                    if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
+                    {
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
+                    }
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, ftilt to right
+                        playerMovement.Flip(true);
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
+                    }
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // ftilt to left
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);                    
+                    }
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, ftilt to left
+                        playerMovement.Flip(true);
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);                   
+                    }
+                    else if(attackDirection[1] > 0f){ // up tilt
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isUptilt", true);
+                        source.PlayOneShot(uptiltAudio);
+
+                    }
+                    else{
+                        playerMovement.playerInput.Player.Disable(); 
+                        anim.SetBool("isFtilt", true);
+                        source.PlayOneShot(ftiltAudio);
+                    }
+                }
+                else if(!playerMovement.inAerialState && !playerMovement.IsGrounded() && !playerMovement.isWallSliding){
+                    playerMovement.inAerialState = true;
+                    attackDirection = context.ReadValue<Vector2>();
+                    // Debug.Log(attackDirection[0]);
+                    // do aerials, disable necessary inputs while aerialing, and make it so you don't change directions when aerialing
+                    if (attackDirection[0] > 0f && playerMovement.facingRight) // fair to right
+                        {
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;
+                        // anim.SetBool("isJumping", false);
+                    }
+                    else if(attackDirection[0] > 0f && !playerMovement.facingRight){ // facing left, fair to right
+                        playerMovement.Flip(false, true);
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;
+                    }
+                    else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;                  
+                    }
+                    else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
+                        playerMovement.Flip(false, true);
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isFair", true);
+                        anim.enabled = true;                  
+                    }
+                    else if(attackDirection[1] > 0f){ // up air
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isUpair", true);
+                        anim.enabled = true;
+                    }
+                    else{ // dair
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+                        
+                        anim.SetBool("isDair", true);
+                        anim.enabled = true; 
+                    }                   
+                }
+                else if(playerMovement.isWallSliding){
+                    playerMovement.inAerialState = true;
+                    attackDirection = context.ReadValue<Vector2>();
+                    playerMovement.moveDir[0] = 0f;
+                    playerMovement.moveDir[1] = 0f; //new
+                    if (attackDirection[0] != 0f || attackDirection[1] != 0f) // any right stick input = wall attack
+                    {
+                        playerMovement.playerInput.Player.Disable(); 
+                        anim.SetBool("isWallAttack", true);
+                    }
+                }
+            }
+        }
     }
+ 
+}

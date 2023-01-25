@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Player1Manager : MonoBehaviour
 
@@ -16,7 +17,7 @@ public class Player1Manager : MonoBehaviour
     }
 
     public void LoadPlayer(){
-        playerSelect1[selectedCharacter1].SetActive(true);
+        playerSelect1[selectedCharacter1].SetActive(false);
         currentPlayer = Instantiate(playerSelect1[selectedCharacter1], position.transform.position, Quaternion.identity);
         PlayerPrefs.SetInt("selectedCharacter1", selectedCharacter1);
     }

@@ -10,7 +10,7 @@ public class PlayerOneHP : MonoBehaviour
     public Image healthBar;
     public float healthAmount = 100f;
 
-    public PlayerMovement playerMovement;
+    public PlayerMovementGreen playerMovement;
     public bool fromRight;
 
     public Image gameOver;
