@@ -475,6 +475,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3d4e6aa1-8c12-4768-844c-1bfcdc1788d3
     m_ActionName: SelectScreen/StartGame[/SwitchProControllerHID/buttonSouth,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f8c31664-6960-4cec-a6d6-a6cfe8540d9c
+    m_ActionName: StartScreen/StartGame
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -673,7 +677,7 @@ MonoBehaviour:
   playerPercentage: 0
   playerMovement: {fileID: 4444598130636708959}
   fromRight: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 3204139703901452213, guid: abe0365f85e1d7c418c508ceb5d296f5, type: 3}
   healthAmount: 100
 --- !u!1 &1798582113508628507
 GameObject:
