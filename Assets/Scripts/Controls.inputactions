@@ -222,9 +222,18 @@
             "id": "c62ca533-0064-40d3-b3b5-10baebe4def6",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Player1Switch",
                     "type": "Button",
-                    "id": "0d09adfd-f9a2-4c81-8da2-327b2eacc10b",
+                    "id": "c87aae66-7682-4b07-9319-dd78f967f1b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player2Switch",
+                    "type": "Button",
+                    "id": "a581b640-44f8-4b59-bf22-6a49d6c9f0b2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -234,12 +243,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "77a83201-8abb-44e8-815f-6405a936700f",
-                    "path": "",
+                    "id": "99e032e6-60b7-4744-b6b4-abc549de8533",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Player1Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a50c1fc8-8a07-4dc8-bac8-71769ca5e630",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player2Switch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

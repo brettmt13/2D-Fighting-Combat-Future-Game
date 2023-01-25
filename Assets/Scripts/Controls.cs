@@ -244,9 +244,18 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             ""id"": ""c62ca533-0064-40d3-b3b5-10baebe4def6"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Player1Switch"",
                     ""type"": ""Button"",
-                    ""id"": ""0d09adfd-f9a2-4c81-8da2-327b2eacc10b"",
+                    ""id"": ""c87aae66-7682-4b07-9319-dd78f967f1b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Player2Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""a581b640-44f8-4b59-bf22-6a49d6c9f0b2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -256,12 +265,23 @@ public partial class @Controls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""77a83201-8abb-44e8-815f-6405a936700f"",
-                    ""path"": """",
+                    ""id"": ""99e032e6-60b7-4744-b6b4-abc549de8533"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Player1Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a50c1fc8-8a07-4dc8-bac8-71769ca5e630"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -280,7 +300,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // SelectScreen
         m_SelectScreen = asset.FindActionMap("SelectScreen", throwIfNotFound: true);
-        m_SelectScreen_Newaction = m_SelectScreen.FindAction("New action", throwIfNotFound: true);
+        m_SelectScreen_Player1Switch = m_SelectScreen.FindAction("Player1Switch", throwIfNotFound: true);
+        m_SelectScreen_Player2Switch = m_SelectScreen.FindAction("Player2Switch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -413,12 +434,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     // SelectScreen
     private readonly InputActionMap m_SelectScreen;
     private ISelectScreenActions m_SelectScreenActionsCallbackInterface;
-    private readonly InputAction m_SelectScreen_Newaction;
+    private readonly InputAction m_SelectScreen_Player1Switch;
+    private readonly InputAction m_SelectScreen_Player2Switch;
     public struct SelectScreenActions
     {
         private @Controls m_Wrapper;
         public SelectScreenActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_SelectScreen_Newaction;
+        public InputAction @Player1Switch => m_Wrapper.m_SelectScreen_Player1Switch;
+        public InputAction @Player2Switch => m_Wrapper.m_SelectScreen_Player2Switch;
         public InputActionMap Get() { return m_Wrapper.m_SelectScreen; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -428,16 +451,22 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_SelectScreenActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnNewaction;
+                @Player1Switch.started -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer1Switch;
+                @Player1Switch.performed -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer1Switch;
+                @Player1Switch.canceled -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer1Switch;
+                @Player2Switch.started -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer2Switch;
+                @Player2Switch.performed -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer2Switch;
+                @Player2Switch.canceled -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnPlayer2Switch;
             }
             m_Wrapper.m_SelectScreenActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @Player1Switch.started += instance.OnPlayer1Switch;
+                @Player1Switch.performed += instance.OnPlayer1Switch;
+                @Player1Switch.canceled += instance.OnPlayer1Switch;
+                @Player2Switch.started += instance.OnPlayer2Switch;
+                @Player2Switch.performed += instance.OnPlayer2Switch;
+                @Player2Switch.canceled += instance.OnPlayer2Switch;
             }
         }
     }
@@ -453,6 +482,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     }
     public interface ISelectScreenActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnPlayer1Switch(InputAction.CallbackContext context);
+        void OnPlayer2Switch(InputAction.CallbackContext context);
     }
 }
