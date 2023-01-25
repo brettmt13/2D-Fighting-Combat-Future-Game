@@ -5,7 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    public void startGame(){
-        SceneManager.LoadScene("SampleScene");
+
+    public Controls playerInput;
+    public void Start(){
+        playerInput = new Controls();
+        playerInput.StartScreen.Enable();
+    }
+    public void Update(){
+        playerInput.StartScreen.StartGame.performed += ctx => {
+            // Debug.Log("he");    
+            playerInput.StartScreen.Disable();
+            playerInput.SelectScreen.Enable();
+            SceneManager.LoadScene("characterSelection");
+            // Debug.Log('w');
+        };
     }
 }

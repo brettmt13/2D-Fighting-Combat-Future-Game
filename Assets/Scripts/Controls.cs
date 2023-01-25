@@ -306,6 +306,34 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""StartScreen"",
+            ""id"": ""9263eae9-b9a8-4f0b-9f74-62a95af1553f"",
+            ""actions"": [
+                {
+                    ""name"": ""StartGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8c31664-6960-4cec-a6d6-a6cfe8540d9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1ee10f34-e041-48fb-b3d5-dc6849d1244d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -323,6 +351,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_SelectScreen_Player1Switch = m_SelectScreen.FindAction("Player1Switch", throwIfNotFound: true);
         m_SelectScreen_Player2Switch = m_SelectScreen.FindAction("Player2Switch", throwIfNotFound: true);
         m_SelectScreen_StartGame = m_SelectScreen.FindAction("StartGame", throwIfNotFound: true);
+        // StartScreen
+        m_StartScreen = asset.FindActionMap("StartScreen", throwIfNotFound: true);
+        m_StartScreen_StartGame = m_StartScreen.FindAction("StartGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -500,6 +531,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public SelectScreenActions @SelectScreen => new SelectScreenActions(this);
+
+    // StartScreen
+    private readonly InputActionMap m_StartScreen;
+    private IStartScreenActions m_StartScreenActionsCallbackInterface;
+    private readonly InputAction m_StartScreen_StartGame;
+    public struct StartScreenActions
+    {
+        private @Controls m_Wrapper;
+        public StartScreenActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @StartGame => m_Wrapper.m_StartScreen_StartGame;
+        public InputActionMap Get() { return m_Wrapper.m_StartScreen; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(StartScreenActions set) { return set.Get(); }
+        public void SetCallbacks(IStartScreenActions instance)
+        {
+            if (m_Wrapper.m_StartScreenActionsCallbackInterface != null)
+            {
+                @StartGame.started -= m_Wrapper.m_StartScreenActionsCallbackInterface.OnStartGame;
+                @StartGame.performed -= m_Wrapper.m_StartScreenActionsCallbackInterface.OnStartGame;
+                @StartGame.canceled -= m_Wrapper.m_StartScreenActionsCallbackInterface.OnStartGame;
+            }
+            m_Wrapper.m_StartScreenActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @StartGame.started += instance.OnStartGame;
+                @StartGame.performed += instance.OnStartGame;
+                @StartGame.canceled += instance.OnStartGame;
+            }
+        }
+    }
+    public StartScreenActions @StartScreen => new StartScreenActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -513,6 +577,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnPlayer1Switch(InputAction.CallbackContext context);
         void OnPlayer2Switch(InputAction.CallbackContext context);
+        void OnStartGame(InputAction.CallbackContext context);
+    }
+    public interface IStartScreenActions
+    {
         void OnStartGame(InputAction.CallbackContext context);
     }
 }

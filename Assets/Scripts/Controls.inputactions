@@ -284,6 +284,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "StartScreen",
+            "id": "9263eae9-b9a8-4f0b-9f74-62a95af1553f",
+            "actions": [
+                {
+                    "name": "StartGame",
+                    "type": "Button",
+                    "id": "f8c31664-6960-4cec-a6d6-a6cfe8540d9c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1ee10f34-e041-48fb-b3d5-dc6849d1244d",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
