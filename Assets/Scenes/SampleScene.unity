@@ -223,13 +223,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPrefabs1:
   - {fileID: 6452813937547166368, guid: 9ead385c4f550e543b0407f675fe0de3, type: 3}
-  - {fileID: 752821167253666328, guid: 1ebc36c0ff5578f4496c0f91be3b16ff, type: 3}
+  - {fileID: 4911807348406485481, guid: eb2452372f333e844a9fe4c1feff573c, type: 3}
   characterPrefabs2:
-  - {fileID: 752821167253666328, guid: 1ebc36c0ff5578f4496c0f91be3b16ff, type: 3}
+  - {fileID: 4911807348406485481, guid: eb2452372f333e844a9fe4c1feff573c, type: 3}
   - {fileID: 6452813937547166368, guid: 9ead385c4f550e543b0407f675fe0de3, type: 3}
   player2spawnPoint: {fileID: 1977075002}
   player1spawnPoint: {fileID: 1697709803}
   manager: {fileID: 155046297}
+  selectedCharacter1: 0
+  selectedCharacter2: 0
 --- !u!4 &155046296
 Transform:
   m_ObjectHideFlags: 0

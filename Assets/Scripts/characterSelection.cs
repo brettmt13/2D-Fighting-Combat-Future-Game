@@ -22,6 +22,8 @@ public class characterSelection : MonoBehaviour
 
     public void Start()
     {   
+        PlayerPrefs.SetInt("selectedCharacter1", 0);
+        PlayerPrefs.SetInt("selectedCharacter2", 0);
         playerInput = new Controls();
         playerInput.Player.Disable();
         playerInput.SelectScreen.Enable();

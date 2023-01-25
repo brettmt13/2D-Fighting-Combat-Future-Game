@@ -574,6 +574,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cdccb527-2024-46ed-84a7-ff07c66bad4e
     m_ActionName: Player/Attack[/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c87aae66-7682-4b07-9319-dd78f967f1b2
+    m_ActionName: SelectScreen/Player1Switch[/SwitchProControllerHID/buttonNorth,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a581b640-44f8-4b59-bf22-6a49d6c9f0b2
+    m_ActionName: SelectScreen/Player2Switch[/SwitchProControllerHID/buttonWest,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3d4e6aa1-8c12-4768-844c-1bfcdc1788d3
+    m_ActionName: SelectScreen/StartGame[/SwitchProControllerHID/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
