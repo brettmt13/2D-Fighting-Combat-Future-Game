@@ -222,11 +222,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs1:
-  - {fileID: 7195398938225100635, guid: 9ead385c4f550e543b0407f675fe0de3, type: 3}
+  - {fileID: 1246193734313978011, guid: 9ead385c4f550e543b0407f675fe0de3, type: 3}
   - {fileID: 3647366807224722488, guid: eb2452372f333e844a9fe4c1feff573c, type: 3}
   characterPrefabs2:
   - {fileID: 3647366807224722488, guid: eb2452372f333e844a9fe4c1feff573c, type: 3}
-  - {fileID: 7195398938225100635, guid: 9ead385c4f550e543b0407f675fe0de3, type: 3}
+  - {fileID: 1246193734313978011, guid: 9ead385c4f550e543b0407f675fe0de3, type: 3}
   player2spawnPoint: {fileID: 1977075002}
   player1spawnPoint: {fileID: 1697709803}
   manager: {fileID: 155046297}
@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &285927087
 SpriteRenderer:
   m_ObjectHideFlags: 0
