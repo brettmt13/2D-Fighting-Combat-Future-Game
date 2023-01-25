@@ -136,13 +136,13 @@ GameObject:
   - component: {fileID: 7195398938225100625}
   - component: {fileID: 7195398938225100624}
   - component: {fileID: 7195398938225100627}
-  - component: {fileID: 7195398938225100626}
   - component: {fileID: 7195398938225100637}
   - component: {fileID: 7195398938225100636}
   - component: {fileID: 7195398938225100639}
   - component: {fileID: 7195398938225100638}
   - component: {fileID: 7195398938225100633}
   - component: {fileID: 7195398938225100632}
+  - component: {fileID: -2116484263541446136}
   m_Layer: 8
   m_Name: PlayerGreen 1
   m_TagString: Untagged
@@ -276,24 +276,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &7195398938225100626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7195398938225100635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8674ad46997e34249ba4aea16893ab5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  healthAmount: 100
-  playerMovement: {fileID: 0}
-  fromRight: 0
-  gameOver: {fileID: 0}
-  text: {fileID: 0}
 --- !u!96 &7195398938225100637
 TrailRenderer:
   serializedVersion: 2
@@ -683,7 +665,7 @@ MonoBehaviour:
   upairHitboxRadius: 1
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
   playerMovement: {fileID: 7195398938225100632}
   source: {fileID: 7195398938225100638}
   ftiltAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
@@ -692,7 +674,7 @@ MonoBehaviour:
   showUptiltHitboxes: 0
   showFairHitboxes: 0
   showDairHitboxes: 0
-  showUpairHitboxes: 1
+  showUpairHitboxes: 0
 --- !u!114 &7195398938225100632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,6 +720,20 @@ MonoBehaviour:
   KnockFromRight: 0
   inAttackState: 0
   inAerialState: 0
+--- !u!114 &-2116484263541446136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7195398938225100635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36f2655fb03e1145a04c61e67f3fc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPercentage: 0
+  playerMovement: {fileID: 7195398938225100632}
 --- !u!1 &7195398938349848990
 GameObject:
   m_ObjectHideFlags: 0

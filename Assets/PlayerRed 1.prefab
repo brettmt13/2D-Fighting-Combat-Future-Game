@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 2685439452000512080}
   - component: {fileID: 3903600117908064094}
   - component: {fileID: 1551783580535666600}
+  - component: {fileID: 4686105481063378586}
   m_Layer: 9
   m_Name: PlayerRed 1
   m_TagString: Untagged
@@ -653,6 +654,20 @@ MonoBehaviour:
   showFairHitboxes: 0
   showDairHitboxes: 0
   showUpairHitboxes: 0
+--- !u!114 &4686105481063378586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647366807224722488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094d1f8eb2d1caa49bca928f5abd6e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPercentage: 0
+  playerMovement: {fileID: 3903600117908064094}
 --- !u!1 &3768117775829782426
 GameObject:
   m_ObjectHideFlags: 0
