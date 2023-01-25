@@ -238,6 +238,34 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""SelectScreen"",
+            ""id"": ""c62ca533-0064-40d3-b3b5-10baebe4def6"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d09adfd-f9a2-4c81-8da2-327b2eacc10b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""77a83201-8abb-44e8-815f-6405a936700f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -250,6 +278,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_WJump = m_Player.FindAction("WJump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        // SelectScreen
+        m_SelectScreen = asset.FindActionMap("SelectScreen", throwIfNotFound: true);
+        m_SelectScreen_Newaction = m_SelectScreen.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -378,6 +409,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // SelectScreen
+    private readonly InputActionMap m_SelectScreen;
+    private ISelectScreenActions m_SelectScreenActionsCallbackInterface;
+    private readonly InputAction m_SelectScreen_Newaction;
+    public struct SelectScreenActions
+    {
+        private @Controls m_Wrapper;
+        public SelectScreenActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_SelectScreen_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_SelectScreen; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SelectScreenActions set) { return set.Get(); }
+        public void SetCallbacks(ISelectScreenActions instance)
+        {
+            if (m_Wrapper.m_SelectScreenActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_SelectScreenActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_SelectScreenActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public SelectScreenActions @SelectScreen => new SelectScreenActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -386,5 +450,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnWJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+    }
+    public interface ISelectScreenActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

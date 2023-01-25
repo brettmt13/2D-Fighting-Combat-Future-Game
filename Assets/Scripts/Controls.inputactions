@@ -216,6 +216,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "SelectScreen",
+            "id": "c62ca533-0064-40d3-b3b5-10baebe4def6",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "0d09adfd-f9a2-4c81-8da2-327b2eacc10b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "77a83201-8abb-44e8-815f-6405a936700f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -7,6 +7,6 @@ public class MainMenu : MonoBehaviour
 {
     // Start is called before the first frame update
     public void StartGame(){
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("characterSelection");
     }
 }
