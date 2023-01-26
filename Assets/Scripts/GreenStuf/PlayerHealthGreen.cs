@@ -12,7 +12,7 @@ public class PlayerHealthGreen : MonoBehaviour
     public PlayerMovementGreen playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 100f;
+    public float healthAmount = 1000f;
     private int index;
 
     private PlayerInput pi;
@@ -58,10 +58,10 @@ public class PlayerHealthGreen : MonoBehaviour
 
         healthAmount -= damage;
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 100f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 1000f;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 100f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 1000f;
         }
 
         if(healthAmount <= 0){
@@ -74,7 +74,7 @@ public class PlayerHealthGreen : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerTwoWins", 0);
             }
             playerMovement.playerInput.Player.Disable();
-            playerMovement.playerInput.SelectScreen.Enable();
+            playerMovement.playerInput.EndScreen.Enable();
             SceneManager.LoadScene("gameOver");
         }
 

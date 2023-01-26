@@ -334,6 +334,34 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""EndScreen"",
+            ""id"": ""5c1c6724-231a-4150-99d6-3ac88a5c828c"",
+            ""actions"": [
+                {
+                    ""name"": ""Rematch"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d9aa7b9-1d99-400b-ac18-73c27d559bab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""20e3f355-ebe7-4c37-b8e0-52846834cdd4"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rematch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -354,6 +382,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // StartScreen
         m_StartScreen = asset.FindActionMap("StartScreen", throwIfNotFound: true);
         m_StartScreen_StartGame = m_StartScreen.FindAction("StartGame", throwIfNotFound: true);
+        // EndScreen
+        m_EndScreen = asset.FindActionMap("EndScreen", throwIfNotFound: true);
+        m_EndScreen_Rematch = m_EndScreen.FindAction("Rematch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -564,6 +595,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public StartScreenActions @StartScreen => new StartScreenActions(this);
+
+    // EndScreen
+    private readonly InputActionMap m_EndScreen;
+    private IEndScreenActions m_EndScreenActionsCallbackInterface;
+    private readonly InputAction m_EndScreen_Rematch;
+    public struct EndScreenActions
+    {
+        private @Controls m_Wrapper;
+        public EndScreenActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Rematch => m_Wrapper.m_EndScreen_Rematch;
+        public InputActionMap Get() { return m_Wrapper.m_EndScreen; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EndScreenActions set) { return set.Get(); }
+        public void SetCallbacks(IEndScreenActions instance)
+        {
+            if (m_Wrapper.m_EndScreenActionsCallbackInterface != null)
+            {
+                @Rematch.started -= m_Wrapper.m_EndScreenActionsCallbackInterface.OnRematch;
+                @Rematch.performed -= m_Wrapper.m_EndScreenActionsCallbackInterface.OnRematch;
+                @Rematch.canceled -= m_Wrapper.m_EndScreenActionsCallbackInterface.OnRematch;
+            }
+            m_Wrapper.m_EndScreenActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Rematch.started += instance.OnRematch;
+                @Rematch.performed += instance.OnRematch;
+                @Rematch.canceled += instance.OnRematch;
+            }
+        }
+    }
+    public EndScreenActions @EndScreen => new EndScreenActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -582,5 +646,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IStartScreenActions
     {
         void OnStartGame(InputAction.CallbackContext context);
+    }
+    public interface IEndScreenActions
+    {
+        void OnRematch(InputAction.CallbackContext context);
     }
 }

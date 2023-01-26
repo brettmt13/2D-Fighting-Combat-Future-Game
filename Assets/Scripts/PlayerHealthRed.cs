@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthRed : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerHealthRed : MonoBehaviour
     public PlayerMovementRed playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 100f;
+    public float healthAmount = 1000f;
     private int index;
 
     private PlayerInput pi;
@@ -48,10 +49,24 @@ public class PlayerHealthRed : MonoBehaviour
 
         healthAmount -= damage;
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 100f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 1000f;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 100f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+        }
+
+        if(healthAmount <= 0){
+            if(index == 0){
+                PlayerPrefs.SetInt("PlayerOneWins", 0);
+                PlayerPrefs.SetInt("PlayerTwoWins", 1);
+            }
+            else{
+                PlayerPrefs.SetInt("PlayerOneWins", 1);
+                PlayerPrefs.SetInt("PlayerTwoWins", 0);
+            }
+            playerMovement.playerInput.Player.Disable();
+            playerMovement.playerInput.EndScreen.Enable();
+            SceneManager.LoadScene("gameOver");
         }
 
     }

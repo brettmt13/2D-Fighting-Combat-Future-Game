@@ -664,6 +664,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f8c31664-6960-4cec-a6d6-a6cfe8540d9c
     m_ActionName: StartScreen/StartGame
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d9aa7b9-1d99-400b-ac18-73c27d559bab
+    m_ActionName: EndScreen/Rematch[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/SwitchProControllerHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -825,7 +829,7 @@ MonoBehaviour:
   - {fileID: 7416883005428230085}
   - {fileID: 2202433630654361975}
   - {fileID: 4966993418583670855}
-  healthAmount: 100
+  healthAmount: 1000
 --- !u!114 &594886605735666446
 MonoBehaviour:
   m_ObjectHideFlags: 0

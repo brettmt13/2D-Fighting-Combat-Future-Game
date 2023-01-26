@@ -630,7 +630,7 @@ Transform:
   m_GameObject: {fileID: 3647366807224722488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 13.148401, y: -5.6691055, z: 0}
-  m_LocalScale: {x: 3.063694, y: 3.063694, z: 0}
+  m_LocalScale: {x: 4.43732, y: 4.43732, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7201715680682178656}
@@ -1014,6 +1014,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f8c31664-6960-4cec-a6d6-a6cfe8540d9c
     m_ActionName: StartScreen/StartGame[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5d9aa7b9-1d99-400b-ac18-73c27d559bab
+    m_ActionName: EndScreen/Rematch[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1124,7 +1128,7 @@ MonoBehaviour:
   - {fileID: 1711955001162806203}
   - {fileID: 5251531027012837326}
   - {fileID: 771735507288820420}
-  healthAmount: 100
+  healthAmount: 1000
 --- !u!1 &3768117775829782426
 GameObject:
   m_ObjectHideFlags: 0

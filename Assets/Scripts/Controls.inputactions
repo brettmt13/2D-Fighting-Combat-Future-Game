@@ -312,6 +312,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "EndScreen",
+            "id": "5c1c6724-231a-4150-99d6-3ac88a5c828c",
+            "actions": [
+                {
+                    "name": "Rematch",
+                    "type": "Button",
+                    "id": "5d9aa7b9-1d99-400b-ac18-73c27d559bab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "20e3f355-ebe7-4c37-b8e0-52846834cdd4",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rematch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
