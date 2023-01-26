@@ -15,8 +15,8 @@ public class StartGame : MonoBehaviour
         playerInput.StartScreen.StartGame.performed += ctx => {
             // Debug.Log("he");    
             playerInput.StartScreen.Disable();
-            playerInput.SelectScreen.Enable();
-            SceneManager.LoadScene("characterSelection");
+            playerInput.TutorialScreen.Enable();
+            SceneManager.LoadScene("Tutorial");
             // Debug.Log('w');
         };
     }

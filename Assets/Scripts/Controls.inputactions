@@ -360,6 +360,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "TutorialScreen",
+            "id": "4a7c0664-892a-4487-9e57-c772fa4f3aa9",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "7735d00d-c90d-441c-ba56-558f767a350d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "82152081-9457-4053-a08b-9e5456f4499e",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
