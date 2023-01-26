@@ -80,6 +80,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Flip"",
+                    ""type"": ""Button"",
+                    ""id"": ""33e5c095-7602-4cc2-a282-d0de4e9a0b53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""691fd618-e61c-4af7-89c4-653c835408c7"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -374,6 +394,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_WJump = m_Player.FindAction("WJump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Flip = m_Player.FindAction("Flip", throwIfNotFound: true);
         // SelectScreen
         m_SelectScreen = asset.FindActionMap("SelectScreen", throwIfNotFound: true);
         m_SelectScreen_Player1Switch = m_SelectScreen.FindAction("Player1Switch", throwIfNotFound: true);
@@ -450,6 +471,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_WJump;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Flip;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -460,6 +482,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @WJump => m_Wrapper.m_Player_WJump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Flip => m_Wrapper.m_Player_Flip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -487,6 +510,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Flip.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlip;
+                @Flip.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlip;
+                @Flip.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlip;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -509,6 +535,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Flip.started += instance.OnFlip;
+                @Flip.performed += instance.OnFlip;
+                @Flip.canceled += instance.OnFlip;
             }
         }
     }
@@ -636,6 +665,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnWJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnFlip(InputAction.CallbackContext context);
     }
     public interface ISelectScreenActions
     {

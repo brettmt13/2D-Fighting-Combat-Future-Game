@@ -16,11 +16,16 @@ public class PlayerAttacksGreen : MonoBehaviour
     public GameObject upairHitbox2;
     public GameObject upairHitbox3;
     public GameObject wallAttackHitbox;
+    public GameObject flipHitbox1;
+    public GameObject flipHitbox2;
+    public GameObject flipHitbox3;
+    public GameObject flipHitbox4;
     public float fairHitboxRadius;
     public float ftiltHitboxRadius;
     public float uptiltHitboxRadius;
     public float dairHitboxRadius;
     public float upairHitboxRadius;
+    public float flipHitboxRadius;
     public LayerMask enemyLayer;
     public PlayerMovementGreen playerMovement;
     Controls playerInput;
@@ -34,6 +39,8 @@ public class PlayerAttacksGreen : MonoBehaviour
     public bool showFairHitboxes;
     public bool showDairHitboxes;
     public bool showUpairHitboxes;
+
+    private float flipCounter = 0;
 
 
     private void Awake()
@@ -52,7 +59,7 @@ public class PlayerAttacksGreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        flipCounter -= Time.deltaTime;
     }
 
 // GROUNDED ATTACKS
@@ -99,7 +106,6 @@ public class PlayerAttacksGreen : MonoBehaviour
         anim.SetBool("isFtilt", false);
         yield return new WaitForSeconds(0.1f);
         playerMovement.inAttackState = false;
-        // Debug.Log(playerInput.Player.Move.enabled);
     }
 
 
@@ -286,8 +292,96 @@ public class PlayerAttacksGreen : MonoBehaviour
     }
 
 
+    public void startFlip1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox1.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 50, 10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 50, 10, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+
+    public void startFlip2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox2.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, -10, 40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, -10, 40, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+
+    public void startFlip3()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox3.transform.position, ftiltHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 50, -10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 50, -10, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+
+    public void startFlip4()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox4.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 10, -40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 10, -40, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+
+
+    public IEnumerator endFlip()
+    {
+        anim.SetBool("isFlip", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAerialState = false;
+        playerMovement.inAttackState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+        playerMovement.playerInput.Player.Enable();
+    }
+
+
+
     private void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(flipHitbox1.transform.position, flipHitboxRadius);
+        Gizmos.DrawWireSphere(flipHitbox2.transform.position, flipHitboxRadius);
+        Gizmos.DrawWireSphere(flipHitbox3.transform.position, flipHitboxRadius);
+        Gizmos.DrawWireSphere(flipHitbox4.transform.position, flipHitboxRadius);
         if(showFtiltHitboxes){
             Gizmos.DrawWireSphere(ftiltHitbox1.transform.position, ftiltHitboxRadius);
             Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
@@ -308,18 +402,48 @@ public class PlayerAttacksGreen : MonoBehaviour
             Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
         }
 
-        Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, fairHitboxRadius);
+        // Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, fairHitboxRadius);
     }
+
+    public void OnFlip(InputAction.CallbackContext context){
+        if(context.performed){
+            if(flipCounter <= 0){
+                flipCounter = 5;
+                if(playerMovement.KBCounter <= 0 ){
+                    if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
+                        playerMovement.inAttackState = true;
+                        playerMovement.moveDir[0] = 0f;
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isFlip", true);
+                    }
+                
+                    else if(!playerMovement.inAerialState && !playerMovement.IsGrounded() && !playerMovement.isWallSliding){
+                        playerMovement.inAerialState = true;
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+
+                        anim.SetBool("isFlip", true);
+                        anim.enabled = true;
+                    }
+                }
+            }
+        }
+    }
+    
 
     public void OnAttack(InputAction.CallbackContext context){
         if(context.performed){
-            Debug.Log("attack");
             if(playerMovement.KBCounter <= 0){
                 if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
                     playerMovement.inAttackState = true;
                     attackDirection = context.ReadValue<Vector2>();
                     playerMovement.moveDir[0] = 0f;
-                    // Debug.Log(attackDirection);
                     if (attackDirection[0] > 0f && playerMovement.facingRight) // ftilt to right
                     {
                         playerMovement.playerInput.Player.Disable();
@@ -358,7 +482,6 @@ public class PlayerAttacksGreen : MonoBehaviour
                 else if(!playerMovement.inAerialState && !playerMovement.IsGrounded() && !playerMovement.isWallSliding){
                     playerMovement.inAerialState = true;
                     attackDirection = context.ReadValue<Vector2>();
-                    // Debug.Log(attackDirection[0]);
                     // do aerials, disable necessary inputs while aerialing, and make it so you don't change directions when aerialing
                     if (attackDirection[0] > 0f && playerMovement.facingRight) // fair to right
                         {
