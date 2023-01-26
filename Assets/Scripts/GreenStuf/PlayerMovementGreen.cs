@@ -428,6 +428,6 @@ public class PlayerMovementGreen : MonoBehaviour
 
                 Invoke(nameof(StopWallJumping), wallJumpingDuration);
             }     
-        };
+        };  
     }
 }

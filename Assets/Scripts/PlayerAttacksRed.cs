@@ -15,6 +15,7 @@ public class PlayerAttacksRed : MonoBehaviour
     public GameObject upairHitbox1;
     public GameObject upairHitbox2;
     public GameObject upairHitbox3;
+    public GameObject wallAttackHitbox;
     public float fairHitboxRadius;
     public float ftiltHitboxRadius;
     public float uptiltHitboxRadius;
@@ -65,27 +66,25 @@ public class PlayerAttacksRed : MonoBehaviour
             foreach (Collider2D enemyGameobject in hitbox1)
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 8, 7, (float)1.5);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 35, 20, (float)0.3);
-                    // enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x <= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 8, 7, (float)1.5);
                 }
-                
             }
         }
         else if(hitbox2.Length > 0){
             foreach (Collider2D enemyGameobject in hitbox2)
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 8, 7, (float)1.5);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 8, 7, (float)1.5);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
             }           
@@ -111,12 +110,12 @@ public class PlayerAttacksRed : MonoBehaviour
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 10, 40, (float)0.3);
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 2, 9, (float)1.5);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 10, 40, (float)0.3);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 2, 9, (float)1.5);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -140,12 +139,12 @@ public class PlayerAttacksRed : MonoBehaviour
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 40, 40, (float)0.3);
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 10, 4, (float)1);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 40, 40, (float)0.3);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 10, 4, (float)1);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -175,12 +174,12 @@ public class PlayerAttacksRed : MonoBehaviour
             foreach (Collider2D enemyGameobject in hitbox1)
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 1, 10, (float)1);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 1, 10, (float)1);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }
@@ -189,11 +188,12 @@ public class PlayerAttacksRed : MonoBehaviour
             foreach (Collider2D enemyGameobject in hitbox2)
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 1, 10, (float)1);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 1, 10, (float)1);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }           
@@ -202,12 +202,12 @@ public class PlayerAttacksRed : MonoBehaviour
             foreach (Collider2D enemyGameobject in hitbox3)
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 1, 10, (float)1);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 35, 20, (float)0.3);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 1, 10, (float)1);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }                
@@ -233,7 +233,7 @@ public class PlayerAttacksRed : MonoBehaviour
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 5, -35, (float)0.3);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
@@ -257,20 +257,19 @@ public class PlayerAttacksRed : MonoBehaviour
 
     }
 
-
 // wall attack hitbox needs to be negative in x direction, because player techincally facing left when sprite looks right!!
     public void startWallAttack()
     {
         // ftiltHitbox1.transform.position.y += 0.2f;
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(uptiltHitbox.transform.position, uptiltHitboxRadius, enemyLayer);
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(wallAttackHitbox.transform.position, fairHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
-                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 10, 40, (float)0.3);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
-                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 10, 40, (float)0.3);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
@@ -308,15 +307,15 @@ public class PlayerAttacksRed : MonoBehaviour
             Gizmos.DrawWireSphere(upairHitbox2.transform.position, upairHitboxRadius);            
             Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
         }
+
+        Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, fairHitboxRadius);
     }
 
     public void OnAttack(InputAction.CallbackContext context){
         if(context.performed){
             Debug.Log("attack");
             if(playerMovement.KBCounter <= 0){
-                Debug.Log("into here");
                 if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
-                    Debug.Log("now in here");
                     playerMovement.inAttackState = true;
                     attackDirection = context.ReadValue<Vector2>();
                     playerMovement.moveDir[0] = 0f;
@@ -452,5 +451,4 @@ public class PlayerAttacksRed : MonoBehaviour
             }
         }
     }
- 
 }
