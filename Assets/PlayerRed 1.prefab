@@ -327,7 +327,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,7 +348,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -356,8 +356,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.021141052
-        value: 0.57333374
+        time: 0
+        value: 0.7324257
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -365,8 +365,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.30232555
-        value: 0.08799964
+        time: 0.26084453
+        value: 0.065271676
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -378,7 +378,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.754717, g: 0.72884196, b: 0.1666073, a: 1}
+      key0: {r: 0, g: 0.989563, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -567,6 +567,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3d4e6aa1-8c12-4768-844c-1bfcdc1788d3
     m_ActionName: SelectScreen/StartGame[/SwitchProControllerHID/buttonSouth,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f8c31664-6960-4cec-a6d6-a6cfe8540d9c
+    m_ActionName: StartScreen/StartGame[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

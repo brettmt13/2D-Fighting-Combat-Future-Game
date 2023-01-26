@@ -20,17 +20,19 @@ public class PlayerMovementGreen : MonoBehaviour
     public Vector2 wallDir;
 
     // character stats for resetting
-    public const float ORIGINALGROUNDSPEED = 11f;
-    public const float ORIGINALAIRSPEED = 9f;
-    public const float ORIGINALJUMPSTAT = 12f;
-    public const float ORIGINALFALLSPEED = -14f;
+    public const float ORIGINALGROUNDSPEED = 19.5f;
+    public const float ORIGINALAIRSPEED = 11.5f;
+    public const float ORIGINALJUMPSTAT = 27.5f;
+    public const float ORIGINALFALLSPEED = -18f;
+    public const float ORIGINALGRAVITYSCALE = 6f;
+    public const float DECELLERATION = .7f;
 
     // changeable stats
-    public float groundSpeed = 11f;
-    public float airSpeed = 9f;
-    public float jumpStat = 12f;
-    public float fallSpeed = -14f;
-    public int jumps = 2;
+    public float groundSpeed;
+    public float airSpeed;
+    public float jumpStat;
+    public float fallSpeed;
+    public int jumps = 1;
     public bool notMoving = true;
 
     // adding
@@ -67,14 +69,27 @@ public class PlayerMovementGreen : MonoBehaviour
     }
 
     private void Start(){
+        groundSpeed = ORIGINALGROUNDSPEED;
+        airSpeed = ORIGINALAIRSPEED;
+        jumpStat = ORIGINALJUMPSTAT;
+        fallSpeed = ORIGINALFALLSPEED;
+        rb.gravityScale = ORIGINALGRAVITYSCALE;
         wallJumpingPower = new Vector2(groundSpeed, jumpStat);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(IsWalled() || anim.GetBool("isKnocked")){
+            jumps = 1;
+            // anim.SetBool("isJumping", false);
+        }
+        if(IsGrounded() && !anim.GetBool("isJumping")){
+            jumps = 1;
+            // anim.SetBool("isJumping", false);
+        }
         if(IsGrounded()){
-            jumps = 2;
+            // anim.SetBool("isJumping", false);
             isCling = true;
 
             anim.SetBool("onGround", true);
@@ -110,7 +125,7 @@ public class PlayerMovementGreen : MonoBehaviour
 
             // skid property
             if((notMoving) && (groundSpeed > 0)){
-                groundSpeed -= .4f;
+                groundSpeed -= DECELLERATION;
             }
             // make sure speed is correct
             if((!notMoving)){
@@ -212,9 +227,7 @@ public class PlayerMovementGreen : MonoBehaviour
     {
         if (IsWalled() && !IsGrounded())
         {   
-            if(jumps < 2){
-                jumps = 1;
-            }
+            jumps = 1;
             isCling = true;
             airSpeed = 9f; // reset speed when hitting wall so there isn't an infinte multiplier
             isWallSliding = true;
@@ -337,33 +350,35 @@ public class PlayerMovementGreen : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context){
         if(playerInput.Player.enabled){
             if(context.performed){
+                anim.SetBool("isJumping", false);
                 if(jumps > 0){
+                    jumps = 0;
                     anim.SetBool("isJumping", true);
-                }
-
-                if(IsGrounded()){
                     rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
-                    jumps = 1;
-                    // anim.SetBool("isJumping", false);
                 }
-                else if(!IsGrounded() && !IsWalled() && !IsRoofed()){
-                    if(jumps > 0){
-                        jumps = 0;
-                        // change jump trajectory based off of air speed and joystick
-                        if(notMoving){
-                            airSpeed = 0f;
-                            rb.velocity = new Vector2(airSpeed, jumpStat);
-                        }
 
-                        if(!notMoving){
-                            if(!isWallJumping){
-                                airSpeed = ORIGINALAIRSPEED;
-                            }
-                            rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat);
-                        }                   
-                    }
-                } 
-            }
+                    // if(IsGrounded()){
+                    //     rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
+                    //     jumps = 0;
+                    //     // anim.SetBool("isJumping", false);
+                    // }
+                    // else if(!IsGrounded() && !IsWalled() && !IsRoofed()){
+                    //     jumps = 0;
+                    //     // change jump trajectory based off of air speed and joystick
+                    //     if(notMoving){
+                    //         airSpeed = 0f;
+                    //         rb.velocity = new Vector2(airSpeed, jumpStat);
+                    //     }
+
+                    //     if(!notMoving){
+                    //         if(!isWallJumping){
+                    //             airSpeed = ORIGINALAIRSPEED;
+                    //         }
+                    //         rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat);
+                    //     } 
+                    // }                  
+                    
+            } 
         }
     }
 
@@ -374,11 +389,11 @@ public class PlayerMovementGreen : MonoBehaviour
             }
             else if(!IsWalled() && IsRoofed()){
                 Debug.Log("Grav change");
-                rb.gravityScale = 3f;
+                rb.gravityScale = ORIGINALGRAVITYSCALE;
                 airSpeed = ORIGINALAIRSPEED;
                 rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
-                jumps = 1;
-                // isCling = false;
+                // jumps = 1;
+                isCling = false;
                 Debug.Log(rb.gravityScale);
                 Debug.Log(airSpeed);
             }
@@ -400,7 +415,7 @@ public class PlayerMovementGreen : MonoBehaviour
                 isWallJumping = true;
                 isCling = true;
                 airSpeed = airSpeed * 2;
-                rb.velocity = new Vector2(moveDir[0] * airSpeed, jumpStat * 1.13f);
+                rb.velocity = new Vector2(moveDir[0] * airSpeed * 1.13f, jumpStat);
                 wallJumpingCounter = 0f;
 
                 if (transform.localScale.x != wallJumpingDirection)
