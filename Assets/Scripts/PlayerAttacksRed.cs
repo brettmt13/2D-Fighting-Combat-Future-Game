@@ -16,12 +16,14 @@ public class PlayerAttacksRed : MonoBehaviour
     public GameObject upairHitbox2;
     public GameObject upairHitbox3;
     public GameObject wallAttackHitbox;
+    public GameObject specialHitbox;
     public float fairHitboxRadius;
     public float ftiltHitboxRadius;
     public float uptiltHitboxRadius;
     public float dairHitboxRadius;
     public float upairHitboxRadius;
     public float wallAttackRadius;
+    public float specialHitboxRadius;
     public LayerMask enemyLayer;
     public PlayerMovementRed playerMovement;
     Controls playerInput;
@@ -40,6 +42,8 @@ public class PlayerAttacksRed : MonoBehaviour
     public bool showDairHitboxes;
     public bool showUpairHitboxes;
 
+    private float specialCounter = 0;
+
 
     private void Awake()
     {
@@ -57,7 +61,7 @@ public class PlayerAttacksRed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        specialCounter -= Time.deltaTime;
     }
 
 // GROUNDED ATTACKS
@@ -288,8 +292,43 @@ public class PlayerAttacksRed : MonoBehaviour
         // ftiltHitbox1.transform.position.y -= 0.2f;
     }
 
+
+    public void startSpecial()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(specialHitbox.transform.position, specialHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 0, 0, (float)1.5);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 0, 0, (float)1.5);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+
+
+    public IEnumerator endSpecial()
+    {
+        anim.SetBool("isSpecial", false);
+        yield return new WaitForSeconds(0.3f);
+        playerMovement.inAerialState = false;
+        playerMovement.inAttackState = false;
+        playerMovement.playerInput.Player.Jump.Enable();
+        playerMovement.playerInput.Player.Dash.Enable();
+        playerMovement.playerInput.Player.WJump.Enable();
+        playerMovement.playerInput.Player.Attack.Enable();
+        playerMovement.playerInput.Player.Enable();
+    }
+
+
     private void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(specialHitbox.transform.position, specialHitboxRadius);
+
         if(showFtiltHitboxes){
             Gizmos.DrawWireSphere(ftiltHitbox1.transform.position, ftiltHitboxRadius);
             Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
@@ -310,8 +349,41 @@ public class PlayerAttacksRed : MonoBehaviour
             Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
         }
 
-        Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, wallAttackRadius);
+        // Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, wallAttackRadius);
     }
+
+
+    public void OnSpecial(InputAction.CallbackContext context){
+        if(context.performed){
+            if(specialCounter <= 0){
+                specialCounter = 7;
+                if(playerMovement.KBCounter <= 0 ){
+                    if(!playerMovement.inAttackState && playerMovement.IsGrounded()){
+                        playerMovement.inAttackState = true;
+                        playerMovement.moveDir[0] = 0f;
+                        playerMovement.playerInput.Player.Disable();
+                        anim.SetBool("isSpecial", true);
+                    }
+                
+                    else if(!playerMovement.inAerialState && !playerMovement.IsGrounded() && !playerMovement.isWallSliding){
+                        playerMovement.inAerialState = true;
+                        playerMovement.playerInput.Player.Jump.Disable();
+                        playerMovement.playerInput.Player.Dash.Disable();
+                        playerMovement.playerInput.Player.WJump.Disable();
+                        playerMovement.playerInput.Player.Attack.Disable();
+
+                        if(anim.GetBool("isJumping")){
+                            anim.enabled = false;
+                        }
+
+                        anim.SetBool("isSpecial", true);
+                        anim.enabled = true;
+                    }
+                }
+            }
+        }
+    }
+
 
     public void OnAttack(InputAction.CallbackContext context){
         if(context.performed){

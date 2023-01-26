@@ -183,6 +183,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1320477606232293910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2369693426616234964}
+  m_Layer: 8
+  m_Name: specialHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2369693426616234964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320477606232293910}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1.0875008, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1470228524447876536}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563849297328334993
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +435,7 @@ RectTransform:
   - {fileID: 6917132433231153200}
   - {fileID: 6673508429082861607}
   m_Father: {fileID: 1470228524447876536}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -532,7 +563,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1470228524447876536}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3588795745021831859
 GameObject:
@@ -646,8 +677,9 @@ Transform:
   - {fileID: 7201925530967899694}
   - {fileID: 3913058415768446988}
   - {fileID: 646555706421556390}
-  - {fileID: 4939680092660666448}
   - {fileID: 1880565299680919464}
+  - {fileID: 2369693426616234964}
+  - {fileID: 4939680092660666448}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1097,12 +1129,14 @@ MonoBehaviour:
   upairHitbox2: {fileID: 3768117775829782426}
   upairHitbox3: {fileID: 24280239429884592}
   wallAttackHitbox: {fileID: 3212562542435001326}
+  specialHitbox: {fileID: 1320477606232293910}
   fairHitboxRadius: 1.2
   ftiltHitboxRadius: 1.05
   uptiltHitboxRadius: 1.3
   dairHitboxRadius: 1.7
   upairHitboxRadius: 1.2
   wallAttackRadius: 2
+  specialHitboxRadius: 5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 768
