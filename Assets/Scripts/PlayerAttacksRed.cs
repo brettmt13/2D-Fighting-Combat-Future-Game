@@ -34,6 +34,7 @@ public class PlayerAttacksRed : MonoBehaviour
     public AudioClip uptiltAudio;
     public AudioClip fairAudio;
     public AudioClip dairAudio;
+    public AudioClip specialAudio;
 
     public AudioClip upairAudio;
     public bool showFtiltHitboxes;
@@ -314,6 +315,7 @@ public class PlayerAttacksRed : MonoBehaviour
     public IEnumerator endSpecial()
     {
         anim.SetBool("isSpecial", false);
+        source.PlayOneShot(specialAudio);
         yield return new WaitForSeconds(0.3f);
         playerMovement.inAerialState = false;
         playerMovement.inAttackState = false;

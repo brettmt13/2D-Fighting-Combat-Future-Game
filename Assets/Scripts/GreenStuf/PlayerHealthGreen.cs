@@ -12,7 +12,7 @@ public class PlayerHealthGreen : MonoBehaviour
     public PlayerMovementGreen playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 1000f;
+    public float healthAmount = 600f;
     private int index;
     public GameObject spawnPoint;
 
@@ -61,11 +61,12 @@ public class PlayerHealthGreen : MonoBehaviour
         playerMovement.KBCounter = kbTT;
 
         healthAmount -= damage;
+        Debug.Log(healthAmount);
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 600f;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 600f;
         }
 
         if(healthAmount <= 0){
