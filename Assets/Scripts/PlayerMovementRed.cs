@@ -20,12 +20,12 @@ public class PlayerMovementRed : MonoBehaviour
     public Vector2 wallDir;
 
     // character stats for resetting
-    public const float ORIGINALGROUNDSPEED = 19.5f;
-    public const float ORIGINALAIRSPEED = 11.5f;
-    public const float ORIGINALJUMPSTAT = 27.5f;
-    public const float ORIGINALFALLSPEED = -18f;
-    public const float ORIGINALGRAVITYSCALE = 6f;
-    public const float DECELLERATION = .7f;
+    public const float ORIGINALGROUNDSPEED = 14f;
+    public const float ORIGINALAIRSPEED = 9f;
+    public const float ORIGINALJUMPSTAT = 21f;
+    public const float ORIGINALFALLSPEED = -16f;
+    public const float ORIGINALGRAVITYSCALE = 3.7f;
+    public const float DECELLERATION = .5f;
 
     // changeable stats
     public float groundSpeed;
@@ -59,6 +59,10 @@ public class PlayerMovementRed : MonoBehaviour
     public bool KnockFromRight;
     public bool inAttackState;
     public bool inAerialState;
+    
+    public AudioClip moveAudio;
+    public AudioClip jumpAudio;
+    public AudioSource source;
     private Animator anim;
 
     private void Awake(){
@@ -271,6 +275,7 @@ public class PlayerMovementRed : MonoBehaviour
         rb.gravityScale = 0f;
         airSpeed = 9f;
         airSpeed = airSpeed*1.6f;
+        source.PlayOneShot(moveAudio);
         rb.velocity = new Vector2(moveDir[0]*airSpeed, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -355,6 +360,7 @@ public class PlayerMovementRed : MonoBehaviour
                 if(jumps > 0){
                     jumps = 0;
                     anim.SetBool("isJumping", true);
+                    source.PlayOneShot(jumpAudio);
                     rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
                 }
 

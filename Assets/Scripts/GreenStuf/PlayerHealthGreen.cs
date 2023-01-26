@@ -14,6 +14,7 @@ public class PlayerHealthGreen : MonoBehaviour
     public GameObject[] healthBars;
     public float healthAmount = 1000f;
     private int index;
+    public GameObject spawnPoint;
 
     private PlayerInput pi;
     // public Canvas canvas;
@@ -28,14 +29,17 @@ public class PlayerHealthGreen : MonoBehaviour
             // healthBars[0].SetActive(true);
             // Instantiate(healthBars[0], new Vector3(0,0,0), Quaternion.identity);
             // healthBars[0].transform.parent = canvas.transform;
+
             healthBars[3].SetActive(false);
             healthBars[4].SetActive(false);
             healthBars[5].SetActive(false);
+            transform.position = new Vector2(-13.27f,-6.53f);
         }
         else{
             healthBars[0].SetActive(false);
             healthBars[1].SetActive(false);
             healthBars[2].SetActive(false);
+            transform.position = new Vector2(12.17f,-6.53f);
         }
     }
 

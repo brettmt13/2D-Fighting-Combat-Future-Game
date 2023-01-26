@@ -25,11 +25,13 @@ public class PlayerHealthRed : MonoBehaviour
             healthBars[3].SetActive(false);
             healthBars[4].SetActive(false);
             healthBars[5].SetActive(false);
+            transform.position = new Vector2(-13.27f,-6.53f);
         }
         else{
             healthBars[0].SetActive(false);
             healthBars[1].SetActive(false);
             healthBars[2].SetActive(false);
+            transform.position = new Vector2(12.17f,-6.53f);
         }
     }
 

@@ -22,7 +22,7 @@ public class PlayerMovementGreen : MonoBehaviour
     // character stats for resetting
     public const float ORIGINALGROUNDSPEED = 19.5f;
     public const float ORIGINALAIRSPEED = 11.5f;
-    public const float ORIGINALJUMPSTAT = 27.5f;
+    public const float ORIGINALJUMPSTAT = 29f;
     public const float ORIGINALFALLSPEED = -18f;
     public const float ORIGINALGRAVITYSCALE = 6f;
     public const float DECELLERATION = .7f;
@@ -60,6 +60,9 @@ public class PlayerMovementGreen : MonoBehaviour
     public bool inAttackState;
     public bool inAerialState;
     private Animator anim;
+    public AudioSource source;
+    public AudioClip moveAudio;
+    public AudioClip jumpAudio;
 
     private void Awake(){
         anim = GetComponent<Animator>();
@@ -270,6 +273,7 @@ public class PlayerMovementGreen : MonoBehaviour
         rb.gravityScale = 0f;
         airSpeed = 9f;
         airSpeed = airSpeed*1.6f;
+        source.PlayOneShot(moveAudio);
         rb.velocity = new Vector2(moveDir[0]*airSpeed, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -354,6 +358,7 @@ public class PlayerMovementGreen : MonoBehaviour
                 if(jumps > 0){
                     jumps = 0;
                     anim.SetBool("isJumping", true);
+                    source.PlayOneShot(jumpAudio);
                     rb.velocity = new Vector2(moveDir[0] * groundSpeed, jumpStat);
                 }
 

@@ -26,6 +26,7 @@ public class PlayerAttacksGreen : MonoBehaviour
     public float dairHitboxRadius;
     public float upairHitboxRadius;
     public float flipHitboxRadius;
+    public float wallAttackRadius;
     public LayerMask enemyLayer;
     public PlayerMovementGreen playerMovement;
     Controls playerInput;
@@ -34,6 +35,9 @@ public class PlayerAttacksGreen : MonoBehaviour
     public AudioSource source;
     public AudioClip ftiltAudio;
     public AudioClip uptiltAudio;
+    public AudioClip fairAudio;
+    public AudioClip upairAudio;
+    public AudioClip dairAudio;
     public bool showFtiltHitboxes;
     public bool showUptiltHitboxes;
     public bool showFairHitboxes;
@@ -181,11 +185,11 @@ public class PlayerAttacksGreen : MonoBehaviour
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                     enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 25, (float)0.7);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 25, (float)0.7);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }
@@ -195,11 +199,11 @@ public class PlayerAttacksGreen : MonoBehaviour
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                     enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 25, (float)0.7);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 25, (float)0.7);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }           
@@ -209,11 +213,11 @@ public class PlayerAttacksGreen : MonoBehaviour
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                     enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 25, (float)0.7);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 25, (float)0.7);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }                
@@ -267,7 +271,7 @@ public class PlayerAttacksGreen : MonoBehaviour
     public void startWallAttack()
     {
         // ftiltHitbox1.transform.position.y += 0.2f;
-        Collider2D[] enemy = Physics2D.OverlapCircleAll(wallAttackHitbox.transform.position, fairHitboxRadius, enemyLayer);
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(wallAttackHitbox.transform.position, wallAttackRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
@@ -378,10 +382,10 @@ public class PlayerAttacksGreen : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(flipHitbox1.transform.position, flipHitboxRadius);
-        Gizmos.DrawWireSphere(flipHitbox2.transform.position, flipHitboxRadius);
-        Gizmos.DrawWireSphere(flipHitbox3.transform.position, flipHitboxRadius);
-        Gizmos.DrawWireSphere(flipHitbox4.transform.position, flipHitboxRadius);
+        // Gizmos.DrawWireSphere(flipHitbox1.transform.position, flipHitboxRadius);
+        // Gizmos.DrawWireSphere(flipHitbox2.transform.position, flipHitboxRadius);
+        // Gizmos.DrawWireSphere(flipHitbox3.transform.position, flipHitboxRadius);
+        // Gizmos.DrawWireSphere(flipHitbox4.transform.position, flipHitboxRadius);
         if(showFtiltHitboxes){
             Gizmos.DrawWireSphere(ftiltHitbox1.transform.position, ftiltHitboxRadius);
             Gizmos.DrawWireSphere(ftiltHitbox2.transform.position, ftiltHitboxRadius);
@@ -402,7 +406,7 @@ public class PlayerAttacksGreen : MonoBehaviour
             Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
         }
 
-        // Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, fairHitboxRadius);
+        Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, wallAttackRadius);
     }
 
     public void OnFlip(InputAction.CallbackContext context){
@@ -494,6 +498,7 @@ public class PlayerAttacksGreen : MonoBehaviour
                         }
                         
                         anim.SetBool("isFair", true);
+                        source.PlayOneShot(fairAudio);
                         anim.enabled = true;
                         // anim.SetBool("isJumping", false);
                     }
@@ -508,6 +513,7 @@ public class PlayerAttacksGreen : MonoBehaviour
                         }
                         
                         anim.SetBool("isFair", true);
+                        source.PlayOneShot(fairAudio);
                         anim.enabled = true;
                     }
                     else if(attackDirection[0] < 0f && !playerMovement.facingRight){ // fair to left
@@ -520,6 +526,7 @@ public class PlayerAttacksGreen : MonoBehaviour
                         }
                         
                         anim.SetBool("isFair", true);
+                        source.PlayOneShot(fairAudio);
                         anim.enabled = true;                  
                     }
                     else if(attackDirection[0] < 0f && playerMovement.facingRight){ // facing right, fair to left
@@ -533,6 +540,7 @@ public class PlayerAttacksGreen : MonoBehaviour
                         }
                         
                         anim.SetBool("isFair", true);
+                        source.PlayOneShot(fairAudio);
                         anim.enabled = true;                  
                     }
                     else if(attackDirection[1] > 0f){ // up air
@@ -545,6 +553,9 @@ public class PlayerAttacksGreen : MonoBehaviour
                         }
                         
                         anim.SetBool("isUpair", true);
+                        source.volume = 0.5f;
+                        source.PlayOneShot(upairAudio);
+                        source.volume = 1f;
                         anim.enabled = true;
                     }
                     else{ // dair
@@ -557,6 +568,8 @@ public class PlayerAttacksGreen : MonoBehaviour
                         }
                         
                         anim.SetBool("isDair", true);
+                        source.PlayOneShot(dairAudio);
+                        
                         anim.enabled = true; 
                     }                   
                 }
