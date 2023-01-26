@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthGreen : MonoBehaviour
 {
@@ -62,6 +63,14 @@ public class PlayerHealthGreen : MonoBehaviour
         else{
             healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 100f;
         }
+
+        if(healthAmount <= 0){
+            
+            playerMovement.playerInput.Player.Disable();
+            playerMovement.playerInput.SelectScreen.Enable();
+            SceneManager.LoadScene("characterSelection");
+        }
+
 
     }
 }

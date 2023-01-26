@@ -503,6 +503,37 @@ Transform:
   m_Father: {fileID: 1470228524447876536}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3212562542435001326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880565299680919464}
+  m_Layer: 9
+  m_Name: wallAttackHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1880565299680919464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212562542435001326}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.064, y: 0.109, z: 0}
+  m_LocalScale: {x: -1.448356, y: 1.5750886, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1470228524447876536}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3588795745021831859
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +646,7 @@ Transform:
   - {fileID: 3913058415768446988}
   - {fileID: 646555706421556390}
   - {fileID: 4939680092660666448}
+  - {fileID: 1880565299680919464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1052,6 +1084,7 @@ MonoBehaviour:
   upairHitbox1: {fileID: 4889252119222811198}
   upairHitbox2: {fileID: 3768117775829782426}
   upairHitbox3: {fileID: 24280239429884592}
+  wallAttackHitbox: {fileID: 3212562542435001326}
   fairHitboxRadius: 1.2
   ftiltHitboxRadius: 0.9
   uptiltHitboxRadius: 1.15
