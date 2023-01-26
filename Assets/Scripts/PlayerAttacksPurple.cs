@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.InputSystem;
-public class PlayerAttacksRed : MonoBehaviour
+public class PlayerAttacksPurple : MonoBehaviour
 {
 
     private Animator anim;
@@ -25,7 +25,7 @@ public class PlayerAttacksRed : MonoBehaviour
     public float wallAttackRadius;
     public float specialHitboxRadius;
     public LayerMask enemyLayer;
-    public PlayerMovementRed playerMovement;
+    public PlayerMovementPurple playerMovement;
     Controls playerInput;
     private Vector2 attackDirection;
     

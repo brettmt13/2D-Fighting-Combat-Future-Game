@@ -84,6 +84,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                     enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 8, 7, (float)1.5);
                 }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 8, 7, (float)1.5);
+                }
             }
         }
         else if(hitbox2.Length > 0){
@@ -96,6 +100,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                     enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 8, 7, (float)1.5);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
             }           
@@ -127,6 +135,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 2, 9, (float)1.5);
             }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 2, 9, (float)1.5);
+            }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
@@ -155,6 +167,10 @@ public class PlayerAttacksGreen : MonoBehaviour
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 32, 10, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 32, 10, (float)0.8);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -191,6 +207,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                     enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
                 }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }
         }
@@ -205,6 +225,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                     enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
                 }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }           
         }
@@ -218,6 +242,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                     enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
             }                
@@ -249,6 +277,10 @@ public class PlayerAttacksGreen : MonoBehaviour
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 5, -25, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 5, -25, (float)0.8);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -282,6 +314,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 50, -15, (float)0.6);
             }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 50, -15, (float)0.6);
+            }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
@@ -309,6 +345,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 50, 10, (float)0.6);
             }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 50, 10, (float)0.6);
+            }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
@@ -325,6 +365,10 @@ public class PlayerAttacksGreen : MonoBehaviour
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, -10, 40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, -10, 40, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -343,6 +387,10 @@ public class PlayerAttacksGreen : MonoBehaviour
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 50, -10, (float)0.6);
             }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 50, -10, (float)0.6);
+            }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
@@ -359,6 +407,10 @@ public class PlayerAttacksGreen : MonoBehaviour
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
                 enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 10, -40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 10, -40, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
