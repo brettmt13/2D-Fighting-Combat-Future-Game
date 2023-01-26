@@ -1052,9 +1052,25 @@ MonoBehaviour:
     m_ActionId: 5d9aa7b9-1d99-400b-ac18-73c27d559bab
     m_ActionName: EndScreen/Rematch[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1551783580535666600}
+        m_TargetAssemblyTypeName: PlayerAttacksRed, Assembly-CSharp
+        m_MethodName: OnSpecial
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 33e5c095-7602-4cc2-a282-d0de4e9a0b53
     m_ActionName: Player/Flip[/SwitchProControllerHID/buttonEast,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7735d00d-c90d-441c-ba56-558f767a350d
+    m_ActionName: TutorialScreen/Continue[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1146,7 +1162,8 @@ MonoBehaviour:
   uptiltAudio: {fileID: 8300000, guid: b10a2cd083e54674586884f3a334cfc0, type: 3}
   fairAudio: {fileID: 8300000, guid: cd4fe56ef23325544b729dd4a85f7f5c, type: 3}
   dairAudio: {fileID: 8300000, guid: 398946a404a7aec4b89d2cb3227fa91e, type: 3}
-  upairAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
+  specialAudio: {fileID: 8300000, guid: 2cb889681155e174fac63cfa872bf248, type: 3}
+  upairAudio: {fileID: 8300000, guid: 3af228f55d3d2764da3ddb1647166f37, type: 3}
   showFtiltHitboxes: 0
   showUptiltHitboxes: 0
   showFairHitboxes: 0
@@ -1174,7 +1191,7 @@ MonoBehaviour:
   - {fileID: 1711955001162806203}
   - {fileID: 5251531027012837326}
   - {fileID: 771735507288820420}
-  healthAmount: 1000
+  healthAmount: 600
 --- !u!82 &-5496047630136731692
 AudioSource:
   m_ObjectHideFlags: 0

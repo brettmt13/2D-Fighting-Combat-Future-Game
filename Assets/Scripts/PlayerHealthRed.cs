@@ -5,13 +5,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerHealthRed : MonoBehaviour
 {
- public float playerPercentage = 0;
+    public float playerPercentage = 0;
     public PlayerMovementRed playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 1000f;
+    public float healthAmount = 600f;
     private int index;
 
     private PlayerInput pi;
@@ -51,10 +52,10 @@ public class PlayerHealthRed : MonoBehaviour
 
         healthAmount -= damage;
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 600f;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 600f;
         }
 
         if(healthAmount <= 0){

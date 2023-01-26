@@ -750,6 +750,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 33e5c095-7602-4cc2-a282-d0de4e9a0b53
     m_ActionName: Player/Flip[/XInputControllerWindows1/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7735d00d-c90d-441c-ba56-558f767a350d
+    m_ActionName: TutorialScreen/Continue[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -891,7 +895,7 @@ MonoBehaviour:
   ftiltAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
   uptiltAudio: {fileID: 8300000, guid: b10a2cd083e54674586884f3a334cfc0, type: 3}
   fairAudio: {fileID: 8300000, guid: cd4fe56ef23325544b729dd4a85f7f5c, type: 3}
-  upairAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
+  upairAudio: {fileID: 8300000, guid: 3af228f55d3d2764da3ddb1647166f37, type: 3}
   dairAudio: {fileID: 8300000, guid: 398946a404a7aec4b89d2cb3227fa91e, type: 3}
   showFtiltHitboxes: 0
   showUptiltHitboxes: 0
@@ -920,7 +924,7 @@ MonoBehaviour:
   - {fileID: 7416883005428230085}
   - {fileID: 2202433630654361975}
   - {fileID: 4966993418583670855}
-  healthAmount: 1000
+  healthAmount: 600
   spawnPoint: {fileID: 0}
 --- !u!114 &594886605735666446
 MonoBehaviour:

@@ -382,6 +382,34 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TutorialScreen"",
+            ""id"": ""4a7c0664-892a-4487-9e57-c772fa4f3aa9"",
+            ""actions"": [
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""7735d00d-c90d-441c-ba56-558f767a350d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""82152081-9457-4053-a08b-9e5456f4499e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -406,6 +434,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // EndScreen
         m_EndScreen = asset.FindActionMap("EndScreen", throwIfNotFound: true);
         m_EndScreen_Rematch = m_EndScreen.FindAction("Rematch", throwIfNotFound: true);
+        // TutorialScreen
+        m_TutorialScreen = asset.FindActionMap("TutorialScreen", throwIfNotFound: true);
+        m_TutorialScreen_Continue = m_TutorialScreen.FindAction("Continue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -657,6 +688,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public EndScreenActions @EndScreen => new EndScreenActions(this);
+
+    // TutorialScreen
+    private readonly InputActionMap m_TutorialScreen;
+    private ITutorialScreenActions m_TutorialScreenActionsCallbackInterface;
+    private readonly InputAction m_TutorialScreen_Continue;
+    public struct TutorialScreenActions
+    {
+        private @Controls m_Wrapper;
+        public TutorialScreenActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Continue => m_Wrapper.m_TutorialScreen_Continue;
+        public InputActionMap Get() { return m_Wrapper.m_TutorialScreen; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TutorialScreenActions set) { return set.Get(); }
+        public void SetCallbacks(ITutorialScreenActions instance)
+        {
+            if (m_Wrapper.m_TutorialScreenActionsCallbackInterface != null)
+            {
+                @Continue.started -= m_Wrapper.m_TutorialScreenActionsCallbackInterface.OnContinue;
+                @Continue.performed -= m_Wrapper.m_TutorialScreenActionsCallbackInterface.OnContinue;
+                @Continue.canceled -= m_Wrapper.m_TutorialScreenActionsCallbackInterface.OnContinue;
+            }
+            m_Wrapper.m_TutorialScreenActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Continue.started += instance.OnContinue;
+                @Continue.performed += instance.OnContinue;
+                @Continue.canceled += instance.OnContinue;
+            }
+        }
+    }
+    public TutorialScreenActions @TutorialScreen => new TutorialScreenActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -680,5 +744,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IEndScreenActions
     {
         void OnRematch(InputAction.CallbackContext context);
+    }
+    public interface ITutorialScreenActions
+    {
+        void OnContinue(InputAction.CallbackContext context);
     }
 }
