@@ -65,10 +65,17 @@ public class PlayerHealthGreen : MonoBehaviour
         }
 
         if(healthAmount <= 0){
-            
+            if(index == 0){
+                PlayerPrefs.SetInt("PlayerOneWins", 0);
+                PlayerPrefs.SetInt("PlayerTwoWins", 1);
+            }
+            else{
+                PlayerPrefs.SetInt("PlayerOneWins", 1);
+                PlayerPrefs.SetInt("PlayerTwoWins", 0);
+            }
             playerMovement.playerInput.Player.Disable();
             playerMovement.playerInput.SelectScreen.Enable();
-            SceneManager.LoadScene("characterSelection");
+            SceneManager.LoadScene("gameOver");
         }
 
 
