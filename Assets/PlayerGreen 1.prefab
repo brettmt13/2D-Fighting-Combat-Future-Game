@@ -924,9 +924,10 @@ MonoBehaviour:
   - {fileID: 7416883005428230085}
   - {fileID: 2202433630654361975}
   - {fileID: 4966993418583670855}
-  healthAmount: 1000
+  healthAmount: 2000
   spawnPoint: {fileID: 0}
   BlackScreen: {fileID: 7273185053243014859}
+  redHP: {fileID: 4686105481063378586, guid: eb2452372f333e844a9fe4c1feff573c, type: 3}
 --- !u!114 &594886605735666446
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ public class PlayerHealthGreen : MonoBehaviour
     private int index;
     public GameObject spawnPoint;
     public GameObject BlackScreen;
+    private bool faded = false;
+    public PlayerHealthRed redHP;
 
     private PlayerInput pi;
 
@@ -42,20 +44,22 @@ public class PlayerHealthGreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1")){
-            PlayerPrefs.SetInt("PlayerOneWins", 0);
-            PlayerPrefs.SetInt("PlayerTwoWins", 1);
-            // StartCoroutine(FadeOutBlack());
-            FadeBlack();
+        if(faded){
+                Debug.Log("In Faded");
+                faded = false;
+                playerMovement.playerInput.EndScreen.Enable();
+                Debug.Log("endscreen control");
+                SceneManager.LoadScene("gameOver");
+            }
+            // doesnt work
+        if(redHP.healthAmount <= 0){
             playerMovement.playerInput.Player.Disable();
-            playerMovement.playerInput.EndScreen.Enable();
-            SceneManager.LoadScene("gameOver");
+            StartCoroutine(FadeOutBlack());
         }
     }
 
     public void TakeDamage(float damage, float kbForcex, float kbForcey, float kbTT)
     {   
-        Debug.Log(pi.playerIndex);
         playerPercentage += damage;
         playerMovement.KnockFromRight = fromRight;
         playerMovement.KBForceX = kbForcex;
@@ -63,7 +67,6 @@ public class PlayerHealthGreen : MonoBehaviour
         playerMovement.KBCounter = kbTT;
 
         healthAmount -= damage;
-        Debug.Log(healthAmount);
         if(index == 0){
             healthBars[2].GetComponent<Image>().fillAmount = healthAmount / totalHealth;
         }
@@ -80,35 +83,37 @@ public class PlayerHealthGreen : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerOneWins", 1);
                 PlayerPrefs.SetInt("PlayerTwoWins", 0);
             }
-            StartCoroutine(FadeOutBlack());
             playerMovement.playerInput.Player.Disable();
-            playerMovement.playerInput.EndScreen.Enable();
-            SceneManager.LoadScene("gameOver");
+            StartCoroutine(FadeBlack());
         }
     }
 
-    public IEnumerator FadeOutBlack(int fadespeed = 5){
+    public IEnumerator FadeBlack(){
         Color objectColor = BlackScreen.GetComponent<Image>().color;
         float fadeAmount;
 
         while(BlackScreen.GetComponent<Image>().color.a < 1){
-            fadeAmount = objectColor.a + (fadespeed * Time.deltaTime);
+            fadeAmount = objectColor.a + ((float)5 * Time.deltaTime);
             objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
             BlackScreen.GetComponent<Image>().color = objectColor;
-            yield return null;
-        }
-    }
-
-    public void FadeBlack(){
-        Color objectColor = BlackScreen.GetComponent<Image>().color;
-        float fadeAmount;
-
-        while(BlackScreen.GetComponent<Image>().color.a < 1){
-            fadeAmount = objectColor.a + ((float)0.1 * Time.deltaTime);
-            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
-            BlackScreen.GetComponent<Image>().color = objectColor;
+            yield return new WaitForSeconds(0.1f);
             // yield return null;
         }
+        faded = true;
+    }
+
+    public IEnumerator FadeOutBlack(){
+        Color objectColor = BlackScreen.GetComponent<Image>().color;
+        float fadeAmount;
+
+        while(BlackScreen.GetComponent<Image>().color.a < 1){
+            fadeAmount = objectColor.a + ((float)5 * Time.deltaTime);
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            BlackScreen.GetComponent<Image>().color = objectColor;
+            yield return new WaitForSeconds(0.1f);
+            // yield return null;
+        }
+        // faded = true;
     }
 
 }

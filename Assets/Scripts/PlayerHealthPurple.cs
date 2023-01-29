@@ -14,6 +14,8 @@ public class PlayerHealthPurple : MonoBehaviour
     public float healthAmount;
     private float totalHealth;
     private int index;
+    public GameObject BlackScreen;
+    private bool faded = false;
 
     private PlayerInput pi;
 
@@ -40,7 +42,11 @@ public class PlayerHealthPurple : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(faded){
+                faded = false;
+                playerMovement.playerInput.EndScreen.Enable();
+                SceneManager.LoadScene("gameOver");
+            }
     }
 
     public void TakeDamage(float damage, float kbForcex, float kbForcey, float kbTT)
@@ -69,9 +75,22 @@ public class PlayerHealthPurple : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerTwoWins", 0);
             }
             playerMovement.playerInput.Player.Disable();
-            playerMovement.playerInput.EndScreen.Enable();
-            SceneManager.LoadScene("gameOver");
+            StartCoroutine(FadeBlack());
         }
-
     }
+
+    public IEnumerator FadeBlack(){
+        Color objectColor = BlackScreen.GetComponent<Image>().color;
+        float fadeAmount;
+
+        while(BlackScreen.GetComponent<Image>().color.a < 1){
+            fadeAmount = objectColor.a + ((float)5 * Time.deltaTime);
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            BlackScreen.GetComponent<Image>().color = objectColor;
+            yield return new WaitForSeconds(0.1f);
+            // yield return null;
+        }
+        faded = true;
+    }
+
 }

@@ -52,7 +52,7 @@ public class characterSelection : MonoBehaviour
                 titleRendererPlayer1.sprite = player1Title[selectedCharacter1];
                 PlayerPrefs.SetInt("selectedCharacter1", selectedCharacter1);
             }
-            else if(index == 0){
+            else if(index == 1){
                 selectedCharacter2 = (selectedCharacter2 + 1) % characterSpritesPlayer2.Length;
                 spriteRendererPlayer2.sprite = characterSpritesPlayer2[selectedCharacter2];
                 titleRendererPlayer2.sprite = player2Title[selectedCharacter2];
