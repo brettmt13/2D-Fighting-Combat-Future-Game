@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320477606232293910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: -1.1, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1.0875008, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,10 +475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -642,10 +642,10 @@ GameObject:
   - component: {fileID: 6418851269795029196}
   - component: {fileID: 8507063029950757273}
   - component: {fileID: 2685439452000512080}
-  - component: {fileID: 3903600117908064094}
-  - component: {fileID: 1551783580535666600}
-  - component: {fileID: 4686105481063378586}
   - component: {fileID: -5496047630136731692}
+  - component: {fileID: 1768934224288569540}
+  - component: {fileID: 2727552969252954545}
+  - component: {fileID: 8060142201659572570}
   m_Layer: 9
   m_Name: PlayerPurple 1
   m_TagString: Untagged
@@ -769,7 +769,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.041169405, y: 0.015518799}
+  m_Offset: {x: 0.0066137463, y: 0.0155187845}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -780,7 +780,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7129922, y: 0.5317844}
+  m_Size: {x: 0.59780574, y: 0.5317844}
   m_EdgeRadius: 0
 --- !u!96 &6418851269795029196
 TrailRenderer:
@@ -854,7 +854,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.989563, b: 1, a: 1}
+      key0: {r: 0.5660378, g: 0.09291561, b: 0.4718563, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -937,8 +937,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3903600117908064094}
-        m_TargetAssemblyTypeName: PlayerMovementRed, Assembly-CSharp
+      - m_Target: {fileID: 8060142201659572570}
+        m_TargetAssemblyTypeName: PlayerMovementPurple, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -953,8 +953,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3903600117908064094}
-        m_TargetAssemblyTypeName: PlayerMovementRed, Assembly-CSharp
+      - m_Target: {fileID: 8060142201659572570}
+        m_TargetAssemblyTypeName: PlayerMovementPurple, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -969,8 +969,8 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3903600117908064094}
-        m_TargetAssemblyTypeName: PlayerMovementRed, Assembly-CSharp
+      - m_Target: {fileID: 8060142201659572570}
+        m_TargetAssemblyTypeName: PlayerMovementPurple, Assembly-CSharp
         m_MethodName: OnFall
         m_Mode: 0
         m_Arguments:
@@ -985,8 +985,8 @@ MonoBehaviour:
     m_ActionName: Player/Fall[/XInputControllerWindows/leftStick/down]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3903600117908064094}
-        m_TargetAssemblyTypeName: PlayerMovementRed, Assembly-CSharp
+      - m_Target: {fileID: 8060142201659572570}
+        m_TargetAssemblyTypeName: PlayerMovementPurple, Assembly-CSharp
         m_MethodName: OnDash
         m_Mode: 0
         m_Arguments:
@@ -1001,8 +1001,8 @@ MonoBehaviour:
     m_ActionName: Player/Dash[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3903600117908064094}
-        m_TargetAssemblyTypeName: PlayerMovementRed, Assembly-CSharp
+      - m_Target: {fileID: 8060142201659572570}
+        m_TargetAssemblyTypeName: PlayerMovementPurple, Assembly-CSharp
         m_MethodName: OnWallJump
         m_Mode: 0
         m_Arguments:
@@ -1017,8 +1017,8 @@ MonoBehaviour:
     m_ActionName: Player/WJump[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1551783580535666600}
-        m_TargetAssemblyTypeName: PlayerAttacksRed, Assembly-CSharp
+      - m_Target: {fileID: 1768934224288569540}
+        m_TargetAssemblyTypeName: PlayerAttacksPurple, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -1052,129 +1052,30 @@ MonoBehaviour:
     m_ActionId: 5d9aa7b9-1d99-400b-ac18-73c27d559bab
     m_ActionName: EndScreen/Rematch[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768934224288569540}
+        m_TargetAssemblyTypeName: PlayerAttacksPurple, Assembly-CSharp
+        m_MethodName: OnSpecial
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 33e5c095-7602-4cc2-a282-d0de4e9a0b53
     m_ActionName: Player/Flip[/SwitchProControllerHID/buttonEast,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7735d00d-c90d-441c-ba56-558f767a350d
+    m_ActionName: TutorialScreen/Continue[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: 0
   m_Camera: {fileID: 0}
---- !u!114 &3903600117908064094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3647366807224722488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 848b1a95b9310094cbb2c334a2a3d4db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 7595224487610208767}
-  groundCheck: {fileID: 8870251620873475926}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  roofCheck: {fileID: 7201715680682178656}
-  roofLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  tr: {fileID: 6418851269795029196}
-  wallCheck: {fileID: 8172533457932900157}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  moveDir: {x: 0, y: 0}
-  wallDir: {x: 0, y: 0}
-  groundSpeed: 11
-  airSpeed: 9
-  jumpStat: 20
-  fallSpeed: -14
-  jumps: 2
-  notMoving: 1
-  facingRight: 0
-  isWallJumping: 0
-  isWallSliding: 0
-  wallJumpingDirection: 0
-  KBForceX: 0
-  KBForceY: 0
-  KBCounter: 0
-  KBTotalTime: 0
-  KnockFromRight: 0
-  inAttackState: 0
-  inAerialState: 0
-  moveAudio: {fileID: 8300000, guid: d8897385b09d8ef489ebaef49e30d899, type: 3}
-  jumpAudio: {fileID: 8300000, guid: 8f8b632716f33c84f8dd03e66593e291, type: 3}
-  source: {fileID: -5496047630136731692}
---- !u!114 &1551783580535666600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3647366807224722488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ead7523b883a83d4bb1f6520467e9f0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ftiltHitbox1: {fileID: 1563849297328334993}
-  ftiltHitbox2: {fileID: 3628722802324311443}
-  uptiltHitbox: {fileID: 8175622789898642484}
-  fairHitbox: {fileID: 3119519196092981229}
-  dairHitbox: {fileID: 9096309032727757225}
-  upairHitbox1: {fileID: 4889252119222811198}
-  upairHitbox2: {fileID: 3768117775829782426}
-  upairHitbox3: {fileID: 24280239429884592}
-  wallAttackHitbox: {fileID: 3212562542435001326}
-  specialHitbox: {fileID: 1320477606232293910}
-  fairHitboxRadius: 1.2
-  ftiltHitboxRadius: 1.05
-  uptiltHitboxRadius: 1.3
-  dairHitboxRadius: 1.7
-  upairHitboxRadius: 1.2
-  wallAttackRadius: 2
-  specialHitboxRadius: 5
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 768
-  playerMovement: {fileID: 3903600117908064094}
-  source: {fileID: -5496047630136731692}
-  ftiltAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
-  uptiltAudio: {fileID: 8300000, guid: b10a2cd083e54674586884f3a334cfc0, type: 3}
-  fairAudio: {fileID: 8300000, guid: cd4fe56ef23325544b729dd4a85f7f5c, type: 3}
-  dairAudio: {fileID: 8300000, guid: 398946a404a7aec4b89d2cb3227fa91e, type: 3}
-  upairAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
-  showFtiltHitboxes: 0
-  showUptiltHitboxes: 0
-  showFairHitboxes: 0
-  showDairHitboxes: 0
-  showUpairHitboxes: 0
---- !u!114 &4686105481063378586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3647366807224722488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094d1f8eb2d1caa49bca928f5abd6e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPercentage: 0
-  playerMovement: {fileID: 3903600117908064094}
-  fromRight: 0
-  healthBars:
-  - {fileID: 809766392710405394}
-  - {fileID: 1647821666619916347}
-  - {fileID: 7501019646957516821}
-  - {fileID: 1711955001162806203}
-  - {fileID: 5251531027012837326}
-  - {fileID: 771735507288820420}
-  healthAmount: 1000
 --- !u!82 &-5496047630136731692
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1271,6 +1172,121 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1768934224288569540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647366807224722488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b0a7e3261ca1745ac28b50a17d66c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ftiltHitbox1: {fileID: 1563849297328334993}
+  ftiltHitbox2: {fileID: 3628722802324311443}
+  uptiltHitbox: {fileID: 8175622789898642484}
+  fairHitbox: {fileID: 3119519196092981229}
+  dairHitbox: {fileID: 9096309032727757225}
+  upairHitbox1: {fileID: 4889252119222811198}
+  upairHitbox2: {fileID: 3768117775829782426}
+  upairHitbox3: {fileID: 24280239429884592}
+  wallAttackHitbox: {fileID: 3212562542435001326}
+  specialHitbox: {fileID: 1320477606232293910}
+  fairHitboxRadius: 1.2
+  ftiltHitboxRadius: 1.05
+  uptiltHitboxRadius: 1.3
+  dairHitboxRadius: 1.7
+  upairHitboxRadius: 1.2
+  wallAttackRadius: 2
+  specialHitboxRadius: 3
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 768
+  playerMovement: {fileID: 8060142201659572570}
+  source: {fileID: -5496047630136731692}
+  ftiltAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
+  uptiltAudio: {fileID: 8300000, guid: b10a2cd083e54674586884f3a334cfc0, type: 3}
+  fairAudio: {fileID: 8300000, guid: cd4fe56ef23325544b729dd4a85f7f5c, type: 3}
+  dairAudio: {fileID: 8300000, guid: 398946a404a7aec4b89d2cb3227fa91e, type: 3}
+  upairAudio: {fileID: 8300000, guid: b594c60bacf77e64faabc8d8a083a75b, type: 3}
+  showFtiltHitboxes: 0
+  showUptiltHitboxes: 0
+  showFairHitboxes: 0
+  showDairHitboxes: 0
+  showUpairHitboxes: 0
+--- !u!114 &2727552969252954545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647366807224722488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4e360d782accf4bb0d32285309d547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPercentage: 0
+  playerMovement: {fileID: 8060142201659572570}
+  fromRight: 0
+  healthBars:
+  - {fileID: 809766392710405394}
+  - {fileID: 1647821666619916347}
+  - {fileID: 7501019646957516821}
+  - {fileID: 1711955001162806203}
+  - {fileID: 5251531027012837326}
+  - {fileID: 771735507288820420}
+  healthAmount: 600
+--- !u!114 &8060142201659572570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647366807224722488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8ff1d0d9fee55478afadd54354be50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7595224487610208767}
+  groundCheck: {fileID: 8870251620873475926}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  roofCheck: {fileID: 7201715680682178656}
+  roofLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  tr: {fileID: 6418851269795029196}
+  wallCheck: {fileID: 8172533457932900157}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  moveDir: {x: 0, y: 0}
+  wallDir: {x: 0, y: 0}
+  groundSpeed: 11
+  airSpeed: 9
+  jumpStat: 20
+  fallSpeed: -14
+  jumps: 1
+  notMoving: 1
+  facingRight: 0
+  isWallJumping: 0
+  isWallSliding: 0
+  wallJumpingDirection: 0
+  KBForceX: 0
+  KBForceY: 0
+  KBCounter: 0
+  KBTotalTime: 0
+  KnockFromRight: 0
+  inAttackState: 0
+  inAerialState: 0
+  moveAudio: {fileID: 8300000, guid: d8897385b09d8ef489ebaef49e30d899, type: 3}
+  jumpAudio: {fileID: 8300000, guid: 8f8b632716f33c84f8dd03e66593e291, type: 3}
+  source: {fileID: -5496047630136731692}
 --- !u!1 &3768117775829782426
 GameObject:
   m_ObjectHideFlags: 0

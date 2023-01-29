@@ -455,15 +455,19 @@ MonoBehaviour:
   characterSpritesPlayer1:
   - {fileID: 21300000, guid: 24c44715ecb0c1547aced4abb115250c, type: 3}
   - {fileID: 21300000, guid: 3275f947b3dff784daaed77417cd181a, type: 3}
+  - {fileID: 21300000, guid: a74a12147edc6194b809bcc20b787764, type: 3}
   characterSpritesPlayer2:
   - {fileID: 21300000, guid: 45d4b283152d9eb4d9f4436315f908ff, type: 3}
   - {fileID: 21300000, guid: a6933ab0700688a4d8d411888f5bfbd4, type: 3}
+  - {fileID: 21300000, guid: 4568b827fb352a442a4ac1b583444891, type: 3}
   player1Title:
   - {fileID: 21300000, guid: 1ad4344fa458e6e46b58fbaca022098e, type: 3}
   - {fileID: 21300000, guid: 10ff8a97c8c5a494c8cbbb04a2c95a29, type: 3}
+  - {fileID: 21300000, guid: 71351d98f1ff64f4db16c8e07721df55, type: 3}
   player2Title:
   - {fileID: 21300000, guid: 10ff8a97c8c5a494c8cbbb04a2c95a29, type: 3}
   - {fileID: 21300000, guid: 1ad4344fa458e6e46b58fbaca022098e, type: 3}
+  - {fileID: 21300000, guid: 71351d98f1ff64f4db16c8e07721df55, type: 3}
   spriteRendererPlayer1: {fileID: 2032543856}
   spriteRendererPlayer2: {fileID: 593450793}
   titleRendererPlayer1: {fileID: 102203669}

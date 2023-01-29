@@ -11,7 +11,7 @@ public class PlayerHealthPurple : MonoBehaviour
     public PlayerMovementPurple playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 1000f;
+    public float healthAmount = 600f;
     private int index;
 
     private PlayerInput pi;
@@ -51,10 +51,10 @@ public class PlayerHealthPurple : MonoBehaviour
 
         healthAmount -= damage;
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 600f;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 1000f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 600f;
         }
 
         if(healthAmount <= 0){
