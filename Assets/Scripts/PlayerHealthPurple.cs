@@ -11,13 +11,15 @@ public class PlayerHealthPurple : MonoBehaviour
     public PlayerMovementPurple playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 600f;
+    public float healthAmount;
+    private float totalHealth;
     private int index;
 
     private PlayerInput pi;
 
     // Start is called before the first frame update
     void Start(){
+        totalHealth = healthAmount;
         pi = GetComponent<PlayerInput>();
         index = pi.playerIndex;
         if(index == 0){
@@ -51,10 +53,10 @@ public class PlayerHealthPurple : MonoBehaviour
 
         healthAmount -= damage;
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 600f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / totalHealth;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 600f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / totalHealth;
         }
 
         if(healthAmount <= 0){

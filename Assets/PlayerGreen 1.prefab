@@ -406,7 +406,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: e894b5a3f8b16da4c848550c1b5741e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.98039216}
   m_FlipX: 1
@@ -924,7 +924,7 @@ MonoBehaviour:
   - {fileID: 7416883005428230085}
   - {fileID: 2202433630654361975}
   - {fileID: 4966993418583670855}
-  healthAmount: 600
+  healthAmount: 1000
   spawnPoint: {fileID: 0}
 --- !u!114 &594886605735666446
 MonoBehaviour:

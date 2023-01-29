@@ -38,8 +38,6 @@ public class PlayerMovementRed : MonoBehaviour
     // adding
     public bool facingRight = false;
     private bool canDash = true;
-    private bool isDashing = true;
-    private float dashingPower = 12f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
     public bool isWallJumping;
@@ -220,7 +218,6 @@ public class PlayerMovementRed : MonoBehaviour
     {
         if(IsRoofed() && !IsWalled() && isCling)
         {
-            Debug.Log("Roof Cling");
             airSpeed = 0f;
             rb.gravityScale = 0f;
             isCling = false;
@@ -270,7 +267,6 @@ public class PlayerMovementRed : MonoBehaviour
     private IEnumerator Dash()
     {
         canDash = false;
-        isDashing = true;
         float orignalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         airSpeed = 9f;
@@ -281,7 +277,6 @@ public class PlayerMovementRed : MonoBehaviour
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;
         rb.gravityScale = orignalGravity;
-        isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
@@ -395,14 +390,11 @@ public class PlayerMovementRed : MonoBehaviour
                 rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
             }
             else if(!IsWalled() && IsRoofed()){
-                Debug.Log("Grav change");
                 rb.gravityScale = ORIGINALGRAVITYSCALE;
                 airSpeed = ORIGINALAIRSPEED;
                 rb.velocity = new Vector2(moveDir[0] * airSpeed, fallSpeed);
                 // jumps = 1;
                 isCling = false;
-                Debug.Log(rb.gravityScale);
-                Debug.Log(airSpeed);
             }
         }
     }

@@ -73,7 +73,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.16666667
-    functionName: startUpAir
+    functionName: startUpAir0
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.18333334
+    functionName: startUpAir1
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -81,6 +88,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.2
     functionName: endUpAir
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.2
+    functionName: startUpAir2
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

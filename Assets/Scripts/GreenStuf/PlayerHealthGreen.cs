@@ -12,24 +12,19 @@ public class PlayerHealthGreen : MonoBehaviour
     public PlayerMovementGreen playerMovement;
     public bool fromRight;
     public GameObject[] healthBars;
-    public float healthAmount = 600f;
+    public float healthAmount;
+    private float totalHealth;
     private int index;
     public GameObject spawnPoint;
 
     private PlayerInput pi;
-    // public Canvas canvas;
 
     // Start is called before the first frame update
     void Start(){
-        // canvas.GetComponent<Canvas>();
+        totalHealth = healthAmount;
         pi = GetComponent<PlayerInput>();
         index = pi.playerIndex;
         if(index == 0){
-            // Debug.Log("ssioh");
-            // healthBars[0].SetActive(true);
-            // Instantiate(healthBars[0], new Vector3(0,0,0), Quaternion.identity);
-            // healthBars[0].transform.parent = canvas.transform;
-
             healthBars[3].SetActive(false);
             healthBars[4].SetActive(false);
             healthBars[5].SetActive(false);
@@ -53,8 +48,6 @@ public class PlayerHealthGreen : MonoBehaviour
     {   
         Debug.Log(pi.playerIndex);
         playerPercentage += damage;
-        // do the knockback stuff, playerMovement is already assigned to the correct script so you'll be all set to just make knockback
-        // change the vals in player attacks too
         playerMovement.KnockFromRight = fromRight;
         playerMovement.KBForceX = kbForcex;
         playerMovement.KBForceY = kbForcey;
@@ -63,10 +56,10 @@ public class PlayerHealthGreen : MonoBehaviour
         healthAmount -= damage;
         Debug.Log(healthAmount);
         if(index == 0){
-            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / 600f;
+            healthBars[2].GetComponent<Image>().fillAmount = healthAmount / totalHealth;
         }
         else{
-            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / 600f;
+            healthBars[5].GetComponent<Image>().fillAmount = healthAmount / totalHealth;
         }
 
         if(healthAmount <= 0){

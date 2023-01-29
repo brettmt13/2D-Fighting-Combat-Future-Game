@@ -68,7 +68,7 @@ public class PlayerAttacksGreen : MonoBehaviour
 
 // GROUNDED ATTACKS
 
-    public void startFTilt()
+    public void startFTilt0()
     {
         Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(ftiltHitbox1.transform.position, ftiltHitboxRadius, enemyLayer);
         Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(ftiltHitbox2.transform.position, ftiltHitboxRadius, enemyLayer);
@@ -78,15 +78,15 @@ public class PlayerAttacksGreen : MonoBehaviour
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                     enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 8, 7, (float)1.5);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 8, 7, (float)1.5);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 8, 7, (float)1.5);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 8, 7, (float)1.5);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                     enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 8, 7, (float)1.5);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 8, 7, (float)1.5);
                 }
             }
         }
@@ -95,23 +95,102 @@ public class PlayerAttacksGreen : MonoBehaviour
             {
                 if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                     enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 8, 7, (float)1.5);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 8, 7, (float)1.5);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                     enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 8, 7, (float)1.5);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 8, 7, (float)1.5);
                 }
                 else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                     enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 8, 7, (float)1.5);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 8, 7, (float)1.5);
                 }
                 // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
             }           
         }
-
-
     }
+    public void startFTilt1()
+    {
+        Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(ftiltHitbox1.transform.position, ftiltHitboxRadius, enemyLayer);
+        Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(ftiltHitbox2.transform.position, ftiltHitboxRadius, enemyLayer);
 
+        if(hitbox1.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox1)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+            }
+        }
+        else if(hitbox2.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox2)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+            }           
+        }
+    }
+    public void startFTilt2()
+    {
+        Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(ftiltHitbox1.transform.position, ftiltHitboxRadius, enemyLayer);
+        Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(ftiltHitbox2.transform.position, ftiltHitboxRadius, enemyLayer);
+
+        if(hitbox1.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox1)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+            }
+        }
+        else if(hitbox2.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox2)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 8, 7, (float)1.5);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+            }           
+        }
+    }
 
     public IEnumerator endFTilt()
     {
@@ -121,7 +200,7 @@ public class PlayerAttacksGreen : MonoBehaviour
     }
 
 
-    public void startUpTilt()
+    public void startUpTilt0()
     {
         // ftiltHitbox1.transform.position.y += 0.2f;
         Collider2D[] enemy = Physics2D.OverlapCircleAll(uptiltHitbox.transform.position, uptiltHitboxRadius, enemyLayer);
@@ -129,20 +208,61 @@ public class PlayerAttacksGreen : MonoBehaviour
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 2, 9, (float)1.5);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 2, 9, (float)1.5);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 2, 9, (float)1.5);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 2, 9, (float)1.5);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 2, 9, (float)1.5);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 2, 9, (float)1.5);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
-
+    public void startUpTilt1()
+    {
+        // ftiltHitbox1.transform.position.y += 0.2f;
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(uptiltHitbox.transform.position, uptiltHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 2, 9, (float)1.5);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 2, 9, (float)1.5);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 2, 9, (float)1.5);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startUpTilt2()
+    {
+        // ftiltHitbox1.transform.position.y += 0.2f;
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(uptiltHitbox.transform.position, uptiltHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 2, 9, (float)1.5);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 2, 9, (float)1.5);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 2, 9, (float)1.5);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
 
     public IEnumerator endUpTilt()
     {
@@ -155,27 +275,66 @@ public class PlayerAttacksGreen : MonoBehaviour
 
 // AERIAL ATTACKS
 
-    public void startFAir()
+    public void startFAir0()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(fairHitbox.transform.position, fairHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 32, 10, (float)0.8);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(25, 32, 10, (float)0.8);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 32, 10, (float)0.8);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(25, 32, 10, (float)0.8);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 32, 10, (float)0.8);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(25, 32, 10, (float)0.8);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
-
+    public void startFAir1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(fairHitbox.transform.position, fairHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(25, 32, 10, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(25, 32, 10, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(25, 32, 10, (float)0.8);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startFAir2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(fairHitbox.transform.position, fairHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(25, 32, 10, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(25, 32, 10, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(25, 32, 10, (float)0.8);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
 
     public IEnumerator endFAir()
     {
@@ -190,7 +349,129 @@ public class PlayerAttacksGreen : MonoBehaviour
     }
 
 
-    public void startUpAir()
+    public void startUpAir0()
+    {
+        Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(upairHitbox1.transform.position, upairHitboxRadius, enemyLayer);
+        Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(upairHitbox2.transform.position, upairHitboxRadius, enemyLayer);
+        Collider2D[] hitbox3 = Physics2D.OverlapCircleAll(upairHitbox3.transform.position, upairHitboxRadius, enemyLayer);
+
+        if(hitbox1.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox1)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            }
+        }
+        else if(hitbox2.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox2)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            }           
+        }
+        else if(hitbox3.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox3)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            }                
+        }
+    }
+    public void startUpAir1()
+    {
+        Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(upairHitbox1.transform.position, upairHitboxRadius, enemyLayer);
+        Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(upairHitbox2.transform.position, upairHitboxRadius, enemyLayer);
+        Collider2D[] hitbox3 = Physics2D.OverlapCircleAll(upairHitbox3.transform.position, upairHitboxRadius, enemyLayer);
+
+        if(hitbox1.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox1)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            }
+        }
+        else if(hitbox2.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox2)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            }           
+        }
+        else if(hitbox3.Length > 0){
+            foreach (Collider2D enemyGameobject in hitbox3)
+            {
+                if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                    enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                    enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 2, 18, (float)0.85);
+                }
+                // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+            }                
+        }
+    }
+    public void startUpAir2()
     {
         Collider2D[] hitbox1 = Physics2D.OverlapCircleAll(upairHitbox1.transform.position, upairHitboxRadius, enemyLayer);
         Collider2D[] hitbox2 = Physics2D.OverlapCircleAll(upairHitbox2.transform.position, upairHitboxRadius, enemyLayer);
@@ -252,7 +533,6 @@ public class PlayerAttacksGreen : MonoBehaviour
         }
     }
 
-
     public IEnumerator endUpAir()
     {
         anim.SetBool("isUpair", false);
@@ -265,22 +545,62 @@ public class PlayerAttacksGreen : MonoBehaviour
         }
 
 
-    public void startDAir()
+    public void startDAir0()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(dairHitbox.transform.position, dairHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 5, -25, (float)0.8);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 5, -25, (float)0.8);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 5, -25, (float)0.8);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 5, -25, (float)0.8);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 5, -25, (float)0.8);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 5, -25, (float)0.8);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startDAir1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(dairHitbox.transform.position, dairHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 5, -25, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 5, -25, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 5, -25, (float)0.8);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startDAir2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(dairHitbox.transform.position, dairHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 5, -25, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 5, -25, (float)0.8);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 5, -25, (float)0.8);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -300,7 +620,7 @@ public class PlayerAttacksGreen : MonoBehaviour
     }
 
 // wall attack hitbox needs to be negative in x direction, because player techincally facing left when sprite looks right!!
-    public void startWallAttack()
+    public void startWallAttack0()
     {
         // ftiltHitbox1.transform.position.y += 0.2f;
         Collider2D[] enemy = Physics2D.OverlapCircleAll(wallAttackHitbox.transform.position, wallAttackRadius, enemyLayer);
@@ -308,15 +628,57 @@ public class PlayerAttacksGreen : MonoBehaviour
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(30, 50, -15, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 50, -15, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(30, 50, -15, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 50, -15, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(30, 50, -15, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 50, -15, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startWallAttack1()
+    {
+        // ftiltHitbox1.transform.position.y += 0.2f;
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(wallAttackHitbox.transform.position, wallAttackRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 50, -15, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 50, -15, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 50, -15, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startWallAttack2()
+    {
+        // ftiltHitbox1.transform.position.y += 0.2f;
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(wallAttackHitbox.transform.position, wallAttackRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, 50, -15, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, 50, -15, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, 50, -15, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -332,85 +694,245 @@ public class PlayerAttacksGreen : MonoBehaviour
     }
 
 
-    public void startFlip1()
+    public void startFFlip0()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox1.transform.position, flipHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 50, 10, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(40, 50, 10, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 50, 10, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(40, 50, 10, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 50, 10, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(40, 50, 10, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startFFlip1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox1.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(40, 50, 10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(40, 50, 10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(40, 50, 10, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startFFlip2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox1.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(40, 50, 10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(40, 50, 10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(40, 50, 10, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
 
-    public void startFlip2()
+    public void startUFlip0()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox2.transform.position, flipHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, -10, 40, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, -10, 40, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, -10, 40, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, -10, 40, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, -10, 40, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, -10, 40, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startUFlip1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox2.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, -10, 40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, -10, 40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, -10, 40, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startUFlip2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox2.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(50, -10, 40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(50, -10, 40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(50, -10, 40, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
 
-    public void startFlip3()
+    public void startBFlip0()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox3.transform.position, ftiltHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 50, -10, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(60, 50, -10, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 50, -10, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(60, 50, -10, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 50, -10, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(60, 50, -10, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startBFlip1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox3.transform.position, ftiltHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(60, 50, -10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(60, 50, -10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(60, 50, -10, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startBFlip2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox3.transform.position, ftiltHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(60, 50, -10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(60, 50, -10, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(60, 50, -10, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
     }
 
-    public void startFlip4()
+    public void startDFlip0()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox4.transform.position, flipHitboxRadius, enemyLayer);
         foreach (Collider2D enemyGameobject in enemy)
         {
             if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
                 enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(10, 10, -40, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(70, 10, -40, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
                 enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(10, 10, -40, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(70, 10, -40, (float)0.6);
             }
             else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
                 enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
-                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(10, 10, -40, (float)0.6);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(70, 10, -40, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startDFlip1()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox4.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(70, 10, -40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(70, 10, -40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(70, 10, -40, (float)0.6);
+            }
+            // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
+        }
+    }
+    public void startDFlip2()
+    {
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(flipHitbox4.transform.position, flipHitboxRadius, enemyLayer);
+        foreach (Collider2D enemyGameobject in enemy)
+        {
+            if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerRed"){
+                enemyGameobject.GetComponent<PlayerHealthRed>().fromRight = (playerMovement.rb.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthRed>().TakeDamage(70, 10, -40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerGreen"){
+                enemyGameobject.GetComponent<PlayerHealthGreen>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthGreen>().TakeDamage(70, 10, -40, (float)0.6);
+            }
+            else if(enemyGameobject.gameObject.ToString().Split()[0] == "PlayerPurple"){
+                enemyGameobject.GetComponent<PlayerHealthPurple>().fromRight = (ftiltHitbox1.transform.position.x >= enemyGameobject.transform.position.x);
+                enemyGameobject.GetComponent<PlayerHealthPurple>().TakeDamage(70, 10, -40, (float)0.6);
             }
             // enemyGameobject.GetComponent<PlayerTwoHP>().fromRight = (fairHitbox.transform.position.x >= enemyGameobject.transform.position.x);
         }
@@ -458,7 +980,7 @@ public class PlayerAttacksGreen : MonoBehaviour
             Gizmos.DrawWireSphere(upairHitbox3.transform.position, upairHitboxRadius);            
         }
 
-        Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, wallAttackRadius);
+        // Gizmos.DrawWireSphere(wallAttackHitbox.transform.position, wallAttackRadius);
     }
 
     public void OnFlip(InputAction.CallbackContext context){
