@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerTwoHP : MonoBehaviour
 {
 
-    public Image healthBar;
+    // public Image healthBar;
     public float healthAmount = 100f;
 
     public PlayerTwoMovement playerTwoMovement;
@@ -43,6 +43,6 @@ public class PlayerTwoHP : MonoBehaviour
         playerTwoMovement.KBCounter = kbTT;
 
         healthAmount -= damage;
-        healthBar.fillAmount = healthAmount / 100f;
+        // healthBar.fillAmount = healthAmount / 100f;
     }
 }
