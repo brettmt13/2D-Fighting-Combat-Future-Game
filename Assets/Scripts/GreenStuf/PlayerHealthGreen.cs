@@ -16,6 +16,7 @@ public class PlayerHealthGreen : MonoBehaviour
     private float totalHealth;
     private int index;
     public GameObject spawnPoint;
+    public GameObject BlackScreen;
 
     private PlayerInput pi;
 
@@ -41,7 +42,15 @@ public class PlayerHealthGreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetButtonDown("Fire1")){
+            PlayerPrefs.SetInt("PlayerOneWins", 0);
+            PlayerPrefs.SetInt("PlayerTwoWins", 1);
+            // StartCoroutine(FadeOutBlack());
+            FadeBlack();
+            playerMovement.playerInput.Player.Disable();
+            playerMovement.playerInput.EndScreen.Enable();
+            SceneManager.LoadScene("gameOver");
+        }
     }
 
     public void TakeDamage(float damage, float kbForcex, float kbForcey, float kbTT)
@@ -71,11 +80,35 @@ public class PlayerHealthGreen : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerOneWins", 1);
                 PlayerPrefs.SetInt("PlayerTwoWins", 0);
             }
+            StartCoroutine(FadeOutBlack());
             playerMovement.playerInput.Player.Disable();
             playerMovement.playerInput.EndScreen.Enable();
             SceneManager.LoadScene("gameOver");
         }
-
-
     }
+
+    public IEnumerator FadeOutBlack(int fadespeed = 5){
+        Color objectColor = BlackScreen.GetComponent<Image>().color;
+        float fadeAmount;
+
+        while(BlackScreen.GetComponent<Image>().color.a < 1){
+            fadeAmount = objectColor.a + (fadespeed * Time.deltaTime);
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            BlackScreen.GetComponent<Image>().color = objectColor;
+            yield return null;
+        }
+    }
+
+    public void FadeBlack(){
+        Color objectColor = BlackScreen.GetComponent<Image>().color;
+        float fadeAmount;
+
+        while(BlackScreen.GetComponent<Image>().color.a < 1){
+            fadeAmount = objectColor.a + ((float)0.1 * Time.deltaTime);
+            objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+            BlackScreen.GetComponent<Image>().color = objectColor;
+            // yield return null;
+        }
+    }
+
 }
