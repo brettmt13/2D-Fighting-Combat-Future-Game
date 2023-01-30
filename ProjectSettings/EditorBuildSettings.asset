@@ -8,4 +8,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/characterSelection.unity
+    guid: 46b2ea26d7505414aad1a1dcca3a5a1c
+  - enabled: 1
+    path: Assets/Scenes/gameOver.unity
+    guid: 1c7f8c560b14217449cb60906de74565
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: 8d5683ef9bc89a44abfed5037a7e8570
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: d80584ce1cadf434180c90752d86a670
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: cd6d272f669b4ce47a3b21e2f4f3ffb6, type: 2}

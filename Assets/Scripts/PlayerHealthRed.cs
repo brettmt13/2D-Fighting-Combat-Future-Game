@@ -17,6 +17,8 @@ public class PlayerHealthRed : MonoBehaviour
     private int index;
     public GameObject BlackScreen;
     private bool faded = false;
+    public AudioSource source;
+    public AudioClip ending;
 
     private PlayerInput pi;
 
@@ -75,7 +77,8 @@ public class PlayerHealthRed : MonoBehaviour
                 PlayerPrefs.SetInt("PlayerOneWins", 1);
                 PlayerPrefs.SetInt("PlayerTwoWins", 0);
             }
-            playerMovement.playerInput.Player.Disable();
+            playerMovement.playerInput.Player.Disable(); //bad
+            source.PlayOneShot(ending);
             StartCoroutine(FadeBlack());
         }
 
@@ -89,7 +92,7 @@ public class PlayerHealthRed : MonoBehaviour
             fadeAmount = objectColor.a + ((float)5 * Time.deltaTime);
             objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
             BlackScreen.GetComponent<Image>().color = objectColor;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             // yield return null;
         }
         faded = true;
