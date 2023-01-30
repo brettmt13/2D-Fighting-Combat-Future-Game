@@ -925,7 +925,7 @@ MonoBehaviour:
   - {fileID: 7416883005428230085}
   - {fileID: 2202433630654361975}
   - {fileID: 4966993418583670855}
-  healthAmount: 200
+  healthAmount: 2500
   spawnPoint: {fileID: 0}
   BlackScreen: {fileID: 8152597398951461895}
   source: {fileID: 8057357692807189164}

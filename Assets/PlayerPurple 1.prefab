@@ -1239,7 +1239,7 @@ MonoBehaviour:
   - {fileID: 1711955001162806203}
   - {fileID: 5251531027012837326}
   - {fileID: 771735507288820420}
-  healthAmount: 200
+  healthAmount: 2500
   BlackScreen: {fileID: 5376611985344011826}
   source: {fileID: -5496047630136731692}
   ending: {fileID: 8300000, guid: da5f49922c5cc864cbd7c1826d3827b6, type: 3}
